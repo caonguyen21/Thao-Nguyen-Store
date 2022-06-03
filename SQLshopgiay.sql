@@ -1,0 +1,395 @@
+USE [master]
+GO
+/****** Object:  Database [WebShopGiayDep]    Script Date: 22/05/2022 19:32:49 ******/
+CREATE DATABASE [WebShopGiayDep]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'WebShopGiayDep', FILENAME = N'D:\Hoc Tap\SQL2019\MSSQL15.MSSQLSERVER\MSSQL\DATA\WebShopGiayDep.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'WebShopGiayDep_log', FILENAME = N'D:\Hoc Tap\SQL2019\MSSQL15.MSSQLSERVER\MSSQL\DATA\WebShopGiayDep_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [WebShopGiayDep] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [WebShopGiayDep].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [WebShopGiayDep] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [WebShopGiayDep] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [WebShopGiayDep] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [WebShopGiayDep] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [WebShopGiayDep] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET RECOVERY FULL 
+GO
+ALTER DATABASE [WebShopGiayDep] SET  MULTI_USER 
+GO
+ALTER DATABASE [WebShopGiayDep] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [WebShopGiayDep] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [WebShopGiayDep] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [WebShopGiayDep] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [WebShopGiayDep] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [WebShopGiayDep] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'WebShopGiayDep', N'ON'
+GO
+ALTER DATABASE [WebShopGiayDep] SET QUERY_STORE = OFF
+GO
+USE [WebShopGiayDep]
+GO
+/****** Object:  Table [dbo].[BAIDANHGIA]    Script Date: 22/05/2022 19:32:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BAIDANHGIA](
+	[MaBaiDanhGia] [char](4) NOT NULL,
+	[MaKH] [char](5) NOT NULL,
+	[MaGiay] [char](5) NOT NULL,
+	[NgayGui] [date] NULL,
+	[NoiDung] [nvarchar](max) NOT NULL,
+	[TrangThai] [bit] NULL,
+ CONSTRAINT [PK_BAIDANHGIA] PRIMARY KEY CLUSTERED 
+(
+	[MaBaiDanhGia] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CT_DONHANG]    Script Date: 22/05/2022 19:32:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CT_DONHANG](
+	[MaDonHang] [char](5) NOT NULL,
+	[MaGiay] [char](5) NOT NULL,
+	[GiaLucBan] [decimal](18, 0) NOT NULL,
+	[SoLuong] [tinyint] NOT NULL,
+	[ThanhTien] [decimal](18, 0) NOT NULL,
+ CONSTRAINT [PK_CT_DONHANG_1] PRIMARY KEY CLUSTERED 
+(
+	[MaDonHang] ASC,
+	[MaGiay] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DONHANG]    Script Date: 22/05/2022 19:32:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DONHANG](
+	[MaDonHang] [char](5) NOT NULL,
+	[TinhTrangGiaoHang] [bit] NULL,
+	[NgayDat] [date] NULL,
+	[NgayGiao] [date] NULL,
+	[TongTien] [decimal](18, 0) NULL,
+	[MaKH] [char](5) NOT NULL,
+ CONSTRAINT [PK_DONHANG] PRIMARY KEY CLUSTERED 
+(
+	[MaDonHang] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[KHACHHANG]    Script Date: 22/05/2022 19:32:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[KHACHHANG](
+	[MaKH] [char](5) NOT NULL,
+	[TaiKhoanKH] [varchar](50) NULL,
+	[MatKhau] [varchar](50) NOT NULL,
+	[HoTen] [nvarchar](50) NULL,
+	[EmailKH] [nchar](10) NULL,
+	[DiaChiKH] [nvarchar](100) NULL,
+	[DienThoaiKH] [varchar](10) NULL,
+	[NgaySinh] [date] NULL,
+	[TrangThai] [bit] NULL,
+ CONSTRAINT [PK_KHACHHANG] PRIMARY KEY CLUSTERED 
+(
+	[MaKH] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LOAIGIAY]    Script Date: 22/05/2022 19:32:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LOAIGIAY](
+	[MaLoai] [char](1) NOT NULL,
+	[TenLoai] [nvarchar](50) NOT NULL,
+	[TrangThai] [bit] NULL,
+ CONSTRAINT [PK_LOAIGIAY] PRIMARY KEY CLUSTERED 
+(
+	[MaLoai] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[NHACUNGCAP]    Script Date: 22/05/2022 19:32:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[NHACUNGCAP](
+	[MaNCC] [char](4) NOT NULL,
+	[TenNCC] [nvarchar](50) NOT NULL,
+	[DiaChi] [nvarchar](100) NULL,
+	[DienThoai] [varchar](50) NULL,
+	[TrangThai] [bit] NOT NULL,
+ CONSTRAINT [PK_NHACUNGCAP] PRIMARY KEY CLUSTERED 
+(
+	[MaNCC] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[QUANLY]    Script Date: 22/05/2022 19:32:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[QUANLY](
+	[TaiKhoanQL] [varchar](50) NOT NULL,
+	[MatKhau] [varchar](50) NOT NULL,
+	[HoTen] [nvarchar](50) NULL,
+	[EmailQL] [varchar](50) NULL,
+	[DienThoaiQL] [varchar](10) NULL,
+	[TrangThai] [bit] NULL,
+ CONSTRAINT [PK_QUANLY] PRIMARY KEY CLUSTERED 
+(
+	[TaiKhoanQL] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SANPHAM]    Script Date: 22/05/2022 19:32:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SANPHAM](
+	[MaGiay] [char](5) NOT NULL,
+	[TenGiay] [nvarchar](50) NOT NULL,
+	[Size] [tinyint] NOT NULL,
+	[AnhBia] [varchar](50) NULL,
+	[GiaBan] [decimal](18, 0) NOT NULL,
+	[ThuongHieu] [nvarchar](30) NULL,
+	[TrangThai] [bit] NULL,
+	[MaNCC] [char](4) NULL,
+	[MaLoai] [char](1) NULL,
+	[ThoiGianBaoHanh] [int] NULL,
+	[SoLuongTon] [int] NOT NULL,
+ CONSTRAINT [PK_SANPHAM] PRIMARY KEY CLUSTERED 
+(
+	[MaGiay] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[LOAIGIAY] ([MaLoai], [TenLoai], [TrangThai]) VALUES (N'a', N'nam', 1)
+GO
+INSERT [dbo].[LOAIGIAY] ([MaLoai], [TenLoai], [TrangThai]) VALUES (N'b', N'nu', 1)
+GO
+INSERT [dbo].[LOAIGIAY] ([MaLoai], [TenLoai], [TrangThai]) VALUES (N'c', N'sandal', 1)
+GO
+INSERT [dbo].[LOAIGIAY] ([MaLoai], [TenLoai], [TrangThai]) VALUES (N'e', N'dep', 1)
+GO
+INSERT [dbo].[LOAIGIAY] ([MaLoai], [TenLoai], [TrangThai]) VALUES (N'f', N'giay the thao', 1)
+GO
+INSERT [dbo].[NHACUNGCAP] ([MaNCC], [TenNCC], [DiaChi], [DienThoai], [TrangThai]) VALUES (N'NCC1', N'Phạm Hồ Thành', N'Bình Chánh', N'0123456789', 1)
+GO
+INSERT [dbo].[NHACUNGCAP] ([MaNCC], [TenNCC], [DiaChi], [DienThoai], [TrangThai]) VALUES (N'NCC2', N'Lê Văn Luyện', N'Tân Bình', N'0231458679', 1)
+GO
+INSERT [dbo].[NHACUNGCAP] ([MaNCC], [TenNCC], [DiaChi], [DienThoai], [TrangThai]) VALUES (N'NCC3', N'Huỳnh Gia Hào', N'Bình Tân', N'0909333693', 1)
+GO
+INSERT [dbo].[NHACUNGCAP] ([MaNCC], [TenNCC], [DiaChi], [DienThoai], [TrangThai]) VALUES (N'NCC4', N'Nguyễn Cao Nguyên', N'Tân Phú', N'0902584754', 1)
+GO
+INSERT [dbo].[NHACUNGCAP] ([MaNCC], [TenNCC], [DiaChi], [DienThoai], [TrangThai]) VALUES (N'NCC5', N'Trịnh Hữu Tiến', N'Quận 1', N'0369852147', 1)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP001', N'Spetre', 16, N'naihong.jpg', CAST(3900000 AS Decimal(18, 0)), N'NIKE', 1, N'NCC1', N'b', 6, 29)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP002', N'Phantom', 32, N'naihongnu.jpg', CAST(3200000 AS Decimal(18, 0)), N'NIKE', 1, N'NCC3', N'b', 6, 14)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP003', N'PumaTrainer', 39, N'pumatrang.jpg', CAST(4500000 AS Decimal(18, 0)), N'PUMA', 1, N'NCC4', N'b', 4, 20)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP004', N'Sandal', 39, N'sandaladidas.jpg', CAST(3000000 AS Decimal(18, 0)), N'ADIDAS', 1, N'NCC5', N'c', 4, 32)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP005', N'Dép 3 sọc', 38, N'depadidas.jpg', CAST(3000000 AS Decimal(18, 0)), N'ADIDAS', 1, N'NCC1', N'e', 6, 25)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP006', N'Vans SK8', 43, N'vansk8.jpg', CAST(1800000 AS Decimal(18, 0)), N'VANS', 1, N'NCC3', N'a', 6, 48)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP007', N'Converse 1970s', 42, N'converse1970s.jpg', CAST(1800000 AS Decimal(18, 0)), N'CONVERSE', 1, N'NCC3', N'a', 6, 23)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP008', N'Balenciaga', 41, N'balenciaga.jpg', CAST(8000000 AS Decimal(18, 0)), N'BALENCIAGA', 1, N'NCC3', N'a', 6, 42)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP009', N'ReeboxDMX', 36, N'reebokdmx.jpg', CAST(3200000 AS Decimal(18, 0)), N'REEBOK', 1, N'NCC2', N'f', 6, 25)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP010', N'Asics ', 35, N'asicsthethao.jpg', CAST(2500000 AS Decimal(18, 0)), N'ASICS', 1, N'NCC2', N'f', 6, 23)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP011', N'Sandal Nike', 39, N'sandalnike.jpg', CAST(1200000 AS Decimal(18, 0)), N'NIKE', 1, N'NCC1', N'c', 3, 12)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP012', N'Sandal Rs', 38, N'sandalpuma.jpg', CAST(1200000 AS Decimal(18, 0)), N'PUMA', 1, N'NCC1', N'c', 3, 17)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP013', N'Dép Logo Xanh lục', 37, N'dep1.jpg', CAST(980000 AS Decimal(18, 0)), N'CONVERSE', 1, N'NCC1', N'e', 3, 22)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP014', N'Puma RSX', 42, N'pumarsx.jpg', CAST(4000000 AS Decimal(18, 0)), N'PUMA', 1, N'NCC3', N'f', 6, 33)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP015', N'Balenciaga Trainer', 44, N'balenden.jpg', CAST(21000000 AS Decimal(18, 0)), N'BALENCIAGA', 1, N'NCC5', N'a', 6, 32)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP016', N'Adidas Stanmith', 35, N'adidastrang.jpg', CAST(1200000 AS Decimal(18, 0)), N'ADIDAS', 1, N'NCC4', N'b', 6, 9)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP017', N'Nike AirMax97', 39, N'nike97.jpg', CAST(4950000 AS Decimal(18, 0)), N'NIKE', 1, N'NCC4', N'a', 6, 17)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP018', N'Vans Comfort Old Shool', 31, N'vansnu2.jpg', CAST(1490000 AS Decimal(18, 0)), N'VANS', 1, N'NCC4', N'b', 6, 2)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP019', N'Asics Cumulus', 29, N'asicsnu.jpg', CAST(4200000 AS Decimal(18, 0)), N'ASICS', 1, N'NCC5', N'b', 6, 6)
+GO
+INSERT [dbo].[SANPHAM] ([MaGiay], [TenGiay], [Size], [AnhBia], [GiaBan], [ThuongHieu], [TrangThai], [MaNCC], [MaLoai], [ThoiGianBaoHanh], [SoLuongTon]) VALUES (N'SP020', N'Reebok Unisex-Adult Classics Slide Sandal', 38, N'depreebok.jpg', CAST(1200000 AS Decimal(18, 0)), N'REEBOK', 1, N'NCC3', N'e', 6, 36)
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__KHACHHAN__7ED9643F06EA6F5F]    Script Date: 22/05/2022 19:32:58 ******/
+ALTER TABLE [dbo].[KHACHHANG] ADD  CONSTRAINT [UQ__KHACHHAN__7ED9643F06EA6F5F] UNIQUE NONCLUSTERED 
+(
+	[EmailKH] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__KHACHHAN__7ED9643FF20E9B15]    Script Date: 22/05/2022 19:32:58 ******/
+ALTER TABLE [dbo].[KHACHHANG] ADD UNIQUE NONCLUSTERED 
+(
+	[EmailKH] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__KHACHHAN__9A123AA25C2DCBA2]    Script Date: 22/05/2022 19:32:58 ******/
+ALTER TABLE [dbo].[KHACHHANG] ADD UNIQUE NONCLUSTERED 
+(
+	[TaiKhoanKH] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__KHACHHAN__9A123AA2E72EA436]    Script Date: 22/05/2022 19:32:58 ******/
+ALTER TABLE [dbo].[KHACHHANG] ADD  CONSTRAINT [UQ__KHACHHAN__9A123AA2E72EA436] UNIQUE NONCLUSTERED 
+(
+	[TaiKhoanKH] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__QUANLY__7ED955FC74825E29]    Script Date: 22/05/2022 19:32:58 ******/
+ALTER TABLE [dbo].[QUANLY] ADD UNIQUE NONCLUSTERED 
+(
+	[EmailQL] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__QUANLY__7ED955FC8BE1B4D8]    Script Date: 22/05/2022 19:32:58 ******/
+ALTER TABLE [dbo].[QUANLY] ADD  CONSTRAINT [UQ__QUANLY__7ED955FC8BE1B4D8] UNIQUE NONCLUSTERED 
+(
+	[EmailQL] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__QUANLY__9A120A6674752384]    Script Date: 22/05/2022 19:32:58 ******/
+ALTER TABLE [dbo].[QUANLY] ADD UNIQUE NONCLUSTERED 
+(
+	[TaiKhoanQL] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__QUANLY__9A120A668422B7C4]    Script Date: 22/05/2022 19:32:58 ******/
+ALTER TABLE [dbo].[QUANLY] ADD  CONSTRAINT [UQ__QUANLY__9A120A668422B7C4] UNIQUE NONCLUSTERED 
+(
+	[TaiKhoanQL] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[BAIDANHGIA]  WITH CHECK ADD  CONSTRAINT [FK_BAIDANHGIA_KHACHHANG] FOREIGN KEY([MaKH])
+REFERENCES [dbo].[KHACHHANG] ([MaKH])
+GO
+ALTER TABLE [dbo].[BAIDANHGIA] CHECK CONSTRAINT [FK_BAIDANHGIA_KHACHHANG]
+GO
+ALTER TABLE [dbo].[BAIDANHGIA]  WITH CHECK ADD  CONSTRAINT [FK_BAIDANHGIA_SANPHAM] FOREIGN KEY([MaGiay])
+REFERENCES [dbo].[SANPHAM] ([MaGiay])
+GO
+ALTER TABLE [dbo].[BAIDANHGIA] CHECK CONSTRAINT [FK_BAIDANHGIA_SANPHAM]
+GO
+ALTER TABLE [dbo].[CT_DONHANG]  WITH CHECK ADD  CONSTRAINT [FK_CT_DONHANG_DONHANG] FOREIGN KEY([MaDonHang])
+REFERENCES [dbo].[DONHANG] ([MaDonHang])
+GO
+ALTER TABLE [dbo].[CT_DONHANG] CHECK CONSTRAINT [FK_CT_DONHANG_DONHANG]
+GO
+ALTER TABLE [dbo].[CT_DONHANG]  WITH CHECK ADD  CONSTRAINT [FK_CT_DONHANG_SANPHAM] FOREIGN KEY([MaGiay])
+REFERENCES [dbo].[SANPHAM] ([MaGiay])
+GO
+ALTER TABLE [dbo].[CT_DONHANG] CHECK CONSTRAINT [FK_CT_DONHANG_SANPHAM]
+GO
+ALTER TABLE [dbo].[DONHANG]  WITH CHECK ADD  CONSTRAINT [FK_DONHANG_KHACHHANG] FOREIGN KEY([MaKH])
+REFERENCES [dbo].[KHACHHANG] ([MaKH])
+GO
+ALTER TABLE [dbo].[DONHANG] CHECK CONSTRAINT [FK_DONHANG_KHACHHANG]
+GO
+ALTER TABLE [dbo].[SANPHAM]  WITH CHECK ADD  CONSTRAINT [FK_SANPHAM_LOAIGIAY] FOREIGN KEY([MaLoai])
+REFERENCES [dbo].[LOAIGIAY] ([MaLoai])
+GO
+ALTER TABLE [dbo].[SANPHAM] CHECK CONSTRAINT [FK_SANPHAM_LOAIGIAY]
+GO
+ALTER TABLE [dbo].[SANPHAM]  WITH CHECK ADD  CONSTRAINT [FK_SANPHAM_NHACUNGCAP] FOREIGN KEY([MaNCC])
+REFERENCES [dbo].[NHACUNGCAP] ([MaNCC])
+GO
+ALTER TABLE [dbo].[SANPHAM] CHECK CONSTRAINT [FK_SANPHAM_NHACUNGCAP]
+GO
+USE [master]
+GO
+ALTER DATABASE [WebShopGiayDep] SET  READ_WRITE 
+GO

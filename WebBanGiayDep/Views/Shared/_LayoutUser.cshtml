@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Free Adidas Website Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown img.flag").addClass("flagvisibility");
+
+            $(".dropdown dt a").click(function () {
+                $(".dropdown dd ul").toggle();
+            });
+
+            $(".dropdown dd ul li a").click(function () {
+                var text = $(this).html();
+                $(".dropdown dt a span").html(text);
+                $(".dropdown dd ul").hide();
+                $("#result").html("Selected value is: " + getSelectedValue("sample"));
+            });
+
+            function getSelectedValue(id) {
+                return $("#" + id).find("dt a span.value").html();
+            }
+
+            $(document).bind('click', function (e) {
+                var $clicked = $(e.target);
+                if (!$clicked.parents().hasClass("dropdown"))
+                    $(".dropdown dd ul").hide();
+            });
+
+
+            $("#flagSwitcher").click(function () {
+                $(".dropdown img.flag").toggleClass("flagvisibility");
+            });
+        });
+    </script>
+    <!-- start menu -->
+    <link href="~/Content/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Scripts/megamenu.js"></script>
+    <script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
+    <!-- end menu -->
+    <!-- top scrolling -->
+    <script type="text/javascript" src="~/Scripts/move-top.js"></script>
+    <script type="text/javascript" src="~/Scripts/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--menu-->
+    <div class="header-top">
+        <div class="wrap">
+            <div class="logo">
+                <a href="index.html"><img src="~/images/logo.png" alt="" /></a>
+            </div>
+            <div class="cssmenu">
+                <ul>
+                    <li><a href="shop.html">Sản phẩm</a></li>
+                    <li><a href="login.html">Tài khoản</a></li>
+                    <li><a href="checkout.html">Giỏ hàng</a></li>
+                </ul>
+            </div>
+            <ul class="icon2 sub-icon2 profile_img">
+                <li>
+                    <a class="active-icon c2" href="#"> </a>
+                    <ul class="sub-icon2 list">
+                        <li><h3>Sản phẩm</h3><a href=""></a></li>
+                        <li><p>mo ta <a href="">adipiscing elit, sed diam</a></p></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="wrap">
+            <!--start header menu -->
+            <ul class="megamenu skyblue">
+                <li><a class="color1" href="#">Trang chủ</a></li>
+                <li class="grid">
+                    <a class="color2" href="#">Giày nam</a>
+                </li>
+                <li class="active grid">
+                    <a class="color4" href="#">Giày nữ</a>
+                </li>
+                <li>
+                    <a class="color5" href="#">Giày trẻ em</a>
+                </li>
+                <li>
+                    <a class="color6" href="#">Dép</a>
+                </li>
+                <li>
+                    <a class="color7" href="#">Sandal</a>
+                </li>
+
+                <li>
+                    <a class="color9" href="#">Giày thể thao</a>
+                </li>
+                <!--Thuong hiêu-->
+                <li>
+                    <a class="color10" href="#">Thương hiệu</a>
+                    <div class="megapanel">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Thương hiệu</h4>
+                                    @Html.Action("ThuongHieu", "Home")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!--end_menu-->
+    @RenderBody()
+    <!--footer-->
+    <div class="footer">
+        <div class="footer-top">
+            <div class="wrap">
+                <div class="col_1_of_footer-top span_1_of_footer-top">
+                    <ul class="f_list">
+                        <li><img src="~/images/f_icon2.png" alt="" /><span class="delivery">© 2015 SHOP GIÀY DÉP THẢO NGUYÊN.</span></li>
+                    </ul>
+
+                </div>
+                <div class="col_1_of_footer-top span_1_of_footer-top">
+                    <ul class="f_list">
+                        <li><img src="~/images/f_icon1.png" alt="" /><span class="delivery">Hộ trợ khách hàng : <span class="orange">(+84) 899 999 999 </span></span></li>
+                    </ul>
+                </div>
+                <div class="col_1_of_footer-top span_1_of_footer-top">
+                    <ul class="f_list">
+                        <li><img src="~/images/f_icon.png" alt="" /><span class="delivery">Mua hàng hiệu chính hãng trực tuyến, Giá Tốt Nhất</span></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="wrap">
+                <div class="section group">
+                    <div class="col_1_of_5 span_1_of_5">
+                        <h3 class="m_9">CHĂM SÓC KHÁCH HÀNG</h3>
+                        <ul class="list1">
+                            <li><a href="shop.html">Chính sách bán hàng</a></li>
+                            <li><a href="shop.html">Chính sách bảo hành</a></li>
+                            <li><a href="shop.html">Chính sách giao hàng</a></li>
+                            <li><a href="shop.html">Chính sách đổi trả và hoàn tiền</a></li>
+                            <li><a href="shop.html">Chính sách bảo mật thanh toán</a></li>
+                            <li><a href="shop.html">Chính sách bảo mật và chia sẻ thông tin</a></li>
+                            <li><a href="shop.html">Điều kiện và điều khoản giao dịch</a></li>
+                            <li><a href="shop.html">Cơ chế giải quyết tranh chấp</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        <h3 class="m_9">THÔNG TIN</h3>
+                        <ul class="list1">
+                            <li><a href="shop.html">Tên doanh nghiệp: Shop Giày Dép Thảo Nguyên</a></li>
+                            <li><a href="shop.html">Hotline: (+84) 899 999 999</a></li>
+                            <li><a href="shop.html">Email: shopthaonguyen@gmail.com</a></li>
+                            <li><a href="shop.html">Thời gian làm việc: Thứ 2 - Chủ nhật: 8h00 - 22h00</a></li>
+                            <li><a href="shop.html">Địa chỉ: 23k/7, Bình Đáng, Bình Hòa, Thuận An, Bình Dương</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="copy">
+            <div class="wrap">
+                <p>© All rights reserved | Designed by Nhóm 11 19DTHA2</a></p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+    <!--end_footer-->
+</body>
+</html>
