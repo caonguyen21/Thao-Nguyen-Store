@@ -4,19 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanGiayDep.Models;
+
 namespace WebBanGiayDep.Controllers
 {
     public class HomeController : Controller
     {
         //Tao 1 doi tuong chua toan bo CSDL tu dbWeb ban giay
-        DataClasses1DataContext data = new DataClasses1DataContext();
+        dbShopGiayDataContext data = new dbShopGiayDataContext();
         public ActionResult Index()
         {
             return View();
         }
         private List<SANPHAM> layGiayMoi(int count)
         {
-            return data.SANPHAMs.OrderByDescending(a => a.ThoiGianBaoHanh).Take(count).ToList();
+            return data.SANPHAMs.OrderByDescending(a => a.NgayCapNhat).Take(count).ToList();
         }
         public ActionResult GiayMoi()
         {
@@ -32,18 +33,44 @@ namespace WebBanGiayDep.Controllers
             var giayton = SoLuongTonGiay(9);
             return PartialView(giayton);
         }
-        /* public ActionResult ChiTietSanPham(int id)
-         {
-             var chitietsanpham = (from s in data.SANPHAMs
-                                   where int.Parse(s.MaGiay) == id
-                                   select (s.AnhBia, s.TenGiay, s.GiaBan, s.Size))
+        public ActionResult ChiTietSanPham(int id)
+        {
+            var chitietsanpham = (from s in data.SANPHAMs
+                                  where s.MaGiay == id
+                                  select s);
              return View(chitietsanpham);
-         }*/
+        }
         [HttpGet]
         public ActionResult ThuongHieu()
         {
-            var thuonghieu = (from s in data.SANPHAMs select (s.ThuongHieu.Distinct()));
+            var thuonghieu = (from s in data.THUONGHIEUs select s);
             return PartialView(thuonghieu);
+        }
+
+        public ActionResult SPTheoThuongHieu(int id)
+        {
+            var sanpham = from s in data.SANPHAMs where s.MaThuongHieu == id select s;
+            return View(sanpham);
+        }
+        public ActionResult GiayNam()
+        {
+            var GiayNam = from s in data.LOAIGIAYs
+                          where s.GioiTinh == true
+                          select s;
+            return PartialView(GiayNam);
+        }
+        public ActionResult GiayNu()
+        {
+            var GiayNu = from s in data.LOAIGIAYs
+                          where s.GioiTinh == false
+                          select s;
+            return PartialView(GiayNu);
+        }
+
+        public ActionResult SPTheoGioiTinh(int id)
+        {
+            var sanpham = from s in data.SANPHAMs where s.MaLoai == id select s;
+            return View(sanpham);
         }
     }
 }

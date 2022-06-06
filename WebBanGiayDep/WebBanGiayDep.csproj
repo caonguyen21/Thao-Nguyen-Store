@@ -45,11 +45,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -125,10 +130,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataClasses1.designer.cs">
+    <Compile Include="Models\dbShopGiay.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
+      <DependentUpon>dbShopGiay.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -163,6 +168,7 @@
     <Content Include="images\nav_img.jpg" />
     <Content Include="images\nav_img1.jpg" />
     <Content Include="images\nav_img2.jpg" />
+    <Content Include="images\nike1.jpg" />
     <Content Include="images\nz.png" />
     <Content Include="images\pic.jpg" />
     <Content Include="images\pic1.jpg" />
@@ -190,6 +196,7 @@
     <Content Include="images\t6.jpg" />
     <Content Include="images\uk.png" />
     <Content Include="images\us.png" />
+    <Content Include="images\van1.jpg" />
     <Content Include="images\wish.png" />
     <Content Include="images\zoom.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -205,13 +212,13 @@
     <Content Include="images\s_arrow.psd" />
     <Content Include="images\Thumbs.db" />
     <Content Include="images\tw.psd" />
-    <Content Include="Models\DataClasses1.dbml">
+    <Content Include="Models\dbShopGiay.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
+      <LastGenOutput>dbShopGiay.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Models\DataClasses1.dbml.layout">
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
+    <None Include="Models\dbShopGiay.dbml.layout">
+      <DependentUpon>dbShopGiay.dbml</DependentUpon>
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\easing.js" />
@@ -250,8 +257,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\GiayMoi.cshtml" />
     <Content Include="Views\Home\GiayTon.cshtml" />
-    <Content Include="Views\Home\ChiTietSanPham.cshtml" />
     <Content Include="Views\Home\ThuongHieu.cshtml" />
+    <Content Include="Views\Home\SPTheoThuongHieu.cshtml" />
+    <Content Include="Views\Home\GiayNam.cshtml" />
+    <Content Include="Views\Home\GiayNu.cshtml" />
+    <Content Include="Views\Home\SPTheoGioiTinh.cshtml" />
+    <Content Include="Views\Home\ChiTietSanPham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

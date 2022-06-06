@@ -1,4 +1,5 @@
-﻿@foreach (var item in Model)
+﻿@model IEnumerable<WebBanGiayDep.Models.SANPHAM>
+@foreach (var item in Model)
 {
     <div class="wmuSliderWrapper">
         <article style="position: relative; width: 100%; opacity: 1;">
@@ -7,7 +8,7 @@
                     <img src="~/images/@item.AnhBia" alt="" />
                 </div>
                 <div class="slider-right">
-                    <h1>@item.ThuongHieu</h1>
+                    @*<h1>@item.MaThuongHieu</h1>*@
                     <h2>@item.GiaBan VND</h2>
                     <p>@item.TenGiay</p>
                     <div class="btn"><a href="shop.html">Shop Now</a></div>

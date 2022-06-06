@@ -3,6 +3,7 @@
     ViewBag.Title = "ChiTietSanPham";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+<h2>ChiTietSanPham</h2>
 <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="~/Content/form.css" rel="stylesheet" type="text/css" media="all" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -226,11 +227,11 @@
                 <ul id="etalage" class="etalage" style="display: block; width: 314px; height: 552px;">
                     <li class="etalage_thumb thumb_1" style="display: none; background-image: none; opacity: 0;">
                         <a href="optionallink.html">
-                            <img class="etalage_thumb_image" src="images/t1.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
-                            <img class="etalage_source_image" src="images/t2.jpg">
+                            <img class="etalage_thumb_image" src="~/images/@Model.Anhbia" style="display: inline; width: 300px; height: 400px; opacity: 1;">
+                  
                         </a>
                     </li>
-                    <li class="etalage_thumb thumb_2" style="background-image: none; display: none; opacity: 0;">
+                    @*<li class="etalage_thumb thumb_2" style="background-image: none; display: none; opacity: 0;">
                         <img class="etalage_thumb_image" src="images/t2.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
                         <img class="etalage_source_image" src="images/t2.jpg">
                     </li>
@@ -257,19 +258,17 @@
                     <li class="etalage_magnifier" style="margin: 0px; padding: 0px; left: 111px; top: 227px; display: none; opacity: 0.000894935;"><div style="margin: 0px; padding: 0px; width: 195px; height: 179px;"><img src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t4.jpg" style="margin: 0px; padding: 0px; width: 300px; height: 400px; display: inline; left: -105px; top: -221px;"></div></li>
                     <li class="etalage_icon" style="display: list-item; top: 290px; left: 20px; opacity: 1;">&nbsp;</li>
                     <li class="etalage_hint" style="display: none; margin: 0px; top: -15px; right: -15px;">&nbsp;</li>
-                    <li class="etalage_zoom_area" style="margin: 0px; opacity: 0; left: 324px; display: none; background-image: none;"><div class="etalage_description" style="width: 546px; bottom: 6px; left: 6px; opacity: 0.7; display: none;"></div><div style="width: 586px; height: 538px;"><img class="etalage_zoom_img" src="images/t4.jpg" style="width: 900px; height: 1200px; left: -200.851px; top: -653.707px;"></div></li>
-                    <li class="etalage_small_thumbs" style="width: 314px; top: 424px;"><ul style="width: 1072px;"><li class="etalage_smallthumb_navtoend" style="opacity: 0.4; margin: 0px 10px 0px 0px; left: -324px;"><img class="etalage_small_thumb" src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t1.jpg" width="90" style="width: 90px; height: 120px;"></li><li class="" style="opacity: 0.4; margin: 0px 10px 0px 0px; left: -324px;"><img class="etalage_small_thumb" src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t1.jpg" width="90" style="width: 90px; height: 120px;"></li><li class="" style="opacity: 0.4; margin: 0px 10px 0px 0px; left: -324px;"><img class="etalage_small_thumb" src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t2.jpg" width="90" style="width: 90px; height: 120px;"></li><li style="opacity: 0.4; margin: 0px 10px 0px 0px; left: -324px;" class="etalage_smallthumb_first"><img class="etalage_small_thumb" src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t3.jpg" width="90" style="width: 90px; height: 120px;"></li><li style="opacity: 1; margin: 0px 10px 0px 0px; left: -324px;" class="etalage_smallthumb_active"><img class="etalage_small_thumb" src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t4.jpg" width="90" style="width: 90px; height: 120px;"></li><li style="opacity: 0.4; margin: 0px 10px 0px 0px; left: -324px;" class="etalage_smallthumb_last"><img class="etalage_small_thumb" src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t5.jpg" width="90" style="width: 90px; height: 120px;"></li><li style="opacity: 0.4; margin: 0px 10px 0px 0px; left: -324px;"><img class="etalage_small_thumb" src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t6.jpg" width="90" style="width: 90px; height: 120px;"></li><li style="opacity: 0.4; margin: 0px 10px 0px 0px; left: -324px;"><img class="etalage_small_thumb" src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t1.jpg" width="90" style="width: 90px; height: 120px;"></li><li class="etalage_smallthumb_navtostart" style="opacity: 0.4; margin: 0px 10px 0px 0px; left: -324px;"><img class="etalage_small_thumb" src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t1.jpg" width="90" style="width: 90px; height: 120px;"></li></ul></li>
+                    <li class="etalage_zoom_area" style="margin: 0px; opacity: 0; left: 324px; display: none; background-image: none;"><div class="etalage_description" style="width: 546px; bottom: 6px; left: 6px; opacity: 0.7; display: none;"></div><div style="width: 586px; height: 538px;"><img class="etalage_zoom_img" src="images/t4.jpg" style="width: 900px; height: 1200px; left: -200.851px; top: -653.707px;"></div></li>*@
                 </ul>
 
 
                 <!-- end product_slider -->
             </div>
             <div class="cont1 span_2_of_a1">
-                <h3 class="m_3">Lorem ipsum dolor sit amet</h3>
+                <h3 class="m_3">@Model.TenGiay</h3>
 
                 <div class="price_single">
-                    <span class="reducedfrom">$66.00</span>
-                    <span class="actual">$12.00</span><a href="#">click for offer</a>
+                    <span class="reducedfrom">@Model.GiaBan</span>
                 </div>
                 <ul class="options">
                     <h4 class="m_9">Select a Size</h4>
@@ -381,4 +380,3 @@
         <div class="clear"></div>
     </div>
 </div>
-
