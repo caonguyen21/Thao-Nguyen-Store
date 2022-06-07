@@ -130,6 +130,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CTSP.cs" />
     <Compile Include="Models\dbShopGiay.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

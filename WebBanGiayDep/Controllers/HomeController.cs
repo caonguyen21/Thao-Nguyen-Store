@@ -36,9 +36,25 @@ namespace WebBanGiayDep.Controllers
         public ActionResult ChiTietSanPham(int id)
         {
             var chitietsanpham = (from s in data.SANPHAMs
-                                  where s.MaGiay == id
-                                  select s);
-             return View(chitietsanpham);
+                                  where s.MaGiay == id 
+                                  join lg in data.LOAIGIAYs
+                                  on s.MaLoai equals lg.MaLoai
+                                  join th in data.THUONGHIEUs
+                                  on s.MaThuongHieu equals th.MaThuongHieu
+                                  select new CTSP
+                                  {
+                                      MaGiay = s.MaGiay,
+                                      TenGiay = s.TenGiay,
+                                      Size = s.Size,
+                                      AnhBia = s.AnhBia,
+                                      GiaBan = s.GiaBan,
+                                      MaThuongHieu = th.MaThuongHieu,
+                                      TenThuongHieu = th.TenThuongHieu,
+                                      MaLoai = lg.MaLoai,
+                                      TenLoai = lg.TenLoai,
+                                      ThoiGianBaoHanh = (int)s.ThoiGianBaoHanh,
+                                  });
+             return View(chitietsanpham.Single());
         }
         [HttpGet]
         public ActionResult ThuongHieu()

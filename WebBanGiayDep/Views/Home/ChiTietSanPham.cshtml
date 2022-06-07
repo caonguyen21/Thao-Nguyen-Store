@@ -3,11 +3,51 @@
     ViewBag.Title = "ChiTietSanPham";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-<h2>ChiTietSanPham</h2>
+<title>Free Adidas Website Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".dropdown img.flag").addClass("flagvisibility");
+
+        $(".dropdown dt a").click(function () {
+            $(".dropdown dd ul").toggle();
+        });
+
+        $(".dropdown dd ul li a").click(function () {
+            var text = $(this).html();
+            $(".dropdown dt a span").html(text);
+            $(".dropdown dd ul").hide();
+            $("#result").html("Selected value is: " + getSelectedValue("sample"));
+        });
+
+        function getSelectedValue(id) {
+            return $("#" + id).find("dt a span.value").html();
+        }
+
+        $(document).bind('click', function (e) {
+            var $clicked = $(e.target);
+            if (!$clicked.parents().hasClass("dropdown"))
+                $(".dropdown dd ul").hide();
+        });
+
+
+        $("#flagSwitcher").click(function () {
+            $(".dropdown img.flag").toggleClass("flagvisibility");
+        });
+    });
+</script>
+@* css*@
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="~/Content/form.css" rel="stylesheet" type="text/css" media="all" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/jquery.easydropdown.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".dropdown img.flag").addClass("flagvisibility");
@@ -50,31 +90,22 @@
         $('.scroll-pane').jScrollPane();
     });
 </script>
-<!----details-product-slider--->
-<!-- Include the Etalage files -->
-<link rel="stylesheet" href="~/Content/etalage.css">
-<script src="~/Scripts/jquery.etalage.min.js"></script>
-<!-- Include the Etalage files -->
-<script>
+<!-- top scrolling -->
+<script type="text/javascript" src="~/Scripts/move-top.js"></script>
+<script type="text/javascript" src="~/Scripts/easing.js"></script>
+<script type="text/javascript">
     jQuery(document).ready(function ($) {
-
-        $('#etalage').etalage({
-            thumb_image_width: 300,
-            thumb_image_height: 400,
-
-            show_hint: true,
-            click_callback: function (image_anchor, instance_id) {
-                alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
-            }
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
         });
-        // This is for the dropdown list example:
-        $('.dropdownlist').change(function () {
-            etalage_show($(this).find('option:selected').attr('class'));
-        });
-
     });
 </script>
-<!----//details-product-slider--->
+<!-- start menu -->
+<link href="~/Content/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="~/Scripts/megamenu.js"></script>
+<script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
+<!-- end menu -->
 <!-- top scrolling -->
 <script type="text/javascript" src="~/Scripts/move-top.js"></script>
 <script type="text/javascript" src="~/Scripts/easing.js"></script>
@@ -87,296 +118,127 @@
     });
 </script>
 
-<div class="single">
-    <div class="wrap">
-        <div class="rsidebar span_1_of_left">
-            <section class="sky-form">
-                <h4>Occasion</h4>
-                <div class="row row1 scroll-pane" style="overflow: hidden; padding: 0px; width: 270px;">
-                    <div class="jspContainer" style="width: 270px; height: 200px;">
-                        <div class="jspPane" style="padding: 20px; top: 0px; left: 0px; width: 230px;">
-                            <div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Athletic (20)</label>
-                            </div><div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Athletic Shoes (48)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Casual (45)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Casual (45)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other (1)</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h4>Category</h4>
-                <div class="row row1 scroll-pane" style="overflow: hidden; padding: 0px; width: 270px;">
+@*<div class="single">*@
+@*<div class="wrap">*@
+<div class="cont span_2_of_3">
+    <div class="labout span_1_of_a1">
+        <!-- start product_slider -->
+        <img src="~/images/@Model.AnhBia" style="display: block; width: 350px; height: 350px;">
 
 
-                    <div class="jspContainer" style="width: 270px; height: 200px;">
-                        <div class="jspPane" style="padding: 20px; top: 0px; left: 0px; width: 230px;">
-                            <div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Flats (70)</label>
-                            </div><div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Athletic Shoes (48)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Athletic Shoes (48)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Heels (38)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other (1)</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h4>Styles</h4>
-                <div class="row row1 scroll-pane" style="overflow: hidden; padding: 0px; width: 270px;">
 
+        <!-- end product_slider -->
+    </div>
+    <div class="cont1 span_2_of_a1">
+        <h3 class="m_3">@Model.TenGiay</h3>
 
-                    <div class="jspContainer" style="width: 270px; height: 200px;">
-                        <div class="jspPane" style="padding: 20px; top: 0px; left: 0px; width: 230px;">
-                            <div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Athletic (20)</label>
-                            </div><div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Ballerina (5)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Pumps (7)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>High Tops (2)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other (1)</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="sky-form">
-                <h4>Brand</h4>
-                <div class="row row1 scroll-pane jspScrollable" tabindex="0" style="overflow: hidden; padding: 0px; width: 270px;">
-
-
-                    <div class="jspContainer" style="width: 270px; height: 200px;">
-                        <div class="jspPane" style="padding: 20px; width: 223px; top: 0px;">
-                            <div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Adidas by Stella McCartney</label>
-                            </div><div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Asics</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Bloch</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Bloch Kids</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Capezio</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Capezio Kids</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Nike</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Zumba</label>
-                            </div>
-                        </div><div class="jspVerticalBar"><div class="jspCap jspCapTop"></div><div class="jspTrack" style="height: 200px;"><div class="jspDrag" style="height: 143px;"><div class="jspDragTop"></div><div class="jspDragBottom"></div></div></div><div class="jspCap jspCapBottom"></div></div>
-                    </div>
-                </div>
-            </section>
-            <section class="sky-form">
-                <h4>Heel Height</h4>
-                <div class="row row1 scroll-pane" style="overflow: hidden; padding: 0px; width: 270px;">
-
-
-                    <div class="jspContainer" style="width: 270px; height: 200px;">
-                        <div class="jspPane" style="padding: 20px; top: 0px; left: 0px; width: 230px;">
-                            <div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Flat (20)</label>
-                            </div><div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Under 1in(5)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>1in - 1 3/4 in(5)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>2in - 2 3/4 in(3)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>3in - 3 3/4 in(2)</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="sky-form">
-                <h4>Price</h4>
-                <div class="row row1 scroll-pane" style="overflow: hidden; padding: 0px; width: 270px;">
-
-
-                    <div class="jspContainer" style="width: 270px; height: 200px;">
-                        <div class="jspPane" style="padding: 20px; top: 0px; left: 0px; width: 230px;">
-                            <div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>$50.00 and Under (30)</label>
-                            </div><div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$100.00 and Under (30)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$200.00 and Under (30)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$300.00 and Under (30)</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$400.00 and Under (30)</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="sky-form">
-                <h4>Colors</h4>
-                <div class="row row1 scroll-pane" style="overflow: hidden; padding: 0px; width: 270px;">
-
-
-                    <div class="jspContainer" style="width: 270px; height: 200px;">
-                        <div class="jspPane" style="padding: 20px; top: 0px; left: 0px; width: 230px;">
-                            <div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Red</label>
-                            </div><div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i></label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Black</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Yellow</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Orange</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <div class="price_single">
+            <span class="reducedfrom">@Model.GiaBan VNĐ</span>
         </div>
-        <div class="cont span_2_of_3">
-            <div class="labout span_1_of_a1">
-                <!-- start product_slider -->
-                <ul id="etalage" class="etalage" style="display: block; width: 314px; height: 552px;">
-                    <li class="etalage_thumb thumb_1" style="display: none; background-image: none; opacity: 0;">
-                        <a href="optionallink.html">
-                            <img class="etalage_thumb_image" src="~/images/@Model.Anhbia" style="display: inline; width: 300px; height: 400px; opacity: 1;">
-                  
-                        </a>
-                    </li>
-                    @*<li class="etalage_thumb thumb_2" style="background-image: none; display: none; opacity: 0;">
-                        <img class="etalage_thumb_image" src="images/t2.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
-                        <img class="etalage_source_image" src="images/t2.jpg">
-                    </li>
-                    <li class="etalage_thumb thumb_3" style="background-image: none; display: none; opacity: 0;">
-                        <img class="etalage_thumb_image" src="images/t3.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
-                        <img class="etalage_source_image" src="images/t3.jpg">
-                    </li>
-                    <li class="etalage_thumb thumb_4 etalage_thumb_active" style="background-image: none; display: list-item; opacity: 1;">
-                        <img class="etalage_thumb_image" src="images/t4.jpg" style="display: inline; width: 300px; height: 400px;">
-                        <img class="etalage_source_image" src="images/t4.jpg">
-                    </li>
-                    <li class="etalage_thumb thumb_5" style="background-image: none;">
-                        <img class="etalage_thumb_image" src="images/t5.jpg" style="display: inline; width: 300px; height: 400px;">
-                        <img class="etalage_source_image" src="images/t5.jpg">
-                    </li>
-                    <li class="etalage_thumb thumb_6" style="background-image: none;">
-                        <img class="etalage_thumb_image" src="images/t6.jpg" style="display: inline; width: 300px; height: 400px;">
-                        <img class="etalage_source_image" src="images/t6.jpg">
-                    </li>
-                    <li class="etalage_thumb thumb_7" style="background-image: none;">
-                        <img class="etalage_thumb_image" src="images/t1.jpg" style="display: inline; width: 300px; height: 400px;">
-                        <img class="etalage_source_image" src="images/t1.jpg">
-                    </li>
-                    <li class="etalage_magnifier" style="margin: 0px; padding: 0px; left: 111px; top: 227px; display: none; opacity: 0.000894935;"><div style="margin: 0px; padding: 0px; width: 195px; height: 179px;"><img src="file:///D:/LapTrinhWebsite/adidas-web/web/images/t4.jpg" style="margin: 0px; padding: 0px; width: 300px; height: 400px; display: inline; left: -105px; top: -221px;"></div></li>
-                    <li class="etalage_icon" style="display: list-item; top: 290px; left: 20px; opacity: 1;">&nbsp;</li>
-                    <li class="etalage_hint" style="display: none; margin: 0px; top: -15px; right: -15px;">&nbsp;</li>
-                    <li class="etalage_zoom_area" style="margin: 0px; opacity: 0; left: 324px; display: none; background-image: none;"><div class="etalage_description" style="width: 546px; bottom: 6px; left: 6px; opacity: 0.7; display: none;"></div><div style="width: 586px; height: 538px;"><img class="etalage_zoom_img" src="images/t4.jpg" style="width: 900px; height: 1200px; left: -200.851px; top: -653.707px;"></div></li>*@
-                </ul>
-
-
-                <!-- end product_slider -->
-            </div>
-            <div class="cont1 span_2_of_a1">
-                <h3 class="m_3">@Model.TenGiay</h3>
-
-                <div class="price_single">
-                    <span class="reducedfrom">@Model.GiaBan</span>
-                </div>
-                <ul class="options">
-                    <h4 class="m_9">Select a Size</h4>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <div class="clear"></div>
-                </ul>
-                <div class="btn_form">
-                    <form>
-                        <input type="submit" value="buy now" title="">
-                    </form>
-                </div>
-                <ul class="add-to-links">
-                    <li><img src="images/wish.png" alt=""><a href="#">Add to wishlist</a></li>
-                </ul>
-                <p class="m_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-
-                <div class="social_single">
-                    <ul>
-                        <li class="fb"><a href="#"><span> </span></a></li>
-                        <li class="tw"><a href="#"><span> </span></a></li>
-                        <li class="g_plus"><a href="#"><span> </span></a></li>
-                        <li class="rss"><a href="#"><span> </span></a></li>
-                    </ul>
-                </div>
-            </div>
+        <ul class="options">
+            <h4 class="m_9">Size: @Model.Size</h4>
+            <h4 class="m_9">Thời Gian Bảo Hành: @Model.ThoiGianBaoHanh Tháng</h4>
             <div class="clear"></div>
-
-
-            <div class="nbs-flexisel-container">
-                <div class="nbs-flexisel-inner">
-                    <ul id="flexiselDemo3" class="nbs-flexisel-ul" style="left: -184.6px; display: block;">
-
-
-
-
-
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic9.jpg"><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic8.jpg"><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic7.jpg"><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic11.jpg"><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic10.jpg"><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic9.jpg"><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic8.jpg"><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic7.jpg"><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic11.jpg"><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                        <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic10.jpg"><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-                    </ul><div class="nbs-flexisel-nav-left" style="top: 75px;"></div><div class="nbs-flexisel-nav-right" style="top: 75px;"></div>
-                </div>
-            </div>
-            <script type="text/javascript">
-                $(window).load(function () {
-                    $("#flexiselDemo1").flexisel();
-                    $("#flexiselDemo2").flexisel({
-                        enableResponsiveBreakpoints: true,
-                        responsiveBreakpoints: {
-                            portrait: {
-                                changePoint: 480,
-                                visibleItems: 1
-                            },
-                            landscape: {
-                                changePoint: 640,
-                                visibleItems: 2
-                            },
-                            tablet: {
-                                changePoint: 768,
-                                visibleItems: 3
-                            }
-                        }
-                    });
-
-                    $("#flexiselDemo3").flexisel({
-                        visibleItems: 5,
-                        animationSpeed: 1000,
-                        autoPlay: true,
-                        autoPlaySpeed: 3000,
-                        pauseOnHover: true,
-                        enableResponsiveBreakpoints: true,
-                        responsiveBreakpoints: {
-                            portrait: {
-                                changePoint: 480,
-                                visibleItems: 1
-                            },
-                            landscape: {
-                                changePoint: 640,
-                                visibleItems: 2
-                            },
-                            tablet: {
-                                changePoint: 768,
-                                visibleItems: 3
-                            }
-                        }
-                    });
-
-                });
-            </script>
-            <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-            <div class="toogle">
-                <h3 class="m_3">Product Details</h3>
-                <p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
-            </div>
-            <div class="toogle">
-                <h3 class="m_3">Product Reviews</h3>
-                <p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
-            </div>
+        </ul>
+        <div class="btn_form">
+            <form>
+                <input type="submit" value="buy now" title="">
+            </form>
         </div>
-        <div class="clear"></div>
+        <ul class="add-to-links">
+            <li><img src="images/wish.png" alt=""><a href="#">Add to wishlist</a></li>
+        </ul>
+        <p class="m_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+
+        <div class="social_single">
+            <ul>
+                <li class="fb"><a href="#"><span> </span></a></li>
+                <li class="tw"><a href="#"><span> </span></a></li>
+                <li class="g_plus"><a href="#"><span> </span></a></li>
+                <li class="rss"><a href="#"><span> </span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+
+    <div class="nbs-flexisel-container">
+        <div class="nbs-flexisel-inner">
+            <ul id="flexiselDemo3" class="nbs-flexisel-ul" style="left: -184.6px; display: block;">
+
+
+
+
+
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic9.jpg"><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic8.jpg"><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic7.jpg"><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic11.jpg"><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic10.jpg"><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic9.jpg"><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic8.jpg"><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic7.jpg"><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic11.jpg"><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
+                <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic10.jpg"><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+            </ul><div class="nbs-flexisel-nav-left" style="top: 75px;"></div><div class="nbs-flexisel-nav-right" style="top: 75px;"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $("#flexiselDemo1").flexisel();
+            $("#flexiselDemo2").flexisel({
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 1
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 2
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 3
+                    }
+                }
+            });
+
+            $("#flexiselDemo3").flexisel({
+                visibleItems: 5,
+                animationSpeed: 1000,
+                autoPlay: true,
+                autoPlaySpeed: 3000,
+                pauseOnHover: true,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 1
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 2
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 3
+                    }
+                }
+            });
+
+        });
+    </script>
+    <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+    <div class="toogle">
+        <h3 class="m_3">Product Details</h3>
+        <p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+    </div>
+    <div class="toogle">
+        <h3 class="m_3">Product Reviews</h3>
+        <p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+    </div>
+</div>
+<div class="clear"></div>
     </div>
 </div>
