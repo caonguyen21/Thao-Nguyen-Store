@@ -265,6 +265,7 @@
     <Content Include="Views\Home\GiayNu.cshtml" />
     <Content Include="Views\Home\SPTheoGioiTinh.cshtml" />
     <Content Include="Views\Home\ChiTietSanPham.cshtml" />
+    <Content Include="Views\Shared\_LayoutTaiKhoan.cshtml" />
     <Content Include="Views\User\Dangky.cshtml" />
     <Content Include="Views\User\Dangnhap.cshtml" />
   </ItemGroup>
