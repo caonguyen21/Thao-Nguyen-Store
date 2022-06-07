@@ -1,0 +1,198 @@
+﻿
+@{
+    Layout = null;
+}
+<link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+@* css*@
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/Content/form.css" rel="stylesheet" type="text/css" media="all" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+<!-- start menu -->
+<link href="~/Content/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+
+<!-- top scrolling -->
+
+<!-- start menu -->
+<link href="~/Content/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+
+<!-- end menu -->
+<!-- top scrolling -->
+<script type="text/javascript" src="~/Scripts/move-top.js"></script>
+<script type="text/javascript" src="~/Scripts/easing.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
+        });
+    });
+</script>
+
+
+<div class="header-top">
+    <div class="wrap">
+        <div class="logo">
+            <a href="@Url.Action("Index","Home")"><img src="~/images/logo.png" alt="" /></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<!--end_menu-->
+<table align="center" style="margin-left: 40%">
+    <h2 style="text-align:center">ĐĂNG KÝ THÀNH VIÊN</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <tr style="height:40px">
+            <td>Họ tên khách hàng:</td>
+            <td>
+                @Html.TextBox("HotenKH")
+                @ViewData["Loi1"]
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td>Tên đăng nhập:</td>
+            <td>
+                @Html.TextBox("TenDN")
+                @ViewData["Loi2"]
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td>Mật khẩu:</td>
+            <td>
+                @Html.Password("MatKhau")
+                @ViewData["Loi3"]
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td>Nhập lại mật khẩu:</td>
+            <td>
+                @Html.Password("MatKhauNhapLai")
+                @ViewData["Loi4"]
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td>Email:</td>
+            <td>
+                <input type="email" name="email" />
+                @ViewData["Loi5"]
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td>Địa chỉ:</td>
+            <td>
+                @Html.TextBox("DiaChi")
+                @ViewData["Loi6"]
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td>Điện thoại:</td>
+            <td>
+                @Html.TextBox("DienThoai")
+                @ViewData["Loi7"]
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td>Ngày sinh:</td>
+            <td>
+                <input type="date" name="NgaySinh" />
+                @ViewData["Loi8"]
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td></td>
+            <td>
+                <input type="submit" value="Đăng ký" />
+            </td>
+        </tr>
+    }
+</table>
+<!--footer-->
+<div class="footer">
+    <div class="footer-top">
+        <div class="wrap">
+            <div class="col_1_of_footer-top span_1_of_footer-top">
+                <ul class="f_list">
+                    <li><img src="~/images/f_icon2.png" alt="" /><span class="delivery">© 2015 SHOP GIÀY DÉP THẢO NGUYÊN.</span></li>
+                </ul>
+
+            </div>
+            <div class="col_1_of_footer-top span_1_of_footer-top">
+                <ul class="f_list">
+                    <li><img src="~/images/f_icon1.png" alt="" /><span class="delivery">Hộ trợ khách hàng : <span class="orange">(+84) 899 999 999 </span></span></li>
+                </ul>
+            </div>
+            <div class="col_1_of_footer-top span_1_of_footer-top">
+                <ul class="f_list">
+                    <li><img src="~/images/f_icon.png" alt="" /><span class="delivery">Mua hàng hiệu chính hãng trực tuyến, Giá Tốt Nhất</span></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="wrap">
+            <div class="section group">
+                <div class="col_1_of_5 span_1_of_5">
+                    <h3 class="m_9">CHĂM SÓC KHÁCH HÀNG</h3>
+                    <ul class="list1">
+                        <li><a href="shop.html">Chính sách bán hàng</a></li>
+                        <li><a href="shop.html">Chính sách bảo hành</a></li>
+                        <li><a href="shop.html">Chính sách giao hàng</a></li>
+                        <li><a href="shop.html">Chính sách đổi trả và hoàn tiền</a></li>
+                        <li><a href="shop.html">Chính sách bảo mật thanh toán</a></li>
+                        <li><a href="shop.html">Chính sách bảo mật và chia sẻ thông tin</a></li>
+                        <li><a href="shop.html">Điều kiện và điều khoản giao dịch</a></li>
+                        <li><a href="shop.html">Cơ chế giải quyết tranh chấp</a></li>
+                    </ul>
+                </div>
+                <div class="col_1_of_5 span_1_of_5">
+                    <h3 class="m_9">THÔNG TIN</h3>
+                    <ul class="list1">
+                        <li><a href="shop.html">Tên doanh nghiệp: Shop Giày Dép Thảo Nguyên</a></li>
+                        <li><a href="shop.html">Hotline: (+84) 899 999 999</a></li>
+                        <li><a href="shop.html">Email: shopthaonguyen@gmail.com</a></li>
+                        <li><a href="shop.html">Thời gian làm việc: Thứ 2 - Chủ nhật: 8h00 - 22h00</a></li>
+                        <li><a href="shop.html">Địa chỉ: 23k/7, Bình Đáng, Bình Hòa, Thuận An, Bình Dương</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="copy">
+        <div class="wrap">
+            <p>© All rights reserved | Designed by Nhóm 11 19DTHA2</a></p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+    });
+</script>
+<a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+<!--end_footer-->
