@@ -7,7 +7,7 @@ namespace WebBanGiayDep.Models
 {
     public class CTSP
     {
-        /*test*/
+        /*test abc*/
         public int MaGiay { get; set; }
         public string TenGiay { get; set; }
         public int Size { get; set; }
