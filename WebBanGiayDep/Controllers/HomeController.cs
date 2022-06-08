@@ -88,5 +88,13 @@ namespace WebBanGiayDep.Controllers
             var sanpham = from s in data.SANPHAMs where s.MaLoai == id select s;
             return View(sanpham);
         }
+        public ActionResult TinTuc()
+        {
+            return View();
+        }
+        public ActionResult GioiThieu()
+        {
+            return View();
+        }
     }
 }
