@@ -199,6 +199,9 @@
     <Content Include="images\t4.jpg" />
     <Content Include="images\t5.jpg" />
     <Content Include="images\t6.jpg" />
+    <Content Include="images\tintuc1.jpg" />
+    <Content Include="images\tintuc2.jpg" />
+    <Content Include="images\tintuc3.jpg" />
     <Content Include="images\uk.png" />
     <Content Include="images\us.png" />
     <Content Include="images\van1.jpg" />
@@ -272,6 +275,8 @@
     <Content Include="Views\User\Dangky.cshtml" />
     <Content Include="Views\User\Dangnhap.cshtml" />
     <Content Include="Views\GioHang\GioHang.cshtml" />
+    <Content Include="Views\Home\TinTuc.cshtml" />
+    <Content Include="Views\Home\GioiThieu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
