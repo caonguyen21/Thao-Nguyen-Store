@@ -25,8 +25,9 @@ namespace WebBanGiayDep.Models
             sTenGiay = GIAY.TenGiay;
             sAnhBia = GIAY.AnhBia;
             iSize = GIAY.Size;
-            dGiaBan = double.Parse(GIAY.GiaBan.ToString());
             iSoLuong = 1;
+            dGiaBan = double.Parse(GIAY.GiaBan.ToString());
+           
         }
     }
 }

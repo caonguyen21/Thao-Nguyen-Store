@@ -120,7 +120,21 @@
 
 @*<div class="single">*@
 @*<div class="wrap">*@
-<div class="cont span_2_of_3">
+<style>
+    .chitietsanpham {
+        margin: 20px 150px 150px 150px;
+    }
+    .themgiohang a {
+        display: inline-block;
+        background: #000000;
+        color: #ffffff;
+        padding: 8px 30px;
+        margin: 30px 0;
+        border-radius: 30px;
+        transition: backgroud 0.5s;
+    }
+</style>
+<div class="chitietsanpham">
     <div class="labout span_1_of_a1">
         <!-- start product_slider -->
         <img src="~/images/@Model.AnhBia" style="display: block; width: 350px; height: 350px;">
@@ -140,8 +154,7 @@
             <div class="clear"></div>
         </ul>
         <div class="btn_form">
-            <form>
-                <input type="submit" value="buy now" title="">
+            <form class="themgiohang">
                 <a href="@Url.Action("ThemGioHang","GioHang",new { @iMaGiay = @Model.MaGiay, @strURL = Request.Url.ToString() })">Thêm vào Giỏ Hàng</a>
             </form>
         </div>

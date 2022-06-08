@@ -69,9 +69,52 @@ namespace WebBanGiayDep.Controllers
             return View(listGioHang);
         }
 
-        public ActionResult Index()
+        public ActionResult GiohangPartial()
         {
-            return View();
+            ViewBag.TongSoLuong = TongSoLuong();
+            ViewBag.TongTien = TongTien();
+            return PartialView();
+        }
+        //Xoa gio hang 
+        public ActionResult XoaGioHang(int iMaSp)
+        {
+            //lay gio hang tu sesstion
+            List<GioHang> listGioHang = LayGioHang();
+            //Kiem tra giay da co trong sesstion 
+            GioHang sanpham = listGioHang.SingleOrDefault(n => n.iMaGiay == iMaSp);
+            //neu ton tai thi cho sua so luong
+            if(sanpham != null)
+            {
+                listGioHang.RemoveAll(n => n.iMaGiay == iMaSp);
+                return RedirectToAction("GioHang");
+            }
+            if(listGioHang.Count == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("GioHang");
+        }
+        //cap nhap gio hang 
+        public ActionResult CapnhatGiohang(int iMaSp, FormCollection f)
+        {
+            //Lay gio hang tu sesstion
+            List<GioHang> listGioHang = LayGioHang();
+            //kiem tra giay da co trong sesstion
+            GioHang sanpham = listGioHang.SingleOrDefault(n => n.iMaGiay == iMaSp);
+            //neu ton tai thi cho sua so luong
+            if (sanpham != null)
+            {
+                sanpham.iSoLuong = int.Parse(f["txtSoluong"].ToString()); 
+            }
+            return RedirectToAction("GioHang");
+        }
+        //xoa tat ca gio hang 
+        public ActionResult XoaTatcaGiohang()
+        {
+            //Lay gio hang tu sesstion
+            List<GioHang> listGioHang = LayGioHang();
+            listGioHang.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
