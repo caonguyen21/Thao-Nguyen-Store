@@ -1,0 +1,36 @@
+﻿@using WebBanGiayDep.Models
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 style=" text-align:center"> THONG TIN GIO HANG </h2>
+<table align="center" border="1">
+    <tr style="text-align:center; font-weight:bold">
+        <td> Mã Giày </td>
+        <td> Size </td>
+        <td> Tên Giày </td>
+        <td> Ảnh Bìa </td>
+        <td> Giá Bán </td>
+        <td> Số lượng </td>
+        <td> Thành Tiền </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="text-align:center; font-weight:bold">
+            <td>@item.iMaGiay</td>
+            <td> @item.sTenGiay</td>
+            <td> @item.iSize</td>
+            <td> <img src = "~/images/@item.sAnhBia" /></td>
+            <td> @item.iSoLuong</td>
+            <td> @String.Format("0:0,0", item.dGiaBan)</td>
+            <td> @String.Format("0;0,0", item.dThanhTien) </td>
+        </tr>
+    }
+    <tr style="font-weight:bold; text-align:right; color: pink">
+        <td colspan="3"> Số lượng giày: @ViewBag.TongSoLuong</td>
+        <td colspan="3"> Tổng tiền: @String.Format("0;0,0"), ViewBag.TongTien) VND </td>
+    </tr>
+</table>
+

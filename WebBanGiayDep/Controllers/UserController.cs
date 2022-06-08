@@ -104,6 +104,7 @@ namespace WebBanGiayDep.Controllers
                 {
                     ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";
                     Session["TaiKhoan"] = kh;
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                     ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";

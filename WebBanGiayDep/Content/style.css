@@ -47,7 +47,7 @@ body{
 }
 .logo{
 	float:left;
-	margin-right: 46.5%;
+	margin-right: 40%;
 }
 .cssmenu {
 	float:left;
@@ -1736,7 +1736,7 @@ p.cart a:hover {
 		width:90%;
 	}
 	.logo {
-		margin-right: 44.5%;
+		margin-right: 40%;
     }
    .dropdown {
 	   padding-right: 63%;
@@ -1789,7 +1789,7 @@ p.cart a:hover {
 		width:90%;
 	}
 	.logo {
-		margin-right:41.5%;
+		margin-right:40%;
     }
    .dropdown {
 	   padding-right:62%;

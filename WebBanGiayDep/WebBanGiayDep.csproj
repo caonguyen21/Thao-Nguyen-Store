@@ -126,6 +126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -137,6 +138,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbShopGiay.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\GioHang.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +158,7 @@
     <Content Include="images\arrow2.gif" />
     <Content Include="images\arrows.png" />
     <Content Include="images\as.png" />
+    <Content Include="images\avavtar.png" />
     <Content Include="images\b-arrow.png" />
     <Content Include="images\banner1.jpg" />
     <Content Include="images\banner2.jpg" />
@@ -268,6 +271,7 @@
     <Content Include="Views\Shared\_LayoutTaiKhoan.cshtml" />
     <Content Include="Views\User\Dangky.cshtml" />
     <Content Include="Views\User\Dangnhap.cshtml" />
+    <Content Include="Views\GioHang\GioHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

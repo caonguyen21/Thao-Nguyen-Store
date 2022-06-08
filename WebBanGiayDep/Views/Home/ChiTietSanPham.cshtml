@@ -142,6 +142,7 @@
         <div class="btn_form">
             <form>
                 <input type="submit" value="buy now" title="">
+                <a href="@Url.Action("ThemGioHang","GioHang",new { @iMaGiay = @Model.MaGiay, @strURL = Request.Url.ToString() })">Thêm vào Giỏ Hàng</a>
             </form>
         </div>
         <ul class="add-to-links">
@@ -164,10 +165,6 @@
     <div class="nbs-flexisel-container">
         <div class="nbs-flexisel-inner">
             <ul id="flexiselDemo3" class="nbs-flexisel-ul" style="left: -184.6px; display: block;">
-
-
-
-
 
                 <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic9.jpg"><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
                 <li class="nbs-flexisel-item" style="width: 184.6px;"><img src="images/pic8.jpg"><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
