@@ -31,6 +31,8 @@ namespace WebBanGiayDep.Controllers
             var diachi = collection["DiaChi"];
             var dienthoai = collection["DienThoai"];
             var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["NgaySinh"]);
+            string matkhau_mahoa;
+         
 
             if (String.IsNullOrEmpty(hoten))
             {
@@ -42,7 +44,7 @@ namespace WebBanGiayDep.Controllers
             {
                 ViewData["Loi3"] = "Mật khẩu không được để trống!";
             }
-            else if(!matkhaunhaplai.Equals(matkhau)){
+            else if(!matkhaunhaplai.Equals(matkhau)){               
                 ViewData["Loi4"] = "Mật khẩu nhập lại không trùng khớp!";
             }
             else if (String.IsNullOrEmpty(email))
@@ -63,9 +65,10 @@ namespace WebBanGiayDep.Controllers
             }
             else
             {
+                matkhau_mahoa = Md5.MaHoaMD5(matkhau);
                 kh.HoTen = hoten;
                 kh.TaiKhoanKH = tendn;
-                kh.MatKhau = matkhau;
+                kh.MatKhau = matkhau_mahoa;
                 kh.EmailKH = email;
                 kh.DiaChiKH = diachi;
                 kh.NgaySinh = DateTime.Parse(ngaysinh);
@@ -90,6 +93,7 @@ namespace WebBanGiayDep.Controllers
         {
             var tendn = collection["TenDN"];
             var matkhau = collection["MatKhau"];
+            var matkhau_mahoa = Md5.MaHoaMD5(matkhau);
             if (String.IsNullOrEmpty(tendn))
             {
                 ViewData["Loi1"] = "Tên đăng nhập không được để trống";
@@ -99,7 +103,7 @@ namespace WebBanGiayDep.Controllers
                    }
             else
             {
-                KHACHHANG kh = data.KHACHHANGs.SingleOrDefault(n => n.TaiKhoanKH == tendn && n.MatKhau == matkhau);
+                KHACHHANG kh = data.KHACHHANGs.SingleOrDefault(n => n.TaiKhoanKH == tendn && n.MatKhau == matkhau_mahoa);
                 if (kh != null)
                 {
                     ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";
