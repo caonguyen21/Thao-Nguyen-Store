@@ -2,120 +2,303 @@
 @{
     Layout = null;
 }
-<link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Free Adidas Website Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown img.flag").addClass("flagvisibility");
 
-@* css*@
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="~/Content/form.css" rel="stylesheet" type="text/css" media="all" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+            $(".dropdown dt a").click(function () {
+                $(".dropdown dd ul").toggle();
+            });
 
-<!-- start menu -->
-<link href="~/Content/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+            $(".dropdown dd ul li a").click(function () {
+                var text = $(this).html();
+                $(".dropdown dt a span").html(text);
+                $(".dropdown dd ul").hide();
+                $("#result").html("Selected value is: " + getSelectedValue("sample"));
+            });
 
-<!-- top scrolling -->
-<!-- start menu -->
-<link href="~/Content/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+            function getSelectedValue(id) {
+                return $("#" + id).find("dt a span.value").html();
+            }
 
-<!-- end menu -->
-<!-- top scrolling -->
-<script type="text/javascript" src="~/Scripts/move-top.js"></script>
-<script type="text/javascript" src="~/Scripts/easing.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $(".scroll").click(function (event) {
-            event.preventDefault();
-            $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
+            $(document).bind('click', function (e) {
+                var $clicked = $(e.target);
+                if (!$clicked.parents().hasClass("dropdown"))
+                    $(".dropdown dd ul").hide();
+            });
+
+
+            $("#flagSwitcher").click(function () {
+                $(".dropdown img.flag").toggleClass("flagvisibility");
+            });
         });
-    });
-</script>
+    </script>
+    @* css*@
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/form.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.easydropdown.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown img.flag").addClass("flagvisibility");
+
+            $(".dropdown dt a").click(function () {
+                $(".dropdown dd ul").toggle();
+            });
+
+            $(".dropdown dd ul li a").click(function () {
+                var text = $(this).html();
+                $(".dropdown dt a span").html(text);
+                $(".dropdown dd ul").hide();
+                $("#result").html("Selected value is: " + getSelectedValue("sample"));
+            });
+
+            function getSelectedValue(id) {
+                return $("#" + id).find("dt a span.value").html();
+            }
+
+            $(document).bind('click', function (e) {
+                var $clicked = $(e.target);
+                if (!$clicked.parents().hasClass("dropdown"))
+                    $(".dropdown dd ul").hide();
+            });
 
 
-<div class="header-top">
-    <div class="wrap">
-        <div class="logo">
-            <a href="@Url.Action("Index","Home")"><img src="~/images/logo.png" alt="" /></a>
-        </div>
-        <div class="clear"></div>
-    </div>
-</div>
-
-<!--end_menu-->
-@RenderBody()
-<!--footer-->
-<div class="footer">
-    <div class="footer-top">
+            $("#flagSwitcher").click(function () {
+                $(".dropdown img.flag").toggleClass("flagvisibility");
+            });
+        });
+    </script>
+    <!-- start menu -->
+    <link href="~/Content/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Scripts/megamenu.js"></script>
+    <script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
+    <!-- end menu -->
+    <script type="text/javascript" src="~/Scripts/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" id="sourcecode">
+        $(function () {
+            $('.scroll-pane').jScrollPane();
+        });
+    </script>
+    <!-- top scrolling -->
+    <script type="text/javascript" src="~/Scripts/move-top.js"></script>
+    <script type="text/javascript" src="~/Scripts/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
+            });
+        });
+    </script>
+    <!-- start menu -->
+    <link href="~/Content/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Scripts/megamenu.js"></script>
+    <script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
+    <!-- end menu -->
+    <!-- top scrolling -->
+    <script type="text/javascript" src="~/Scripts/move-top.js"></script>
+    <script type="text/javascript" src="~/Scripts/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--menu-->
+    <div class="header-top">
         <div class="wrap">
-            <div class="col_1_of_footer-top span_1_of_footer-top">
-                <ul class="f_list">
-                    <li><img src="~/images/f_icon2.png" alt="" /><span class="delivery">© 2015 SHOP GIÀY DÉP THẢO NGUYÊN.</span></li>
-                </ul>
+            <div class="logo" style="margin-right: 35.5%;">
+                <a href="@Url.Action("Index","Home")"><img src="~/images/logo.png" alt="" /></a>
+            </div>
+            <div class="cssmenu " style="width: 45% ">
+                <ul>
+                    <li><a href="shop.html">Sản phẩm</a></li>
+                    <li class='fas fa-shopping-bag'><a href="@Url.Action("GioHang","GioHang")">Giỏ hàng</a></li>
 
-            </div>
-            <div class="col_1_of_footer-top span_1_of_footer-top">
-                <ul class="f_list">
-                    <li><img src="~/images/f_icon1.png" alt="" /><span class="delivery">Hộ trợ khách hàng : <span class="orange">(+84) 899 999 999 </span></span></li>
+                    @*     @Html.Action("GiohangPartial", "GioHang")*@
+                    @*    @if (taikhoan == null)
+                        {
+                            <li><a href="@Url.Action("Dangnhap","User")">Tài khoản</a></li>
+                        }
+                        else
+                        {
+                            <li style="width: 50%">
+                                <a href="">
+                                    <img src="~/images/avavtar.png" style="width: 10%; height: 10%;" />
+                                    <p>Hello @taikhoan.TaiKhoanKH</p>
+                                </a>
+
+                            </li>
+                        }*@
                 </ul>
             </div>
-            <div class="col_1_of_footer-top span_1_of_footer-top">
-                <ul class="f_list">
-                    <li><img src="~/images/f_icon.png" alt="" /><span class="delivery">Mua hàng hiệu chính hãng trực tuyến, Giá Tốt Nhất</span></li>
-                </ul>
-            </div>
+
+            <ul class="icon2 sub-icon2 profile_img">
+                <li>
+                    <a class="active-icon c2" href="#"> </a>
+                    <ul class="sub-icon2 list">
+                        <li><h3>Sản phẩm</h3><a href=""></a></li>
+                        <li><p>mo ta <a href="">adipiscing elit, sed diam</a></p></li>
+                    </ul>
+                </li>
+
+            </ul>
             <div class="clear"></div>
         </div>
     </div>
-    <div class="footer-bottom">
+    <div class="header-bottom">
         <div class="wrap">
-            <div class="section group">
-                <div class="col_1_of_5 span_1_of_5">
-                    <h3 class="m_9">CHĂM SÓC KHÁCH HÀNG</h3>
-                    <ul class="list1">
-                        <li><a href="shop.html">Chính sách bán hàng</a></li>
-                        <li><a href="shop.html">Chính sách bảo hành</a></li>
-                        <li><a href="shop.html">Chính sách giao hàng</a></li>
-                        <li><a href="shop.html">Chính sách đổi trả và hoàn tiền</a></li>
-                        <li><a href="shop.html">Chính sách bảo mật thanh toán</a></li>
-                        <li><a href="shop.html">Chính sách bảo mật và chia sẻ thông tin</a></li>
-                        <li><a href="shop.html">Điều kiện và điều khoản giao dịch</a></li>
-                        <li><a href="shop.html">Cơ chế giải quyết tranh chấp</a></li>
+            <!--start header menu -->
+            <ul class="megamenu skyblue">
+                <li>
+                    @Html.ActionLink("Trang chủ", "Index", "Home")
+                </li>
+                <li class="grid">
+                    <a class="color2" href="#">Giày nam</a>
+                    <div class="megapanel">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Giày Nam</h4>
+                                    @Html.Action("GiayNam", "Home")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+                <li class="active grid">
+                    <a class="color4" href="#">Giày nữ</a>
+                    <div class="megapanel">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Giày Nữ</h4>
+                                    @Html.Action("GiayNu", "Home")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!--Thuong hiêu-->
+                <li>
+                    <a class="color10" href="#">Thương hiệu</a>
+                    <div class="megapanel">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Thương hiệu</h4>
+                                    @Html.Action("ThuongHieu", "Home")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!--Tin tuc-->
+                <li>
+                    <a class="color10" href="@Url.Action("TinTuc", "Home")">Tin tức</a>
+                </li>
+
+                <!--Gioi thieu-->
+                <li>
+                    <a class="color10" href="@Url.Action("GioiThieu", "Home")">Giới thiệu</a>
+                </li>
+
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    @RenderBody()
+    <!--footer-->
+    <div class="footer">
+        <div class="footer-top">
+            <div class="wrap">
+                <div class="col_1_of_footer-top span_1_of_footer-top">
+                    <ul class="f_list">
+                        <li><img src="~/images/f_icon2.png" alt="" /><span class="delivery">© 2015 SHOP GIÀY DÉP THẢO NGUYÊN.</span></li>
+                    </ul>
+
+                </div>
+                <div class="col_1_of_footer-top span_1_of_footer-top">
+                    <ul class="f_list">
+                        <li><img src="~/images/f_icon1.png" alt="" /><span class="delivery">Hộ trợ khách hàng : <span class="orange">(+84) 899 999 999 </span></span></li>
                     </ul>
                 </div>
-                <div class="col_1_of_5 span_1_of_5">
-                    <h3 class="m_9">THÔNG TIN</h3>
-                    <ul class="list1">
-                        <li><a href="shop.html">Tên doanh nghiệp: Shop Giày Dép Thảo Nguyên</a></li>
-                        <li><a href="shop.html">Hotline: (+84) 899 999 999</a></li>
-                        <li><a href="shop.html">Email: shopthaonguyen@gmail.com</a></li>
-                        <li><a href="shop.html">Thời gian làm việc: Thứ 2 - Chủ nhật: 8h00 - 22h00</a></li>
-                        <li><a href="shop.html">Địa chỉ: 23k/7, Bình Đáng, Bình Hòa, Thuận An, Bình Dương</a></li>
+                <div class="col_1_of_footer-top span_1_of_footer-top">
+                    <ul class="f_list">
+                        <li><img src="~/images/f_icon.png" alt="" /><span class="delivery">Mua hàng hiệu chính hãng trực tuyến, Giá Tốt Nhất</span></li>
                     </ul>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
-    </div>
-    <div class="copy">
-        <div class="wrap">
-            <p>© All rights reserved | Designed by Nhóm 11 19DTHA2</a></p>
+        <div class="footer-bottom">
+            <div class="wrap">
+                <div class="section group">
+                    <div class="col_1_of_5 span_1_of_5">
+                        <h3 class="m_9">CHĂM SÓC KHÁCH HÀNG</h3>
+                        <ul class="list1">
+                            <li><a href="shop.html">Chính sách bán hàng</a></li>
+                            <li><a href="shop.html">Chính sách bảo hành</a></li>
+                            <li><a href="shop.html">Chính sách giao hàng</a></li>
+                            <li><a href="shop.html">Chính sách đổi trả và hoàn tiền</a></li>
+                            <li><a href="shop.html">Chính sách bảo mật thanh toán</a></li>
+                            <li><a href="shop.html">Chính sách bảo mật và chia sẻ thông tin</a></li>
+                            <li><a href="shop.html">Điều kiện và điều khoản giao dịch</a></li>
+                            <li><a href="shop.html">Cơ chế giải quyết tranh chấp</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        <h3 class="m_9">THÔNG TIN</h3>
+                        <ul class="list1">
+                            <li><a href="shop.html">Tên doanh nghiệp: Shop Giày Dép Thảo Nguyên</a></li>
+                            <li><a href="shop.html">Hotline: (+84) 899 999 999</a></li>
+                            <li><a href="shop.html">Email: shopthaonguyen@gmail.com</a></li>
+                            <li><a href="shop.html">Thời gian làm việc: Thứ 2 - Chủ nhật: 8h00 - 22h00</a></li>
+                            <li><a href="shop.html">Địa chỉ: 23k/7, Bình Đáng, Bình Hòa, Thuận An, Bình Dương</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="copy">
+            <div class="wrap">
+                <p>© All rights reserved | Designed by Nhóm 11 19DTHA2</a></p>
+            </div>
         </div>
     </div>
-</div>
-<script type="text/javascript">
-    $(document).ready(function () {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-        var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-        };
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
 
-        $().UItoTop({ easingType: 'easeOutQuart' });
+            $().UItoTop({ easingType: 'easeOutQuart' });
 
-    });
-</script>
-<a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
-<!--end_footer-->
+        });
+    </script>
+    <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+    <!--end_footer-->

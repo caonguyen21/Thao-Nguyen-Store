@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanGiayDep.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace WebBanGiayDep.Controllers
 {

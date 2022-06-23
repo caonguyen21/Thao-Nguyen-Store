@@ -4,8 +4,8 @@
     Layout = "~/Views/Shared/_LayoutTaiKhoan.cshtml";
 }
 <h4 style="color:red; text-align:center">@ViewBag.Thongbao</h4>
-<table align="center" style="margin-left: 40%;">
-    <h3 style="text-align:center">ĐĂNG NHẬP</h3>
+<table align="center" style="margin-left: 40%; margin-bottom:10%; margin-top:2%">
+    <h1 style="text-align:center; margin-top: 100px; font-size: 25px; font-weight: bold ">ĐĂNG NHẬP</h1>
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
@@ -27,7 +27,7 @@
             <td></td>
             <td>
                 <input type="submit" value="Đăng nhập" style="margin-left:5%" />
-                <p>Bạn Chưa có tài khoản?<a href="@Url.Action("Dangky","User")" style="font-size:25px">  Đăng ký </a></p>
+                <p style="font-size: 15px">Bạn Chưa có tài khoản?<a href="@Url.Action("Dangky","User")" style="font-size:15px; font-weight:bold">  Đăng ký </a></p>
             </td>
         </tr>
     }

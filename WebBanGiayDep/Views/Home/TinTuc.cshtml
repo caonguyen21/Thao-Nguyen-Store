@@ -3,84 +3,77 @@
     ViewBag.Title = "TinTuc";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-<div class="tintuc" style="margin: 20px 0 0 200px">
+<div class="tintuc" style="margin: 20px 0 0 300px">
     <h1>Tin tức</h1>
 </div>
 <br>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        h1 {
-            font-weight: bold;
-            font-size: 30px;
+<style>
+    h1 {
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    h2 {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    html {
+        box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+
+    .column {
+        float: left;
+        width: 33.3%;
+        margin-bottom: 50px;
+        padding: 0 8px;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+        padding: 0 16px;
+        width: 100%;
+        height: 280px;
+    }
+
+        .container::after, .row::after {
+            content: "";
+            clear: both;
+            display: table;
         }
 
-        h2 {
-            font-weight: bold;
-            font-size: 20px;
+    .title {
+        color: grey;
+    }
+
+    .button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+    }
+
+        .button:hover {
+            background-color: #555;
         }
 
-        html {
-            box-sizing: border-box;
-        }
-
-        *, *:before, *:after {
-            box-sizing: inherit;
-        }
-
-        .column {
-            float: left;
-            width: 33.3%;
-            margin-bottom: 50px;
-            padding: 0 8px;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        .container {
-            padding: 0 16px;
-            width: 100%;
-            height: 280px;
-        }
-
-            .container::after, .row::after {
-                content: "";
-                clear: both;
-                display: table;
-            }
-
-        .title {
-            color: grey;
-        }
-
-        .button {
-            border: none;
-            outline: 0;
-            display: inline-block;
-            padding: 8px;
-            color: white;
-            background-color: #000;
-            text-align: center;
-            cursor: pointer;
-            width: 100%;
-        }
-
-            .button:hover {
-                background-color: #555;
-            }
-
-        .row {
-            margin: 0 200px 10px 200px;
-        }
-    </style>
-</head>
-<body>
-    <br>
+    .row {
+        margin: 0px 200px 300px 200px;
+    }
+</style>
     <div class="row">
         <div class="column">
             <div class="card">
@@ -150,6 +143,3 @@
             </div>
         </div>
     </div>
-
-</body>
-</html>
