@@ -30,10 +30,13 @@ namespace WebBanGiayDep.Controllers
         {
             return data.SANPHAMs.OrderByDescending(a => a.SoLuongTon).Take(count).ToList();
         }
-        public ActionResult GiayTon()
+        public ActionResult GiayTon(int ? page)
         {
-            var giayton = SoLuongTonGiay(9);
-            return PartialView(giayton);
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+
+            var giayton = SoLuongTonGiay(20);
+            return PartialView(giayton.ToPagedList(pageNum,pageSize));
         }
         public ActionResult ChiTietSanPham(int id)
         {
@@ -85,10 +88,13 @@ namespace WebBanGiayDep.Controllers
             return PartialView(GiayNu);
         }
 
-        public ActionResult SPTheoGioiTinh(int id)
+        public ActionResult SPTheoGioiTinh(int id, int ? page)
         {
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+
             var sanpham = from s in data.SANPHAMs where s.MaLoai == id select s;
-            return View(sanpham);
+            return View(sanpham.ToPagedList(pageNum,pageSize));
         }
         public ActionResult TinTuc()
         {

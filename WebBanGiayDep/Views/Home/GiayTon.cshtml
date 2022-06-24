@@ -1,8 +1,12 @@
-﻿@model IEnumerable<WebBanGiayDep.Models.SANPHAM>
+﻿
+@using WebBanGiayDep.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<SANPHAM>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @foreach (var item in Model)
 {
     <div class="box1">
-        <div class="col_1_of_3 span_1_of_3" style="margin-right: 20px; width: 300px;" >
+        <div class="col_1_of_3 span_1_of_3" style="margin-right: 20px; width: 300px;">
             <a href="@Url.Action("ChiTietSanPham", "Home",new {id = item.MaGiay } )">
                 <div class="view view-fifth">
                     <div class="top_box">
@@ -27,7 +31,7 @@
                     <label for="rating-input-1-2" class="rating-star"></label>
                     <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
                     <label for="rating-input-1-1" class="rating-star"></label>&nbsp;
-         
+
                 </span>
                 <ul class="list">
                     <li>
@@ -35,16 +39,22 @@
                         <ul class="icon1 sub-icon1 profile_img">
                             <li>
                                 <a class="active-icon c1" href="#">Giỏ Hàng </a>-->
-                                @*<ul class="sub-icon1 list">
-                                    <li><h3>sed diam nonummy</h3><a href=""></a></li>
-                                    <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                                </ul>*@
-                            <!--</li>
+                @*<ul class="sub-icon1 list">
+                        <li><h3>sed diam nonummy</h3><a href=""></a></li>
+                        <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                    </ul>*@
+                <!--</li>
                         </ul>
                     </li>
                 </ul>-->
                 <div class="clear"></div>
             </a>
         </div>
-        </div>
-        }
+    </div>
+}
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+   
