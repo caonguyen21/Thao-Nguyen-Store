@@ -3,7 +3,6 @@
     Layout = null;
 }
 <!DOCTYPE html>
-<html>
 <head>
     <title>Free Adidas Website Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -129,24 +128,10 @@
             </div>
             <div class="cssmenu " style="width: 45% ">
                 <ul>
-                    <li><a href="shop.html">Sản phẩm</a></li>
+                    <li>
+                        <a href="@Url.Action("ListSanPham","Home")">Sản phẩm</a>
+                    </li>
                     <li class='fas fa-shopping-bag'><a href="@Url.Action("GioHang","GioHang")">Giỏ hàng</a></li>
-
-                    @*     @Html.Action("GiohangPartial", "GioHang")*@
-                    @*    @if (taikhoan == null)
-                        {
-                            <li><a href="@Url.Action("Dangnhap","User")">Tài khoản</a></li>
-                        }
-                        else
-                        {
-                            <li style="width: 50%">
-                                <a href="">
-                                    <img src="~/images/avavtar.png" style="width: 10%; height: 10%;" />
-                                    <p>Hello @taikhoan.TaiKhoanKH</p>
-                                </a>
-
-                            </li>
-                        }*@
                 </ul>
             </div>
 
