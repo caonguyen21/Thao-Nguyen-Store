@@ -650,3 +650,7 @@ C:\Users\Admin\Desktop\DoAnWeb\WebBanGigay\LapTrinhWeb\WebBanGiayDep\obj\Debug\W
 C:\Users\Admin\Desktop\DoAnWeb\WebBanGigay\LapTrinhWeb\WebBanGiayDep\obj\Debug\WebBanGiayDep.csproj.CopyComplete
 C:\Users\Admin\Desktop\DoAnWeb\WebBanGigay\LapTrinhWeb\WebBanGiayDep\obj\Debug\WebBanGiayDep.dll
 C:\Users\Admin\Desktop\DoAnWeb\WebBanGigay\LapTrinhWeb\WebBanGiayDep\obj\Debug\WebBanGiayDep.pdb
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\PagedList.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\PagedList.Mvc.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\PagedList.xml
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\PagedList.Mvc.xml

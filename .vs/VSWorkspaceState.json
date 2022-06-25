@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\WebBanGiayDep",
-    "\\WebBanGiayDep\\Controllers"
+    "\\WebBanGiayDep\\Views",
+    "\\WebBanGiayDep\\Views\\Home"
   ],
-  "SelectedNode": "\\WebBanGiayDep\\Controllers\\HomeController.cs",
+  "SelectedNode": "\\WebBanGiayDep\\Views\\Home\\SPTheoThuongHieu.cshtml",
   "PreviewInSolutionExplorer": false
 }

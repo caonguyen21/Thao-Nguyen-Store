@@ -13,10 +13,21 @@ namespace WebBanGiayDep.Controllers
     {
         //Tao 1 doi tuong chua toan bo CSDL tu dbWeb ban giay
         dbShopGiayDataContext data = new dbShopGiayDataContext();
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View();
+            int pageSize = 9;
+            int pageNum = (page ?? 1);
+            var giayton = SoLuongTonGiay(50);
+            return PartialView(giayton.ToPagedList(pageNum, pageSize));
         }
+        public ActionResult ListSanPham(int? page)
+        {
+            int pageSize = 9;
+            int pageNum = (page ?? 1);
+            var giayton = SoLuongTonGiay(50);
+            return PartialView(giayton.ToPagedList(pageNum, pageSize));
+        }
+
         private List<SANPHAM> layGiayMoi(int count)
         {
             return data.SANPHAMs.OrderByDescending(a => a.NgayCapNhat).Take(count).ToList();
@@ -29,14 +40,6 @@ namespace WebBanGiayDep.Controllers
         private List<SANPHAM> SoLuongTonGiay (int count)
         {
             return data.SANPHAMs.OrderByDescending(a => a.SoLuongTon).Take(count).ToList();
-        }
-        public ActionResult GiayTon(int ? page)
-        {
-            int pageSize = 8;
-            int pageNum = (page ?? 1);
-
-            var giayton = SoLuongTonGiay(20);
-            return PartialView(giayton.ToPagedList(pageNum,pageSize));
         }
         public ActionResult ChiTietSanPham(int id)
         {
@@ -68,10 +71,12 @@ namespace WebBanGiayDep.Controllers
             return PartialView(thuonghieu);
         }
 
-        public ActionResult SPTheoThuongHieu(int id)
+        public ActionResult SPTheoThuongHieu(int id, int ? page)
         {
+            int pageSize = 9;
+            int pageNum = (page ?? 1);
             var sanpham = from s in data.SANPHAMs where s.MaThuongHieu == id select s;
-            return View(sanpham);
+            return View(sanpham.ToPagedList(pageNum, pageSize));
         }
         public ActionResult GiayNam()
         {
@@ -90,11 +95,10 @@ namespace WebBanGiayDep.Controllers
 
         public ActionResult SPTheoGioiTinh(int id, int ? page)
         {
-            int pageSize = 8;
+            int pageSize = 9;
             int pageNum = (page ?? 1);
-
             var sanpham = from s in data.SANPHAMs where s.MaLoai == id select s;
-            return View(sanpham.ToPagedList(pageNum,pageSize));
+            return View(sanpham.ToPagedList(pageNum, pageSize));
         }
         public ActionResult TinTuc()
         {

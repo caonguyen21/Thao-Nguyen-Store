@@ -217,7 +217,6 @@
     <Content Include="images\pumathunder.jpg" />
     <Content Include="images\radius.png" />
     <Content Include="images\reebokden.jpg" />
-    <Content Include="images\reebokdmx.jpg" />
     <Content Include="images\Reebokwmns.jpg" />
     <Content Include="images\sandalnuden.jpg" />
     <Content Include="images\srl.png" />
@@ -296,7 +295,6 @@
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\GiayMoi.cshtml" />
-    <Content Include="Views\Home\GiayTon.cshtml" />
     <Content Include="Views\Home\ThuongHieu.cshtml" />
     <Content Include="Views\Home\SPTheoThuongHieu.cshtml" />
     <Content Include="Views\Home\GiayNam.cshtml" />
@@ -312,6 +310,7 @@
     <Content Include="Views\GioHang\GiohangPartial.cshtml" />
     <Content Include="Views\GioHang\DatHang.cshtml" />
     <Content Include="Views\GioHang\Xacnhandonhang.cshtml" />
+    <Content Include="Views\Home\ListSanPham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
