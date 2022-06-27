@@ -138,8 +138,10 @@ namespace WebBanGiayDep.Controllers
             ViewBag.MaNCC = new SelectList(data.NHACUNGCAPs.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
             return View(sanPham);
         }
-        [HttpPost, ActionName("SuaSanPham")]
-        public ActionResult CapNhat(int id, HttpPostedFileBase fileUpload)
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult SuaSanPham( int id, HttpPostedFileBase fileUpload)
         {
             SANPHAM sp = data.SANPHAMs.SingleOrDefault(n => n.MaGiay == id);
 
@@ -175,8 +177,10 @@ namespace WebBanGiayDep.Controllers
                     data.SubmitChanges();
                 }
                 return RedirectToAction("SanPham");
-            }
+            }       
         }
+      
+        
 
        
 
