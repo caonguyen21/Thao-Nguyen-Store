@@ -64,7 +64,6 @@ namespace WebBanGiayDep.Controllers
                                   });
              return View(chitietsanpham.Single());
         }
-        [HttpGet]
         public ActionResult ThuongHieu()
         {
             var thuonghieu = (from s in data.THUONGHIEUs select s);
@@ -75,7 +74,7 @@ namespace WebBanGiayDep.Controllers
         {
             int pageSize = 9;
             int pageNum = (page ?? 1);
-            var sanpham = from s in data.SANPHAMs where s.MaThuongHieu == id select s;
+            var sanpham = from s in data.SANPHAMs where (s.MaThuongHieu == id && s.TrangThai == true) select s;
             return View(sanpham.ToPagedList(pageNum, pageSize));
         }
         public ActionResult GiayNam()
@@ -97,7 +96,7 @@ namespace WebBanGiayDep.Controllers
         {
             int pageSize = 9;
             int pageNum = (page ?? 1);
-            var sanpham = from s in data.SANPHAMs where s.MaLoai == id select s;
+            var sanpham = from s in data.SANPHAMs where (s.MaLoai == id && s.TrangThai == true) select s;
             return View(sanpham.ToPagedList(pageNum, pageSize));
         }
         public ActionResult TinTuc()

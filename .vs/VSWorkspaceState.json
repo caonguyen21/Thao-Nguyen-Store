@@ -3,8 +3,8 @@
     "",
     "\\WebBanGiayDep",
     "\\WebBanGiayDep\\Views",
-    "\\WebBanGiayDep\\Views\\Home"
+    "\\WebBanGiayDep\\Views\\Admin"
   ],
-  "SelectedNode": "\\WebBanGiayDep\\Views\\Home\\SPTheoThuongHieu.cshtml",
+  "SelectedNode": "\\WebBanGiayDep\\Views\\Admin\\Login.cshtml",
   "PreviewInSolutionExplorer": false
 }

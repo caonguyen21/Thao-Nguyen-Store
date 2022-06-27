@@ -106,12 +106,21 @@ namespace WebBanGiayDep.Controllers
                 KHACHHANG kh = data.KHACHHANGs.SingleOrDefault(n => n.TaiKhoanKH == tendn && n.MatKhau == matkhau_mahoa);
                 if (kh != null)
                 {
-                    ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";
-                    Session["TaiKhoan"] = kh;
-                    return RedirectToAction("Index", "Home");
+                    if (kh.TrangThai == true)
+                    {
+                        ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";
+                        Session["TaiKhoan"] = kh;
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.Thongbao = "Tài khoản đã bị khóa";
+                    }
                 }
                 else
+                {
                     ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
+                }
             }
             return View();
         }

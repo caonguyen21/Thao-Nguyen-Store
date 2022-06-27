@@ -192,6 +192,7 @@
     <Content Include="images\arrow2.gif" />
     <Content Include="images\arrows.png" />
     <Content Include="images\as.png" />
+    <Content Include="images\avatars.jpg" />
     <Content Include="images\avavtar.png" />
     <Content Include="images\b-arrow.png" />
     <Content Include="images\banner1.jpg" />
@@ -541,6 +542,7 @@
     <Content Include="vendor\wow\animate.css" />
     <Content Include="vendor\wow\wow.min.js" />
     <Content Include="Views\Shared\index.html" />
+    <Content Include="Views\Shared\index3.html" />
     <Content Include="Views\Shared\login.html" />
     <Content Include="Views\Shared\shop.html" />
     <Content Include="Views\Shared\single.html" />
