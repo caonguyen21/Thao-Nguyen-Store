@@ -127,7 +127,6 @@ namespace WebBanGiayDep.Controllers
         public ActionResult SuaSanPham(int id)
         {
             SANPHAM sanPham = data.SANPHAMs.SingleOrDefault(n => n.MaGiay == id);
-            ViewBag.MaGiay = sanPham.MaGiay;
             if (sanPham == null)
             {
                 Response.StatusCode = 404;
@@ -139,15 +138,14 @@ namespace WebBanGiayDep.Controllers
             ViewBag.MaNCC = new SelectList(data.NHACUNGCAPs.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
             return View(sanPham);
         }
-
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult SuaSanPham(SANPHAM sanpham, HttpPostedFileBase fileUpload)
+        [HttpPost, ActionName("SuaSanPham")]
+        public ActionResult CapNhat(int id, HttpPostedFileBase fileUpload)
         {
+            SANPHAM sp = data.SANPHAMs.SingleOrDefault(n => n.MaGiay == id);
+
             ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
             ViewBag.MaLoai = new SelectList(data.LOAIGIAYs.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
             ViewBag.MaNCC = new SelectList(data.NHACUNGCAPs.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
-            //Kiemtra duong dan
             if (fileUpload == null)
             {
                 ViewBag.ThongBao = "Vui lòng chọn ảnh bìa";
@@ -171,15 +169,16 @@ namespace WebBanGiayDep.Controllers
                         //Luu hinh anh vao duong dan
                         fileUpload.SaveAs(path);
                     }
-                    sanpham.AnhBia = fileName;
+                    sp.AnhBia = fileName;
                     //luu vao csdl
-                    UpdateModel(sanpham);
+                    UpdateModel(sp);
                     data.SubmitChanges();
                 }
                 return RedirectToAction("SanPham");
             }
-
         }
+
+       
 
         [HttpGet]
         public ActionResult Login()

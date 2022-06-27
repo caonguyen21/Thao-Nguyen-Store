@@ -3,8 +3,9 @@
     "",
     "\\WebBanGiayDep",
     "\\WebBanGiayDep\\Views",
-    "\\WebBanGiayDep\\Views\\Admin"
+    "\\WebBanGiayDep\\Views\\Admin",
+    "\\WebBanGiayDep\\Views\\User"
   ],
-  "SelectedNode": "\\WebBanGiayDep\\Views\\Admin\\SuaSanPham.cshtml",
+  "SelectedNode": "\\WebBanGiayDep.sln",
   "PreviewInSolutionExplorer": false
 }
