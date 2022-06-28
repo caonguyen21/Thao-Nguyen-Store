@@ -2072,7 +2072,7 @@ namespace WebBanGiayDep.Models
 		
 		private string _NoiDung;
 		
-		private System.Nullable<bool> _TrangThai;
+	/*	private System.Nullable<bool> _TrangThai;*/
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2088,8 +2088,8 @@ namespace WebBanGiayDep.Models
     partial void OnNgayGuiChanged();
     partial void OnNoiDungChanging(string value);
     partial void OnNoiDungChanged();
-    partial void OnTrangThaiChanging(System.Nullable<bool> value);
-    partial void OnTrangThaiChanged();
+  /*  partial void OnTrangThaiChanging(System.Nullable<bool> value);
+    partial void OnTrangThaiChanged();*/
     #endregion
 		
 		public YKIENKHACHHANG()
@@ -2197,7 +2197,7 @@ namespace WebBanGiayDep.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrangThai", DbType="Bit")]
+		/*[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrangThai", DbType="Bit")]
 		public System.Nullable<bool> TrangThai
 		{
 			get
@@ -2215,7 +2215,7 @@ namespace WebBanGiayDep.Models
 					this.OnTrangThaiChanged();
 				}
 			}
-		}
+		}*/
 		
 		public event PropertyChangingEventHandler PropertyChanging;
 		

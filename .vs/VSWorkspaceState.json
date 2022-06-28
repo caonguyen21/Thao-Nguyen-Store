@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\WebBanGiayDep",
+    "\\WebBanGiayDep\\Views",
+    "\\WebBanGiayDep\\Views\\Shared"
   ],
-  "SelectedNode": "\\WebBanGiayDep.sln",
+  "SelectedNode": "\\WebBanGiayDep\\Views\\Shared\\_LayoutAdmin.cshtml",
   "PreviewInSolutionExplorer": false
 }

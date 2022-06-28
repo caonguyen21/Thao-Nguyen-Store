@@ -419,33 +419,14 @@ C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.DiaSy
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.Managed.Core.targets
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.Win32.Primitives.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.AppContext.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Console.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Diagnostics.StackTrace.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Globalization.Calendars.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.Compression.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.Compression.ZipFile.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.FileSystem.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.FileSystem.Primitives.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Net.Http.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Net.Sockets.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Security.Cryptography.Algorithms.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Security.Cryptography.Encoding.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Security.Cryptography.Primitives.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Text.Encoding.CodePages.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Threading.Tasks.Extensions.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.ValueTuple.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Xml.ReaderWriter.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Xml.XmlDocument.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Xml.XPath.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Xml.XPath.XDocument.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.exe
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.exe.config
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.rsp
@@ -811,3 +792,9 @@ D:\Git\LapTrinhWeb\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Numerics.Vectors.
 D:\Git\LapTrinhWeb\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
 D:\Git\LapTrinhWeb\LapTrinhWeb\WebBanGiayDep\bin\EntityFramework.dll
 D:\Git\LapTrinhWeb\LapTrinhWeb\WebBanGiayDep\bin\EntityFramework.xml
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Buffers.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Memory.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\EntityFramework.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\EntityFramework.xml

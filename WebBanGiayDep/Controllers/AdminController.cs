@@ -179,11 +179,6 @@ namespace WebBanGiayDep.Controllers
                 return RedirectToAction("SanPham");
             }       
         }
-      
-        
-
-       
-
         [HttpGet]
         public ActionResult Login()
         {
@@ -216,6 +211,41 @@ namespace WebBanGiayDep.Controllers
                     ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
             }
             return View();
+        }
+        //y kien khach hang
+        public ActionResult ykienkhachhang(int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 5;
+            return View(data.YKIENKHACHHANGs.ToList().OrderBy(n => n.MAYKIEN).ToPagedList(pageNumber, pageSize));
+        }
+        //Hien thi y kien
+        [HttpGet]
+        public ActionResult Xoaykienkhachhang(int id)
+        {
+            YKIENKHACHHANG ykienkhachhang = data.YKIENKHACHHANGs.SingleOrDefault(n => n.MAYKIEN == id);
+            ViewBag.MAYKIEN = ykienkhachhang.MAYKIEN;
+            if (ykienkhachhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(ykienkhachhang);
+        }
+        [HttpPost, ActionName("Xoaykienkhachhang")]
+        public ActionResult Xacnhanxoa(int id)
+        {
+            //Lay ra y kien can xoa
+            YKIENKHACHHANG ykienkhachhang = data.YKIENKHACHHANGs.SingleOrDefault(n => n.MAYKIEN == id);
+            ViewBag.MAYKIEN = ykienkhachhang.MAYKIEN;
+            if (ykienkhachhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            data.YKIENKHACHHANGs.DeleteOnSubmit(ykienkhachhang);
+            data.SubmitChanges();
+            return RedirectToAction("Ykienkhachhang");
         }
     }
 }

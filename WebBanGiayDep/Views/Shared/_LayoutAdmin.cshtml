@@ -25,78 +25,52 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <!-- HEADER DESKTOP-->
+        <!-- menu-->
         <header class="header-desktop3 d-none d-lg-block">
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
                     <div class="header__logo">
-                        <a href="#">
+                        <a href="@Url.Action("Index","Admin")">
                             <h4 style="color: #CCCCCC">ShopThaoNguyen</h4>
                         </a>
                     </div>
                     <div class="header__navbar">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="#">TRANG CHỦ</a>
+                                <a href="@Url.Action("Index","Admin")">TRANG CHỦ</a>
                             </li>
-                            <li>
-                                <a href="@Url.Action("SanPham","Admin")">
-                                    <i></i>
-                                    @* <span class="bot-line"></span>*@QUẢN LÝ SẢN PHẢM
-                                </a>
-                            </li>
-                            <li>
-                                <a href="table.html">
-                                    <i></i>
-                                    @*<span class="bot-line"></span>*@QUẢN LÝ THƯƠNG HIỆU
-                                </a>
-                            </li>
+
                             <li class="has-sub">
-                                <a href="#">
-                                    <i></i>
-                                    @* <span class="bot-line"></span>*@QUẢN LÝ NHÀ CUNG CẤP
-                                </a>
-                                @* <ul class="header3-sub-list list-unstyled">
-                                        <li>
-                                            <a href="login.html">Login</a>
-                                        </li>
-                                    </ul>*@
+                                <a href="@Url.Action("SanPham","Admin")"><span class="bot-line"></span>QUẢN LÝ SẢN PHẨM</a>
+                                @*droplist*@
+                                <ul class="header3-sub-list list-unstyled">
+                                    <li>
+                                        <a href="#">QUẢN LÝ THƯƠNG HIỆU</a>
+                                        <a href="#">QUẢN LÝ NHÀ CUNG CẤP</a>
+                                        <a href="#">QUẢN LÝ LOẠI GIÀY</a>
+                                    </li>
+                                </ul>
                             </li>
+
                             <li class="has-sub">
-                                <a href="#">
-                                    <i></i>
-                                    @*<span class="bot-line"></span>*@QUẢN LÝ LOẠI GIÀY
-                                </a>
-                                @*<ul class="header3-sub-list list-unstyled">
-                                        <li>
-                                            <a href="button.html">Button</a>
-                                        </li>
-                                    </ul>*@
+                                <a href="#">QUẢN LÝ ĐƠN HÀNG</a>
                             </li>
+
                             <li class="has-sub">
-                                <a href="#">
-                                    <i></i>
-                                    @*<span class="bot-line"></span>*@QUẢN LÝ KHÁCH HÀNG
-                                </a>
-                                @*<ul class="header3-sub-list list-unstyled">
-                                        <li>
-                                            <a href="button.html">Button</a>
-                                        </li>
-                                    </ul>*@
+                                <a href="#">QUẢN LÝ KHÁCH HÀNG</a>
                             </li>
+
                             <li class="has-sub">
-                                <a href="#">
-                                    <i></i>
-                                    @*<span class="bot-line"></span>*@QUẢN LÝ ĐƠN HÀNG
-                                </a>
-                                @*<ul class="header3-sub-list list-unstyled">
-                                        <li>
-                                            <a href="button.html">Button</a>
-                                        </li>
-                                    </ul>*@
+                                <a href="#">QUẢN LÝ NHÂN VIÊN</a>
                             </li>
+
+                            <li class="has-sub">
+                                <a href="@Url.Action("Ykienkhachhang", "Admin")">QUẢN LÝ Ý KIẾN KHÁCH HÀNG</a>
+                            </li>
+
                         </ul>
                     </div>
+                   @* end menu*@
                     <div class="header__tool">
                         <div class="account-wrap">
                             <div class="account-item account-item--style2 clearfix js-item-menu">
@@ -177,7 +151,7 @@
     <!-- ~/vendor JS       -->
     <script src="~/vendor/slick/slick.min.js"></script>
     <script src="~/vendor/wow/wow.min.js"></script>
-    <script src="~/vendor/animsition/animsition.min.js"></script>
+@*    <script src="~/vendor/animsition/animsition.min.js"></script>*@
     <script src="~/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <script src="~/vendor/counter-up/jquery.waypoints.min.js"></script>
     <script src="~/vendor/counter-up/jquery.counterup.min.js"></script>
