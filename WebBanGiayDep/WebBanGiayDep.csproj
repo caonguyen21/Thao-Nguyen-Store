@@ -650,6 +650,11 @@
     <Content Include="Views\Admin\SuaSanPham.cshtml" />
     <Content Include="Views\Admin\ykienkhachhang.cshtml" />
     <Content Include="Views\Admin\Xoaykienkhachhang.cshtml" />
+    <Content Include="Views\Admin\ThuongHieu.cshtml" />
+    <Content Include="Views\Admin\ThemMoiThuongHieu.cshtml" />
+    <Content Include="Views\Admin\ChiTietThuongHieu.cshtml" />
+    <Content Include="Views\Admin\XoaThuongHieu.cshtml" />
+    <Content Include="Views\Admin\SuaThuonghieu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -247,5 +247,100 @@ namespace WebBanGiayDep.Controllers
             data.SubmitChanges();
             return RedirectToAction("Ykienkhachhang");
         }
+
+        //quan ly thuong hieu
+        public ActionResult ThuongHieu(int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 9;
+            return View(data.THUONGHIEUs.ToList().OrderBy(n => n.MaThuongHieu).ToPagedList(pageNumber, pageSize));
+        }
+        //THEM THUONG HIEU
+        [HttpGet]
+        public ActionResult ThemMoiThuongHieu()
+        {
+            //lay ds tu table THUONGHIEU, sap xep theo Ten thuong hieu, chon lay gia tri MaThuongHieu, hien thi ten thuong hieu
+            ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
+            return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult ThemMoiThuongHieu(THUONGHIEU tHUONGHIEU)
+        {
+            //lay ds tu table THUONGHIEU, sap xep theo Ten thuong hieu, chon lay gia tri MaThuongHieu, hien thi ten thuong hieu
+            ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
+            data.THUONGHIEUs.InsertOnSubmit(tHUONGHIEU);
+            //save vao csdl
+            data.SubmitChanges();
+            return RedirectToAction("ThuongHieu");
+        }
+        //chi tiet thuong hieu
+        public ActionResult ChiTietThuongHieu(int id)
+        {
+            // lay thuong hieu theo ma th
+            THUONGHIEU tHUONGHIEU = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
+            ViewBag.MaThuongHieu = tHUONGHIEU.MaThuongHieu;
+            if (tHUONGHIEU == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(tHUONGHIEU);
+        }
+        //xoa thuong hieu
+        [HttpGet]
+        public ActionResult XoaThuongHieu(int id)
+        {
+            //lay san pham can xoa
+            THUONGHIEU tHUONGHIEU = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
+            ViewBag.MaThuongHieu = tHUONGHIEU.MaThuongHieu;
+            if (tHUONGHIEU == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(tHUONGHIEU);
+        }
+        [HttpPost, ActionName("XoaThuongHieu")]
+        public ActionResult XacNhanXoaThuongHieu(int id)
+        {
+            THUONGHIEU tHUONGHIEU = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
+            ViewBag.MaThuongHieu = tHUONGHIEU.MaThuongHieu;
+            if (tHUONGHIEU == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            data.THUONGHIEUs.DeleteOnSubmit(tHUONGHIEU);
+            data.SubmitChanges();
+            return RedirectToAction("ThuongHieu");
+        }
+
+        //sua thong tin thuong hieu
+        [HttpGet]
+        public ActionResult SuaThuonghieu(int id)
+        {
+            THUONGHIEU tHUONGHIEU = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
+            if (tHUONGHIEU == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            //dua du lieu vao drop downlist TenTHuongHieu, TenLoai, TenNCC
+            ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
+            return View(tHUONGHIEU);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult SuaThuonghieuu(int id)
+        {
+            THUONGHIEU tHUONGHIEU = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
+            ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
+              //luu vao csdl
+              UpdateModel(tHUONGHIEU);
+              data.SubmitChanges();  
+              return RedirectToAction("ThuongHieu");                       
+        }
     }
 }
