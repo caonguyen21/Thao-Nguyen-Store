@@ -19,6 +19,8 @@ namespace WebBanGiayDep.Controllers
         {
             return View();
         }
+
+        // =================================================Sản Phẩm===================================================
         public ActionResult SanPham(int ? page)
         {
             int pageNumber = (page ?? 1);
@@ -32,10 +34,10 @@ namespace WebBanGiayDep.Controllers
             ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
 
             //lay ds tu table LoaiGiay, sap xep theo TenLoaiGiay, chon lay gia tri MaLoai, hien thi TenLoai
-            ViewBag.MaLoai = new SelectList(data.LOAIGIAYs.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+            ViewBag.MaLoai = new SelectList(data.LOAIGIAYs.Where(n => n.TrangThai == true).ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
 
             //lay ds tu table NHACUNGCAP, sap xep theo TenNCC, chon lay gia tri MaNCC, hien thi TenNCC
-            ViewBag.MaNCC = new SelectList(data.NHACUNGCAPs.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
+            ViewBag.MaNCC = new SelectList(data.NHACUNGCAPs.Where(n => n.TrangThai == true).ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
 
             return View();
         }
@@ -45,8 +47,8 @@ namespace WebBanGiayDep.Controllers
         public ActionResult ThemMoiSanPham(SANPHAM sanpham, HttpPostedFileBase fileUpload)
         {
             ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
-            ViewBag.MaLoai = new SelectList(data.LOAIGIAYs.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
-            ViewBag.MaNCC = new SelectList(data.NHACUNGCAPs.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
+            ViewBag.MaLoai = new SelectList(data.LOAIGIAYs.ToList().Where(n=>n.TrangThai == true).OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+            ViewBag.MaNCC = new SelectList(data.NHACUNGCAPs.ToList().Where(n => n.TrangThai == true).OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
 
             if (fileUpload == null)
             {
@@ -180,6 +182,7 @@ namespace WebBanGiayDep.Controllers
             }       
         }
         [HttpGet]
+        //======================================Login===============================================
         public ActionResult Login()
         {
             return View();
@@ -213,6 +216,7 @@ namespace WebBanGiayDep.Controllers
             return View();
         }
         //y kien khach hang
+        //======================================Ý kiến Khách Hàng========================================
         public ActionResult ykienkhachhang(int? page)
         {
             int pageNumber = (page ?? 1);
@@ -248,6 +252,7 @@ namespace WebBanGiayDep.Controllers
             return RedirectToAction("Ykienkhachhang");
         }
 
+       // ==========================================Thương hiệu===========================================
         //quan ly thuong hieu
         public ActionResult ThuongHieu(int? page)
         {
@@ -330,17 +335,109 @@ namespace WebBanGiayDep.Controllers
             ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
             return View(tHUONGHIEU);
         }
+        [HttpPost,ActionName("SuaThuongHieu")]
+    
+        public ActionResult CapNhatThuongHieu(int id)
+        {
+            THUONGHIEU thuonghieu = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
+            UpdateModel(thuonghieu);
+            data.SubmitChanges();
+            return RedirectToAction("ThuongHieu");
+        }
 
+       // ================================================Nhà cung Cấp===========================
+       public ActionResult NhaCungCap(int ? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 9;
+
+            return View(data.NHACUNGCAPs.ToList().OrderBy(n => n.MaNCC).ToPagedList(pageNumber,pageSize));
+        }
+        [HttpGet]
+        public ActionResult ThemMoiNhaCungCap()
+        {
+            return View();
+        }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult SuaThuonghieuu(int id)
+        public ActionResult ThemMoiNhaCungCap(NHACUNGCAP ncc)
         {
-            THUONGHIEU tHUONGHIEU = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
-            ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
-              //luu vao csdl
-              UpdateModel(tHUONGHIEU);
-              data.SubmitChanges();  
-              return RedirectToAction("ThuongHieu");                       
+            if (String.IsNullOrEmpty(ncc.TenNCC))
+            {
+                ViewData["Error1"] = "Vui lòng điền đầy đủ thông tin";
+                return ThemMoiNhaCungCap();
+            }
+            if ( String.IsNullOrEmpty(ncc.DiaChi))
+            {
+                ViewData["Error2"] = "Vui lòng điền đầy đủ thông tin";
+                return ThemMoiNhaCungCap();
+            }
+           
+            if (ncc.DienThoai.Length != 10)
+            {
+                ViewData["Error3"] = "Số điện thoại không đúng định dạng";
+                return ThemMoiNhaCungCap();
+            }
+            if (ncc.TrangThai == null)
+            {
+                ViewData["Error4"] = "Chọn trạng thái";
+                return ThemMoiNhaCungCap();
+            }
+
+            data.NHACUNGCAPs.InsertOnSubmit(ncc);
+            //save vao csdl
+            data.SubmitChanges();
+            return RedirectToAction("NhaCungCap");
+        }
+        [HttpGet]
+        public ActionResult XoaNhaCungCap(int id)
+        {
+            NHACUNGCAP ncc = data.NHACUNGCAPs.SingleOrDefault(n => n.MaNCC == id);
+            ViewBag.MaThuongHieu = ncc.MaNCC;
+            if (ncc == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(ncc);
+        }
+        [HttpPost,ActionName("XoaNhaCungCap")]
+        public ActionResult XacNhanXoaNCC(int id)
+        {
+            NHACUNGCAP ncc = data.NHACUNGCAPs.SingleOrDefault(n => n.MaNCC == id);
+            ViewBag.MaNCC = ncc.MaNCC;
+            if (ncc == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            data.NHACUNGCAPs.DeleteOnSubmit(ncc);
+            data.SubmitChanges();
+            return RedirectToAction("NhaCungCap");
+        }
+        
+        [HttpGet]
+        public ActionResult SuaNhaCungCap(int id)
+        {
+            NHACUNGCAP ncc = data.NHACUNGCAPs.SingleOrDefault(n => n.MaNCC == id);
+            ViewBag.MaNCC = ncc.MaNCC;
+            if (ncc == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+          
+            return View(ncc);
+        }
+        [HttpPost,ActionName("SuaNhaCungCap")]
+        public ActionResult CapNhatNCC(int id)
+        {
+           
+            NHACUNGCAP ncc = data.NHACUNGCAPs.SingleOrDefault(n => n.MaNCC == id);
+           
+            UpdateModel(ncc);
+            data.SubmitChanges();
+            return RedirectToAction("NhaCungCap");
         }
     }
 }
