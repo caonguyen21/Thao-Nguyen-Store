@@ -3,8 +3,8 @@
     "",
     "\\WebBanGiayDep",
     "\\WebBanGiayDep\\Views",
-    "\\WebBanGiayDep\\Views\\Shared"
+    "\\WebBanGiayDep\\Views\\Admin"
   ],
-  "SelectedNode": "\\WebBanGiayDep\\Views\\Shared\\_LayoutAdmin.cshtml",
+  "SelectedNode": "\\WebBanGiayDep\\Views\\Admin\\SanPham.cshtml",
   "PreviewInSolutionExplorer": false
 }

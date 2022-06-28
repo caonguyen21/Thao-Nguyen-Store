@@ -659,6 +659,10 @@
     <Content Include="Views\Admin\ThemMoiNhaCungCap.cshtml" />
     <Content Include="Views\Admin\XoaNhaCungCap.cshtml" />
     <Content Include="Views\Admin\SuaNhaCungCap.cshtml" />
+    <Content Include="Views\Admin\KhachHang.cshtml" />
+    <Content Include="Views\Admin\ChiTietKhachHang.cshtml" />
+    <Content Include="Views\User\Themmoiykien.cshtml" />
+    <Content Include="Views\User\DoiMatKhau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

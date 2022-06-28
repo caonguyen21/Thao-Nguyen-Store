@@ -4,7 +4,7 @@
 }
 <!DOCTYPE html>
 <head>
-    <title>Free Adidas Website Template</title>
+    <title>Tài khoản</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -119,171 +119,162 @@
         });
     </script>
 </head>
-<body>
-    <!--menu-->
-    <div class="header-top">
+<!--menu-->
+<div class="header-top">
+    <div class="wrap">
+        <div class="logo" style="margin-right: 35.5%;">
+            <a href="@Url.Action("Index","Home")"><img src="~/images/logo.png" alt="" /></a>
+        </div>
+        <div class="cssmenu " style="width: 50% ">
+            <ul style="text-align:right">
+                <li>
+                    <a href="@Url.Action("ListSanPham","Home")">Sản phẩm</a>
+                </li>
+                <li class='fas fa-shopping-bag'><a href="@Url.Action("GioHang","GioHang")">Giỏ hàng</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="header-bottom">
+    <div class="wrap">
+        <!--start header menu -->
+        <ul class="megamenu skyblue">
+            <li>
+                @Html.ActionLink("Trang chủ", "Index", "Home")
+            </li>
+            <li class="grid">
+                <a class="color2" href="#">Giày nam</a>
+                <div class="megapanel">
+                    <div class="row">
+                        <div class="col1">
+                            <div class="h_nav">
+                                <h4>Giày Nam</h4>
+                                @Html.Action("GiayNam", "Home")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+            <li class="active grid">
+                <a class="color4" href="#">Giày nữ</a>
+                <div class="megapanel">
+                    <div class="row">
+                        <div class="col1">
+                            <div class="h_nav">
+                                <h4>Giày Nữ</h4>
+                                @Html.Action("GiayNu", "Home")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!--Thuong hiêu-->
+            <li>
+                <a class="color10" href="#">Thương hiệu</a>
+                <div class="megapanel">
+                    <div class="row">
+                        <div class="col1">
+                            <div class="h_nav">
+                                <h4>Thương hiệu</h4>
+                                @Html.Action("ThuongHieu", "Home")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!--Tin tuc-->
+            <li>
+                <a class="color10" href="@Url.Action("TinTuc", "Home")">Tin tức</a>
+            </li>
+
+            <!--Gioi thieu-->
+            <li>
+                <a class="color10" href="@Url.Action("GioiThieu", "Home")">Giới thiệu</a>
+            </li>
+            <!--Liên hệ-->
+            <li>
+                <a class="color7" href="@Url.Action("Themmoiykien", "User")">Liên hệ</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+@RenderBody()
+<!--footer-->
+<div class="footer">
+    <div class="footer-top">
         <div class="wrap">
-            <div class="logo" style="margin-right: 35.5%;">
-                <a href="@Url.Action("Index","Home")"><img src="~/images/logo.png" alt="" /></a>
+            <div class="col_1_of_footer-top span_1_of_footer-top">
+                <ul class="f_list">
+                    <li><img src="~/images/f_icon2.png" alt="" /><span class="delivery">© 2015 SHOP GIÀY DÉP THẢO NGUYÊN.</span></li>
+                </ul>
+
             </div>
-            <div class="cssmenu " style="width: 45% ">
-                <ul>
-                    <li>
-                        <a href="@Url.Action("ListSanPham","Home")">Sản phẩm</a>
-                    </li>
-                    <li class='fas fa-shopping-bag'><a href="@Url.Action("GioHang","GioHang")">Giỏ hàng</a></li>
+            <div class="col_1_of_footer-top span_1_of_footer-top">
+                <ul class="f_list">
+                    <li><img src="~/images/f_icon1.png" alt="" /><span class="delivery">Hộ trợ khách hàng : <span class="orange">(+84) 899 999 999 </span></span></li>
                 </ul>
             </div>
-
-            <ul class="icon2 sub-icon2 profile_img">
-                <li>
-                    <a class="active-icon c2" href="#"> </a>
-                    <ul class="sub-icon2 list">
-                        <li><h3>Sản phẩm</h3><a href=""></a></li>
-                        <li><p>mo ta <a href="">adipiscing elit, sed diam</a></p></li>
-                    </ul>
-                </li>
-
-            </ul>
+            <div class="col_1_of_footer-top span_1_of_footer-top">
+                <ul class="f_list">
+                    <li><img src="~/images/f_icon.png" alt="" /><span class="delivery">Mua hàng hiệu chính hãng trực tuyến, Giá Tốt Nhất</span></li>
+                </ul>
+            </div>
             <div class="clear"></div>
         </div>
     </div>
-    <div class="header-bottom">
+    <div class="footer-bottom">
         <div class="wrap">
-            <!--start header menu -->
-            <ul class="megamenu skyblue">
-                <li>
-                    @Html.ActionLink("Trang chủ", "Index", "Home")
-                </li>
-                <li class="grid">
-                    <a class="color2" href="#">Giày nam</a>
-                    <div class="megapanel">
-                        <div class="row">
-                            <div class="col1">
-                                <div class="h_nav">
-                                    <h4>Giày Nam</h4>
-                                    @Html.Action("GiayNam", "Home")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="section group">
+                <div class="col_1_of_5 span_1_of_5">
+                    <h3 class="m_9">TIN TỨC & GIỚI THIỆU</h3>
+                    <ul class="list1">
+                        <li><a href="@Url.Action("TinTuc", "Home")">Tin tức mới</a></li>
+                        <li><a href="@Url.Action("GioiThieu", "Home")">Về chúng tôi</a></li>
 
-                </li>
-                <li class="active grid">
-                    <a class="color4" href="#">Giày nữ</a>
-                    <div class="megapanel">
-                        <div class="row">
-                            <div class="col1">
-                                <div class="h_nav">
-                                    <h4>Giày Nữ</h4>
-                                    @Html.Action("GiayNu", "Home")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <!--Thuong hiêu-->
-                <li>
-                    <a class="color10" href="#">Thương hiệu</a>
-                    <div class="megapanel">
-                        <div class="row">
-                            <div class="col1">
-                                <div class="h_nav">
-                                    <h4>Thương hiệu</h4>
-                                    @Html.Action("ThuongHieu", "Home")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <!--Tin tuc-->
-                <li>
-                    <a class="color10" href="@Url.Action("TinTuc", "Home")">Tin tức</a>
-                </li>
-
-                <!--Gioi thieu-->
-                <li>
-                    <a class="color10" href="@Url.Action("GioiThieu", "Home")">Giới thiệu</a>
-                </li>
-
-            </ul>
-            <div class="clear"></div>
-        </div>
-    </div>
-    @RenderBody()
-    <!--footer-->
-    <div class="footer">
-        <div class="footer-top">
-            <div class="wrap">
-                <div class="col_1_of_footer-top span_1_of_footer-top">
-                    <ul class="f_list">
-                        <li><img src="~/images/f_icon2.png" alt="" /><span class="delivery">© 2015 SHOP GIÀY DÉP THẢO NGUYÊN.</span></li>
                     </ul>
-
-                </div>
-                <div class="col_1_of_footer-top span_1_of_footer-top">
-                    <ul class="f_list">
-                        <li><img src="~/images/f_icon1.png" alt="" /><span class="delivery">Hộ trợ khách hàng : <span class="orange">(+84) 899 999 999 </span></span></li>
+                    <br />
+                    <h3 class="m_9">LIÊN HỆ</h3>
+                    <ul class="list1">
+                        <li><a href="@Url.Action("Themmoiykien", "User")">Liên hệ</a></li>
                     </ul>
                 </div>
-                <div class="col_1_of_footer-top span_1_of_footer-top">
-                    <ul class="f_list">
-                        <li><img src="~/images/f_icon.png" alt="" /><span class="delivery">Mua hàng hiệu chính hãng trực tuyến, Giá Tốt Nhất</span></li>
+                <div class="col_1_of_5 span_1_of_5">
+                    <h3 class="m_9">THÔNG TIN</h3>
+                    <ul class="list1">
+                        <li><a href="#">Tên doanh nghiệp: Shop Giày Dép Thảo Nguyên</a></li>
+                        <li><a href="#">Hotline: (+84) 899 999 999</a></li>
+                        <li><a href="#">Email: shopthaonguyen@gmail.com</a></li>
+                        <li><a href="#">Thời gian làm việc: Thứ 2 - Chủ nhật: 8h00 - 22h00</a></li>
+                        <li><a href="#">Địa chỉ: 23k/7, Bình Đáng, Bình Hòa, Thuận An, Bình Dương</a></li>
                     </ul>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="wrap">
-                <div class="section group">
-                    <div class="col_1_of_5 span_1_of_5">
-                        <h3 class="m_9">CHĂM SÓC KHÁCH HÀNG</h3>
-                        <ul class="list1">
-                            <li><a href="shop.html">Chính sách bán hàng</a></li>
-                            <li><a href="shop.html">Chính sách bảo hành</a></li>
-                            <li><a href="shop.html">Chính sách giao hàng</a></li>
-                            <li><a href="shop.html">Chính sách đổi trả và hoàn tiền</a></li>
-                            <li><a href="shop.html">Chính sách bảo mật thanh toán</a></li>
-                            <li><a href="shop.html">Chính sách bảo mật và chia sẻ thông tin</a></li>
-                            <li><a href="shop.html">Điều kiện và điều khoản giao dịch</a></li>
-                            <li><a href="shop.html">Cơ chế giải quyết tranh chấp</a></li>
-                        </ul>
-                    </div>
-                    <div class="col_1_of_5 span_1_of_5">
-                        <h3 class="m_9">THÔNG TIN</h3>
-                        <ul class="list1">
-                            <li><a href="shop.html">Tên doanh nghiệp: Shop Giày Dép Thảo Nguyên</a></li>
-                            <li><a href="shop.html">Hotline: (+84) 899 999 999</a></li>
-                            <li><a href="shop.html">Email: shopthaonguyen@gmail.com</a></li>
-                            <li><a href="shop.html">Thời gian làm việc: Thứ 2 - Chủ nhật: 8h00 - 22h00</a></li>
-                            <li><a href="shop.html">Địa chỉ: 23k/7, Bình Đáng, Bình Hòa, Thuận An, Bình Dương</a></li>
-                        </ul>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </div>
-        <div class="copy">
-            <div class="wrap">
-                <p>© All rights reserved | Designed by Nhóm 11 19DTHA2</a></p>
-            </div>
+    </div>
+    <div class="copy">
+        <div class="wrap">
+            <p>© All rights reserved | Designed by Nhóm 11 19DTHA2</p>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
 
-            var defaults = {
-                containerID: 'toTop', // fading element id
-                containerHoverID: 'toTopHover', // fading element hover id
-                scrollSpeed: 1200,
-                easingType: 'linear'
-            };
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
 
-            $().UItoTop({ easingType: 'easeOutQuart' });
+        $().UItoTop({ easingType: 'easeOutQuart' });
 
-        });
-    </script>
-    <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
-    <!--end_footer-->
+    });
+</script>
+<a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+<!--end_footer-->

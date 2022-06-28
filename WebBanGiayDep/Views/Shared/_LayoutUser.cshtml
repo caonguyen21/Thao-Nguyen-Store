@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Free Adidas Website Template</title>
+    <title>Shop Giày Thảo Nguyên</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -127,9 +127,13 @@
                 <a href="@Url.Action("Index","Home")"><img src="~/images/logo.png" alt="" /></a>
             </div>
             <div class="cssmenu " style="width: 45% ">
-                <ul>
+                <ul class="icon2 sub-icon2 profile_img">
                     <li>
                         <a href="@Url.Action("ListSanPham","Home")">Sản phẩm</a>
+                    </li>
+
+                    <li>
+                        @Html.Action("GiohangPartial", "GioHang")
                     </li>
 
                     @if (taikhoan == null)
@@ -138,26 +142,22 @@
                     }
                     else
                     {
-                        <li style="width: 50%">
-                            <a href=""><p><img src="~/images/avavtar.png" style="height: 8%; width: 8% " /> Xin Chào @taikhoan.TaiKhoanKH</p></a>
-
+                        <li style="width: 50%; text-align:right">
+                            <a href="#"><p><img src="~/images/avavtar.png" style="height: 8%; width: 8%" /> Xin Chào @taikhoan.TaiKhoanKH</p></a>
+                            <ul class="sub-icon2 list">
+                                <li>
+                                    <a href="@Url.Action("DoiMatKhau","User")">Đổi mật khẩu</a>
+                                </li>
+                                <hr />
+                                <li>
+                                    <a href="#">Đăng xuất</a>
+                                </li>
+                            </ul>
                         </li>
                     }
-                    <li>
-                        @Html.Action("GiohangPartial", "GioHang")
-                    </li>
+
                 </ul>
             </div>
-
-            <ul class="icon2 sub-icon2 profile_img">
-              @*  <li>
-                    <a class="active-icon c2" href="#"> </a>
-                    <ul class="sub-icon2 list">
-                        <li><h3>Sản phẩm</h3><a href=""></a></li>
-                        <li><p>mo ta <a href="">adipiscing elit, sed diam</a></p></li>
-                    </ul>
-                </li>*@
-            </ul>
             <div class="clear"></div>
         </div>
     </div>
@@ -219,6 +219,10 @@
                 <li>
                     <a class="color10" href="@Url.Action("GioiThieu", "Home")">Giới thiệu</a>
                 </li>
+                <!--Liên hệ-->
+                <li>
+                    <a class="color7" href="@Url.Action("Themmoiykien", "User")">Liên hệ</a>
+                </li>
 
             </ul>
             <div class="clear"></div>
@@ -253,16 +257,16 @@
             <div class="wrap">
                 <div class="section group">
                     <div class="col_1_of_5 span_1_of_5">
-                        <h3 class="m_9">CHĂM SÓC KHÁCH HÀNG</h3>
+                        <h3 class="m_9">TIN TỨC & GIỚI THIỆU</h3>
                         <ul class="list1">
-                            <li><a href="#">Chính sách bán hàng</a></li>
-                            <li><a href="#">Chính sách bảo hành</a></li>
-                            <li><a href="#">Chính sách giao hàng</a></li>
-                            <li><a href="#">Chính sách đổi trả và hoàn tiền</a></li>
-                            <li><a href="#">Chính sách bảo mật thanh toán</a></li>
-                            <li><a href="#">Chính sách bảo mật và chia sẻ thông tin</a></li>
-                            <li><a href="#">Điều kiện và điều khoản giao dịch</a></li>
-                            <li><a href="#">Cơ chế giải quyết tranh chấp</a></li>
+                            <li><a href="@Url.Action("TinTuc", "Home")">Tin tức mới</a></li>
+                            <li><a href="@Url.Action("GioiThieu", "Home")">Về chúng tôi</a></li>
+
+                        </ul>
+                        <br />
+                        <h3 class="m_9">LIÊN HỆ</h3>
+                        <ul class="list1">
+                            <li><a href="@Url.Action("Themmoiykien", "User")">Liên hệ</a></li>
                         </ul>
                     </div>
                     <div class="col_1_of_5 span_1_of_5">

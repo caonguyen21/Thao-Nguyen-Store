@@ -39,7 +39,7 @@
                 {
                     <div class="box1">
                         <div class="col_1_of_3 span_1_of_3" style="margin: 0 20px 20px 0">
-                            <a href="@Url.Action("ListSanPham", "Home",new {id = item.MaGiay } )">
+                            <a href="@Url.Action("ChiTietSanPham", "Home",new {id = item.MaGiay } )">
                                 <div class="view view-fifth">
                                     <div class="top_box">
                                         <h3 class="m_1">@item.TenGiay</h3>
@@ -49,7 +49,7 @@
                                                 <div class="info">Xem thêm</div>
                                             </div>
                                         </div>
-                                        <div class="price">@item.GiaBan VND</div>
+                                        <div class="price">@String.Format("{0:0,0}", item.GiaBan) VNĐ</div>
                                     </div>
                                 </div>
                                 <div class="clear"></div>

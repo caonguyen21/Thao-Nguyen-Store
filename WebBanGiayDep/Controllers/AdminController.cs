@@ -439,5 +439,25 @@ namespace WebBanGiayDep.Controllers
             data.SubmitChanges();
             return RedirectToAction("NhaCungCap");
         }
+        // ================================================Quản lý khách hàng===========================
+        public ActionResult KhachHang(int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 9;
+            return View(data.KHACHHANGs.ToList().OrderBy(n => n.MaKH).ToPagedList(pageNumber, pageSize));
+        }
+        //chi tiet khach hang
+        public ActionResult ChiTietKhachHang(int id)
+        {
+            // lay thuong hieu theo ma th
+            KHACHHANG kHACHHANG = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
+            ViewBag.MaKH = kHACHHANG.MaKH;
+            if (kHACHHANG == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(kHACHHANG);
+        }
     }
 }

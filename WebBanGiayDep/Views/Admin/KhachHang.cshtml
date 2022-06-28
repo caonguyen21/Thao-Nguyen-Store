@@ -1,0 +1,46 @@
+﻿@using WebBanGiayDep.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<WebBanGiayDep.Models.KHACHHANG>
+
+@{
+    ViewBag.Title = "KhachHang";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<div class="wrap" style="padding-top:2%; padding-left:10%; padding-right:10%; padding-bottom:5%">
+    <h2 style="text-align: center; ">QUẢN LÝ THÔNG TIN KHÁCH HÀNG</h2>
+    <BR />
+    <table class="table" border="1">
+        <tr>
+            <th>
+                Tên tài khoản
+            </th>
+            <th>
+                Họ tên
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoanKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @Html.ActionLink("Chi tiết", "ChiTietKhachHang", new { id = item.MaKH })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+    <div class="MenuTrang" style=" text-align:center">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("KhachHang", new { page }))
+    </div>
+</div>

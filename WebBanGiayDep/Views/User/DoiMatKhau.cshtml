@@ -1,0 +1,47 @@
+﻿@model WebBanGiayDep.Models.KHACHHANG
+
+@{
+    ViewBag.Title = "ChangePassword";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var item = Model;
+}
+
+<div class="myProfile">
+    @using (Html.BeginForm(new { strURL = Request.Url.ToString() }))
+    {
+        Html.AntiForgeryToken();
+        <form>
+            <h3 style="text-align:center; margin-top: 100px; font-size: 25px; font-weight: bold ">THAY ĐỔI MẬT KHẨU</h3>
+            <div class="profile" style="margin-left: 40%; margin-bottom:10%; margin-top:2%">
+                <div class="form-group">
+                    <label for="oldPassword" style="font-weight:bold">Mật khẩu cũ: </label>
+                    <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Mật khẩu cũ" />
+                </div>
+                <div class="form-group">
+                    <label for="newPassword" style="font-weight:bold">Mật khẩu mới: </label>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Mật khẩu mới">
+                </div>
+                <div class="form-group">
+                    <label for="confirmNewPassword" style="font-weight:bold">Nhập lại mật khẩu mới: </label>
+                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" placeholder="Nhập lại mật khẩu mới">
+                </div>
+                <br />
+                <div>
+                    <button type="submit" id="save-btn">
+                    <i class="fa fa-save" style="font-size:20px">
+                        </i>Lưu</button>
+                </div>
+                <h3 id="Error">@ViewData["Error"]</h3>
+                <h3 id="Success">@ViewData["Success"]</h3>
+            </div>
+        </form>
+    }
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+        function hideURLbar() {
+            window.scrollTo({ top: 290, behavior: 'smooth' });
+        }
+    </script>
+</div>

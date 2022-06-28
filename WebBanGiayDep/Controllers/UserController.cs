@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebBanGiayDep.Models;
 
 namespace WebBanGiayDep.Controllers
 {
     public class UserController : Controller
     {
+        private static string urlAfterLogin; // lưu lại link đang ở trước khi nhấn đăng nhập
         // GET: User
         dbShopGiayDataContext data = new dbShopGiayDataContext();
         public ActionResult Index()
@@ -123,6 +125,74 @@ namespace WebBanGiayDep.Controllers
                 }
             }
             return View();
+        }
+        //y kien khach hang
+        [HttpGet]
+        public ActionResult Themmoiykien()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Themmoiykien(YKIENKHACHHANG yKIENKHACHHANG)
+        {
+            data.YKIENKHACHHANGs.InsertOnSubmit(yKIENKHACHHANG);
+            data.SubmitChanges();
+            return RedirectToAction("Index", "Home");
+        }
+        //doi mat khau
+        [HttpGet]
+        public ActionResult DoiMatKhau()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DoiMatKhau(FormCollection collection)
+        {
+            if (Session["Taikhoan"] == null || Session["Taikhoan"].ToString() == "")
+            {
+                return RedirectToAction("Dangnhap", "User");
+            }
+            KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+
+            var user = data.KHACHHANGs.SingleOrDefault(p => p.MaKH == kh.MaKH);
+
+            var oldPassword = collection["oldPassword"];
+            var newPassword = collection["newPassword"];
+            var confirmNewPassword = collection["confirmNewPassword"];
+
+            if (String.IsNullOrEmpty(oldPassword) || String.IsNullOrEmpty(newPassword) || // trống textbox
+                String.IsNullOrEmpty(confirmNewPassword))
+            {
+                ViewData["Error"] = "Vui lòng điền đủ thông tin";
+                return this.DoiMatKhau();
+            }
+            else if (!String.Equals(newPassword, confirmNewPassword)) // 2 ô mật khẩu mới không khớp
+            {
+                ViewData["Error"] = "Mật khẩu mới không khớp";
+                return this.DoiMatKhau();
+            }
+            else if (!String.Equals(Md5.MaHoaMD5(oldPassword), user.MatKhau)) // kiểm tra mật khẩu cũ
+            {
+                ViewData["Error"] = "Sai mật khẩu cũ";
+                return this.DoiMatKhau();
+            }
+            else // ==============thay đổi mật khẩu===================
+            {
+                newPassword = Md5.MaHoaMD5(newPassword);
+                user.MatKhau = newPassword;
+                data.SubmitChanges();
+                Session["Taikhoan"] = user;
+                ViewData["Success"] = "Đổi mật khẩu thành công";
+                return this.DoiMatKhau();
+            }
+        }
+        //dang xuat
+        public ActionResult LogOut() // đăng xuất
+        {
+            Session["User"] = null;
+            urlAfterLogin = null;
+            return RedirectToAction("ListProduct", "Product");
         }
     }
 }

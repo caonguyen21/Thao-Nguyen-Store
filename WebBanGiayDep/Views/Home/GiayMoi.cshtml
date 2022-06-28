@@ -8,10 +8,9 @@
                     <img src="~/images/@item.AnhBia" alt="" />
                 </div>
                 <div class="slider-right">
-                    @*<h1>@item.MaThuongHieu</h1>*@
-                    <h2>@item.GiaBan VND</h2>
+                    <h2>@String.Format("{0:0,0}", item.GiaBan) VNĐ</h2>
                     <p>@item.TenGiay</p>
-                    <div class="btn"><a href="#">Xem thêm</a></div>
+                    <div class="btn"><a href="@Url.Action("ChiTietSanPham", "Home",new {id = item.MaGiay } )">Xem thêm</a></div>
                 </div>
                 <div class="clear"></div>
             </div>
