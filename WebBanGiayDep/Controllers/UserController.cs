@@ -10,7 +10,6 @@ namespace WebBanGiayDep.Controllers
 {
     public class UserController : Controller
     {
-        private static string urlAfterLogin; // lưu lại link đang ở trước khi nhấn đăng nhập
         // GET: User
         dbShopGiayDataContext data = new dbShopGiayDataContext();
         public ActionResult Index()
@@ -188,11 +187,31 @@ namespace WebBanGiayDep.Controllers
             }
         }
         //dang xuat
-        public ActionResult LogOut() // đăng xuất
+        public ActionResult Logout()
         {
-            Session["User"] = null;
-            urlAfterLogin = null;
-            return RedirectToAction("ListProduct", "Product");
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
+        //chinh sua thong tin khách hàng
+        [HttpGet]
+        public ActionResult MyProfile() // chuyển đến trang hồ sơ
+        {
+            if (Session["Taikhoan"] == null) RedirectToAction("Dangnhap", "User");
+            KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+            return View(kh);
+        }
+        /*[HttpPost]
+        public ActionResult MyProfile(string strURL, FormCollection collection)
+        {
+            if (Session["Taikhoan"] == null || Session["Taikhoan"].ToString() == "")
+            {
+                return RedirectToAction("Dangnhap", "User");
+            }
+            KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+
+            var user = data.KHACHHANGs.SingleOrDefault(p => p.MaKH == kh.MaKH);
+
+        }*/
     }
 }

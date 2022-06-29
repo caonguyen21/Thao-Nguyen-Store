@@ -6,7 +6,7 @@
     var item = Model;
 }
 
-<div class="myProfile">
+
     @using (Html.BeginForm(new { strURL = Request.Url.ToString() }))
     {
         Html.AntiForgeryToken();
@@ -28,12 +28,17 @@
                 <br />
                 <div>
                     <button type="submit" id="save-btn">
-                    <i class="fa fa-save" style="font-size:20px">
-                        </i>Lưu</button>
+                        <i class="fa fa-save" style="font-size:20px">
+                        </i>Lưu
+                    </button>
                 </div>
                 <h3 id="Error">@ViewData["Error"]</h3>
                 <h3 id="Success">@ViewData["Success"]</h3>
+                <div style="margin-left:100px">
+                    @Html.ActionLink("Trở về trang chủ", "Index", "Home")
+                </div>
             </div>
+           
         </form>
     }
     <script>
@@ -44,4 +49,14 @@
             window.scrollTo({ top: 290, behavior: 'smooth' });
         }
     </script>
-</div>
+
+<style>
+    .form-group {
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    input {
+        height: 10%
+    }
+</style>

@@ -15,10 +15,416 @@ namespace WebBanGiayDep.Controllers
     {
         dbShopGiayDataContext data = new dbShopGiayDataContext();
         // GET: Admin
+        //======================================Login===============================================
         public ActionResult Index()
         {
+            if (Session["Username_Admin"] == null)
+            {
+                return RedirectToAction("Login");
+            }
             return View();
         }
+        [HttpGet]
+        public ActionResult Login()
+        {
+            if (Session["Username_Admin"] != null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(FormCollection collection)
+        {
+            try
+            {
+                string Username = collection["txt_Username"];
+                string Password = collection["txt_Password"];
+                var AdminLogin = data.QUANLies.SingleOrDefault(a => a.TaiKhoanQL == Username && a.MatKhau == Password);
+                if (ModelState.IsValid && AdminLogin != null)
+                {
+                    if (AdminLogin.TrangThai == true)// tài khoản không bị ban
+                    {
+                        //Lưu các thông tin vào Session
+                        Session.Add("MaAdmin", AdminLogin.MaQL);
+                        Session.Add("Username_Admin", Username);
+                        Session.Add("HoTen_Admin", AdminLogin.HoTen);
+                        Session.Add("Avatar_Admin", AdminLogin.Avatar);
+                        //Lấy ra thông tin phân quyền của tài khoản vừa Login và vào Session
+                        var PhanQuyen = data.PHANQUYENs.SingleOrDefault(p => p.MaQL == int.Parse(Session["MaAdmin"].ToString()));
+                        Session.Add("PQ_QuanTriAdmin", PhanQuyen.QL_Admin);
+                        Session.Add("PQ_KhachHang", PhanQuyen.QL_KhachHang);
+                        Session.Add("PQ_YKienKhachHang", PhanQuyen.QL_YKienKhachHang);
+                        Session.Add("PQ_DonHang", PhanQuyen.QL_DonHang);
+                        Session.Add("PQ_ThuongHieu", PhanQuyen.QL_ThuongHieu);
+                        Session.Add("PQ_NhaCungCap", PhanQuyen.QL_NhaCungCap);
+                        Session.Add("PQ_LoaiGiay", PhanQuyen.QL_LoaiGiay);
+                        Session.Add("PQ_SanPham", PhanQuyen.QL_SanPham);
+
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else { return Content("<script>alert('Tài khoản quản trị của bạn đã bị khóa!');window.location='/Admin/Login';</script>"); }
+                }
+                else { return Content("<script>alert('Tên đăng nhập hoặc mật khẩu không đúng!');window.location='/Admin/Login';</script>"); }
+            }
+            catch
+            {
+                return Content("<script>alert('Đăng nhập thất bại!');window.location='/Admin/Login';</script>");
+            }
+        }
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
+        public ActionResult Account()
+        {
+            //Chưa đăng nhập => Login
+            if (Session["Username_Admin"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            int MaAdmin = int.Parse(Session["MaAdmin"].ToString());
+            var ttad = data.QUANLies.SingleOrDefault(a => a.MaQL == MaAdmin);
+            return View(ttad);
+        }
+        [HttpPost]
+        public ActionResult Account(FormCollection collection)
+        {
+            try
+            {
+                string Email = collection["txt_Email"];
+                string HoTen = collection["txt_HoTen"];
+                string DienThoai = collection["txt_DienThoai"];
+                string TaiKhoan = collection["Username_Admin"];
+
+                int MaAdmin = int.Parse(Session["MaAdmin"].ToString());
+                var ttad = data.QUANLies.SingleOrDefault(a => a.MaQL == MaAdmin);
+                //Gán giá trị để chỉnh sửa
+                ttad.EmailQL = Email;
+                ttad.HoTen = HoTen;
+                ttad.DienThoaiQL = DienThoai;
+                HttpPostedFileBase FileUpload = Request.Files["FileUpload"];
+                if (FileUpload != null && FileUpload.ContentLength > 0)//Kiểm tra đã chọn 1 file Upload để thực hiện tiếp
+                {
+                    string FileName = Path.GetFileName(FileUpload.FileName);
+                    string Link = Path.Combine(Server.MapPath("/images/Upload/"), FileName);
+                    if (FileUpload.ContentLength > 1 * 1024 * 1024)
+                    {
+                        return Content("<script>alert('Kích thước của tập tin không được vượt quá 1 MB!');window.location='/Admin/Account';</script>");
+                    }
+                    var DuoiFile = new[] { "jpg", "jpeg", "png", "gif" };
+                    var FileExt = Path.GetExtension(FileUpload.FileName).Substring(1);
+                    if (!DuoiFile.Contains(FileExt))
+                    {
+                        return Content("<script>alert('Chỉ được tải tập tin hình ảnh dạng (.jpg, .jpeg, .png, .gif)!');window.location='/Admin/Account';</script>");
+                    }
+                    FileUpload.SaveAs(Link);
+                    ttad.Avatar = "/images/Upload/" + FileName;
+                }
+                //Thực hiện chỉnh sửa
+                UpdateModel(ttad);
+                data.SubmitChanges();
+                return Content("<script>alert('Cập nhật thông tin cá nhân thành công!');window.location='/Admin/Account';</script>");
+            }
+            catch
+            {
+                return Content("<script>alert('Lỗi hệ thống.Vui lòng thử lại!');window.location='/Admin/Account';</script>");
+            }
+        }
+        public ActionResult ListAdmin(int? page)
+        {
+            if (Session["Username_Admin"] == null)
+                return RedirectToAction("Login");
+            else
+                if (bool.Parse(Session["PQ_QuanTriAdmin"].ToString()) == false)//Không đủ quyền hạn
+            {
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực quản trị Administrator !');window.location='/Admin/';</script>");
+            }
+
+            int PageSize = 3;//Chỉ lấy ra 3 dòng (3 Admin)
+            int PageNum = (page ?? 1);
+
+            //Lấy ra Danh sách Admin
+            var PQ = (from pq in data.PHANQUYENs
+                      orderby pq.MaQL descending
+                      select pq).ToPagedList(PageNum, PageSize);
+            return View(PQ);
+        }
+        #region Quản lý admin
+        //Hàm khóa hoặc mở khóa tài khoản Admin (ở đây sử dụng hàm void để Response.Write hình update lại)
+        [HttpPost]
+        public void UpdateTrangThai(int id)
+        {
+            var AD = (from ad in data.QUANLies where ad.MaQL == id select ad).SingleOrDefault();
+            string Hinh = "";
+            if (AD.MaQL != 1)
+            {
+                if (AD.TrangThai == true)
+                {
+                    AD.TrangThai = false;
+                    Hinh = "/images/Admin/Icons/icon_An.png";
+                }
+                else
+                {
+                    AD.TrangThai = true;
+                    Hinh = "/images/Admin/Icons/icon_Hien.png";
+                }
+                UpdateModel(AD);
+                data.SubmitChanges();
+                Response.Write(Hinh);
+            }
+
+        }
+        #endregion
+        #region Quản lý nhà cung cấp
+        [HttpPost]
+        public void UpdatePQ_NhaSanXuat(int id)
+        {
+            var PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
+            string Hinh = "";
+            if (PQ.QL_NhaCungCap == true)
+            {
+                PQ.QL_NhaCungCap = false;
+                Hinh = "/images/Admin/Icons/block.png";
+            }
+            else
+            {
+                PQ.QL_NhaCungCap = true;
+                Hinh = "/images/Admin/Icons/accept.png";
+            }
+            UpdateModel(PQ);
+            data.SubmitChanges();
+            Response.Write(Hinh);
+        }
+        #endregion
+        #region quản lý sản phẩm
+        [HttpPost]
+        public void UpdatePQ_SanPham(int id)
+        {
+            var PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
+            string Hinh = "";
+            if (PQ.QL_SanPham == true)
+            {
+                PQ.QL_SanPham = false;
+                Hinh = "/images/Admin/Icons/block.png";
+            }
+            else
+            {
+                PQ.QL_SanPham = true;
+                Hinh = "/images/Admin/Icons/accept.png";
+            }
+            UpdateModel(PQ);
+            data.SubmitChanges();
+            Response.Write(Hinh);
+        }
+        #endregion
+        #region Quản lý khách hàng
+        [HttpPost]
+        public void UpdatePQ_KhachHang(int id)
+        {
+            var PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
+            string Hinh = "";
+            if (PQ.QL_KhachHang == true)
+            {
+                PQ.QL_KhachHang = false;
+                Hinh = "/images/Admin/Icons/block.png";
+            }
+            else
+            {
+                PQ.QL_KhachHang = true;
+                Hinh = "/images/Admin/Icons/accept.png";
+            }
+            UpdateModel(PQ);
+            data.SubmitChanges();
+            Response.Write(Hinh);
+        }
+        #endregion
+        #region Quản lý đơn hàng
+        //Hàm Update Phân quyền cho quản trị:(ở đây sử dụng hàm void để Response.Write hình update lại)
+        [HttpPost]
+        public void UpdatePQ_DonHang(int id)
+        {
+            var PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
+            string Hinh = "";
+            if (PQ.QL_DonHang == true)
+            {
+                PQ.QL_DonHang = false;
+                Hinh = "/images/Admin/Icons/block.png";
+            }
+            else
+            {
+                PQ.QL_DonHang = true;
+                Hinh = "/images/Admin/Icons/accept.png";
+            }
+            UpdateModel(PQ);
+            data.SubmitChanges();
+            Response.Write(Hinh);
+        }
+        #endregion
+        #region CreateAdmin
+        public ActionResult CreateAdmin()
+        {
+            if (Session["Username_Admin"] == null)//Chưa đăng nhập => Login
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (bool.Parse(Session["PQ_QuanTriAdmin"].ToString()) == false)//Không đủ quyền hạn vào ku vực này  
+                {
+                    return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực quản trị Administrator !');window.location='/Admin/';</script>");
+                }
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateAdmin(FormCollection collection, QUANLY ad, PHANQUYEN pq)
+        {
+            try
+            {
+                //Lấy giá trị ở Form Register         
+                string Username = collection["txt_Username"];
+                string Password = collection["txt_Password"];
+                string RePassword = collection["txt_NhapLaiPass"];
+                string Email = collection["txt_Email"];
+                string HoTen = collection["txt_HoTen"];
+                string DienThoai = collection["txt_DienThoai"];
+                //Kiểm tra xem tài khoản đã có người sử dụng chưa?
+                var CheckUser = data.QUANLies.FirstOrDefault(a => a.TaiKhoanQL == Username);
+                if (CheckUser != null)
+                {
+                    return Content("<script>alert('Tên đăng nhập đã có người sử dụng!');window.location='/Admin/CreateAdmin';</script>");
+                }
+                else
+                {
+                    ad.TaiKhoanQL = Username;
+                }
+                //Kiểm tra Mật khẩu nhập lại có giống Mật khẩu đăng ký không?
+                if (RePassword != Password)
+                    return Content("<script>alert('Mật khẩu nhập lại không đúng!');window.location='/Admin/CreateAdmin';</script>");
+                else
+                    ad.MatKhau = Password;
+
+                //Kiểm tra xem Email đã có người sử dụng chưa?
+                var CheckEmail = data.QUANLies.FirstOrDefault(a => a.EmailQL == Email);
+                if (CheckEmail != null)
+                {
+                    return Content("<script>alert('Email đã có người sử dụng!');window.location='/Admin/CreateAdmin';</script>");
+                }
+                else
+                {
+                    ad.EmailQL = Email;
+                }
+                ad.HoTen = HoTen;
+                ad.DienThoaiQL = DienThoai;
+                HttpPostedFileBase FileUpload = Request.Files["FileUpload"];
+                if (FileUpload != null && FileUpload.ContentLength > 0)
+                {
+                    string _FileName = Path.GetFileName(FileUpload.FileName);
+                    string _Path = Path.Combine(Server.MapPath("~/Content/Images/Upload/"), _FileName);
+                    if (FileUpload.ContentLength > 1 * 1024 * 1024)
+                    {
+                        return Content("<script>alert('Kích thước của tập tin không được vượt quá 1 MB!');window.location='/Admin/CreateAdmin';</script>");
+                    }
+                    var DuoiFile = new[] { "jpg", "jpeg", "png", "gif" };
+                    var FileExt = Path.GetExtension(FileUpload.FileName).Substring(1);
+                    if (!DuoiFile.Contains(FileExt))
+                    {
+                        return Content("<script>alert('Bảo mật Website! Chỉ được Upload tập tin hình ảnh dạng (.jpg, .jpeg, .png, .gif)!');window.location='/Admin/CreateAdmin';</script>");
+                    }
+                    FileUpload.SaveAs(_Path);
+                    ad.Avatar = "/images/Upload/" + _FileName;
+                }
+                else
+                {
+                    ad.Avatar = "/images/Upload/avatars";
+                }
+                ad.TrangThai = true;
+                data.QUANLies.InsertOnSubmit(ad);
+                data.SubmitChanges();
+                pq.MaQL = ad.MaQL;
+                if (collection["ckb_PhanQuyen1"] == "DaChon")
+                {
+                    pq.QL_Admin = true;
+                }
+                else
+                {
+                    pq.QL_Admin = false;
+                }
+                if (collection["ckb_PhanQuyen2"] == "DaChon")
+                {
+                    pq.QL_NhaCungCap = true;
+                }
+                else
+                {
+                    pq.QL_NhaCungCap = false;
+                }
+
+                if (collection["ckb_PhanQuyen3"] == "DaChon")
+                {
+                    pq.QL_SanPham = true;
+                }
+                else
+                {
+                    pq.QL_SanPham = false;
+                }
+
+                if (collection["ckb_PhanQuyen4"] == "DaChon")
+                {
+                    pq.QL_ThuongHieu = true;
+                }
+                else
+                {
+                    pq.QL_ThuongHieu = false;
+                }
+
+                if (collection["ckb_PhanQuyen5"] == "DaChon")
+                {
+                    pq.QL_LoaiGiay = true;
+                }
+                else
+                {
+                    pq.QL_LoaiGiay = false;
+                }
+
+                if (collection["ckb_PhanQuyen6"] == "DaChon")
+                {
+                    pq.QL_DonHang = true;
+                }
+                else
+                {
+                    pq.QL_DonHang = false;
+                }
+
+                if (collection["ckb_PhanQuyen7"] == "DaChon")
+                {
+                    pq.QL_KhachHang = true;
+                }
+                else
+                {
+                    pq.QL_KhachHang = false;
+                }
+
+                if (collection["ckb_PhanQuyen8"] == "DaChon")
+                {
+                    pq.QL_YKienKhachHang = true;
+                }
+                else
+                {
+                    pq.QL_YKienKhachHang = false;
+                }
+                data.PHANQUYENs.InsertOnSubmit(pq);
+                data.SubmitChanges();
+                return Content("<script>alert('Thêm mới tài khoản quản trị thành công !');window.location='/Admin/ListAdmin';</script>");
+            }
+            catch
+            {
+                return Content("<script>alert('Đăng ký thất bại.Vui lòng kiểm tra Ngày/Tháng/Năm sinh đã hợp lệ chưa?!');window.location='/Admin/CreateAdmin';</script>");
+            }
+        }
+        #endregion
 
         // =================================================Sản Phẩm===================================================
         public ActionResult SanPham(int ? page)
@@ -181,40 +587,7 @@ namespace WebBanGiayDep.Controllers
                 return RedirectToAction("SanPham");
             }       
         }
-        [HttpGet]
-        //======================================Login===============================================
-        public ActionResult Login()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Login(FormCollection collection)
-        {
-            
-            var tendn = collection["username"];
-            var matkhau = collection["password"];
-            if (String.IsNullOrEmpty(tendn))
-            {
-                ViewData["Loi1"] = "Phải nhập tên đăng nhập";
-            }
-            else if (String.IsNullOrEmpty(matkhau))
-            {
-                ViewData["Loi2"] = "Phải nhập mật khẩu";
-            }
-            else
-            {
-                QUANLY ad = data.QUANLies.SingleOrDefault(n => n.TaiKhoanQL == tendn && n.MatKhau == matkhau);
-                if (ad != null)
-                {
-                    ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";
-                    Session["TaiKhoanadmin"] = ad;
-                    return RedirectToAction("Index", "Admin");
-                }
-                else
-                    ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
-            }
-            return View();
-        }
+        
         //y kien khach hang
         //======================================Ý kiến Khách Hàng========================================
         public ActionResult ykienkhachhang(int? page)
@@ -278,19 +651,6 @@ namespace WebBanGiayDep.Controllers
             //save vao csdl
             data.SubmitChanges();
             return RedirectToAction("ThuongHieu");
-        }
-        //chi tiet thuong hieu
-        public ActionResult ChiTietThuongHieu(int id)
-        {
-            // lay thuong hieu theo ma th
-            THUONGHIEU tHUONGHIEU = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
-            ViewBag.MaThuongHieu = tHUONGHIEU.MaThuongHieu;
-            if (tHUONGHIEU == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            return View(tHUONGHIEU);
         }
         //xoa thuong hieu
         [HttpGet]
@@ -432,9 +792,7 @@ namespace WebBanGiayDep.Controllers
         [HttpPost,ActionName("SuaNhaCungCap")]
         public ActionResult CapNhatNCC(int id)
         {
-           
             NHACUNGCAP ncc = data.NHACUNGCAPs.SingleOrDefault(n => n.MaNCC == id);
-           
             UpdateModel(ncc);
             data.SubmitChanges();
             return RedirectToAction("NhaCungCap");
@@ -458,6 +816,77 @@ namespace WebBanGiayDep.Controllers
                 return null;
             }
             return View(kHACHHANG);
+        }
+        // ================================================Quản lý loai giay===========================
+        public ActionResult LoaiGiay(int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 9;
+            return View(data.LOAIGIAYs.ToList().OrderBy(n => n.MaLoai).ToPagedList(pageNumber, pageSize));
+        }
+        //chi tiet khach hang
+        [HttpGet]
+        public ActionResult SuaLoaiGiay(int id)
+        {
+            LOAIGIAY lOAIGIAY = data.LOAIGIAYs.SingleOrDefault(n => n.MaLoai == id);
+            ViewBag.MaLoai = lOAIGIAY.MaLoai;
+            if (lOAIGIAY == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
+            return View(lOAIGIAY);
+        }
+        [HttpPost, ActionName("SuaLoaiGiay")]
+        public ActionResult SuaLoaiGiayy(int id)
+        {
+            LOAIGIAY lOAIGIAY = data.LOAIGIAYs.SingleOrDefault(n => n.MaLoai == id);
+            UpdateModel(lOAIGIAY);
+            data.SubmitChanges();
+            return RedirectToAction("LoaiGiay");
+        }
+        //them thuong hieu
+        [HttpGet]
+        public ActionResult ThemMoiLoaiGiay()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult ThemMoiLoaiGiay(LOAIGIAY lOAIGIAY)
+        {
+            data.LOAIGIAYs.InsertOnSubmit(lOAIGIAY);
+            //save vao csdl
+            data.SubmitChanges();
+            return RedirectToAction("LoaiGiay");
+        }
+        //xoa loai giay
+        [HttpGet]
+        public ActionResult XoaLoaiGiay(int id)
+        {
+            LOAIGIAY lOAIGIAY = data.LOAIGIAYs.SingleOrDefault(n => n.MaLoai == id);
+            ViewBag.MaLoai = lOAIGIAY.MaLoai;
+            if (lOAIGIAY == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(lOAIGIAY);
+        }
+        [HttpPost, ActionName("XoaLoaiGiay")]
+        public ActionResult XacNhanXoaLoaiGiay(int id)
+        {
+            LOAIGIAY lOAIGIAY = data.LOAIGIAYs.SingleOrDefault(n => n.MaLoai == id);
+            ViewBag.MaLoai = lOAIGIAY.MaLoai;
+            if (lOAIGIAY == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            data.LOAIGIAYs.DeleteOnSubmit(lOAIGIAY);
+            data.SubmitChanges();
+            return RedirectToAction("LoaiGiay");
         }
     }
 }

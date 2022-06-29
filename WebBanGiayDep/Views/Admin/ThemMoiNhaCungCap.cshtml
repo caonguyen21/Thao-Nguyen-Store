@@ -12,7 +12,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        <div class="form-horizontal">
+        <div class="form-horizontal" style="font-weight: bold; font-size: 16px">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.TenNCC, htmlAttributes: new { @class = "control-label col-md-2" })
