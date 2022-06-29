@@ -56,10 +56,18 @@
         border-top-color: #969696;
         box-shadow: 0px 0px 4px #5C9CDF;
     }
+    table.center {
+        width: 780px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>
 @using (Html.BeginForm("CreateAdmin", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <table style="width: 984px; border: 1px solid #d0d0d0; border-collapse: collapse;">
+    <br />
+    <h2 style="text-align: center; ">THÊM NHÂN VIÊN</h2>
+    <br />
+    <table style="width: 984px; border: 1px solid #d0d0d0; border-collapse: collapse;" class="center">
         <tr>
             <td class="Left">Tên Đăng nhập:</td>
             <td class="Right">
@@ -166,6 +174,7 @@
         </tr>
     </table>
     <div style="text-align: center">
+        <br />
         <input class="btn btn-success" id="NhapLai" type="reset" value="Nhập lại">
         <input class="btn btn-success" type="submit" id="btn_Sumit" name="btn_Sumit" value="Xác nhận">
     </div>

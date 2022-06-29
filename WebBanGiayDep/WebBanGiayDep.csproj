@@ -200,6 +200,7 @@
     <Content Include="images\Admin\Icons\add.png" />
     <Content Include="images\Admin\Icons\block.png" />
     <Content Include="images\Admin\Icons\icon_An.png" />
+    <Content Include="images\Admin\Icons\icon_eye.png" />
     <Content Include="images\Admin\Icons\icon_Hien.png" />
     <Content Include="images\Admin\Logo\cover-name.png" />
     <Content Include="images\Admin\Logo\cover.png" />
@@ -690,6 +691,8 @@
     <Content Include="Views\DonHang\ChiTietDonHang.cshtml" />
     <Content Include="Views\User\MyProfile.cshtml" />
     <Content Include="Views\Admin\ChangePassword.cshtml" />
+    <Content Include="Views\Admin\Order.cshtml" />
+    <Content Include="Views\Admin\OrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

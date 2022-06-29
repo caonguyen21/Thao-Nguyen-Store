@@ -12,8 +12,6 @@ namespace WebBanGiayDep.Controllers
     public class AdminController : Controller
     {
         dbShopGiayDataContext data = new dbShopGiayDataContext();
-        // GET: Admin
-        //======================================Login===============================================
         #region Trang chủ
         public ActionResult Index()
         {
@@ -185,6 +183,7 @@ namespace WebBanGiayDep.Controllers
             }
         }
         #endregion
+        #region Quản trị Admin(Tạo thêm mới + ẩn trạng thái + phân quyền)
         #region Danh sách admin
         public ActionResult ListAdmin(int? page)
         {
@@ -566,7 +565,8 @@ namespace WebBanGiayDep.Controllers
             }
         }
         #endregion
-
+        #endregion
+        #region Quản lý sản phẩm
         // =================================================Sản Phẩm===================================================
         public ActionResult SanPham(int? page)
         {
@@ -735,8 +735,8 @@ namespace WebBanGiayDep.Controllers
                 return RedirectToAction("SanPham");
             }
         }
-
-        //y kien khach hang
+        #endregion
+        #region Quản lý ý kiến khách hàng
         //======================================Ý kiến Khách Hàng========================================
         public ActionResult ykienkhachhang(int? page)
         {
@@ -779,9 +779,9 @@ namespace WebBanGiayDep.Controllers
             data.SubmitChanges();
             return RedirectToAction("Ykienkhachhang");
         }
-
+        #endregion
+        #region Quản lý thương hiệu
         // ==========================================Thương hiệu===========================================
-        //quan ly thuong hieu
         public ActionResult ThuongHieu(int? page)
         {
             if (Session["Username_Admin"] == null)
@@ -842,7 +842,6 @@ namespace WebBanGiayDep.Controllers
             data.SubmitChanges();
             return RedirectToAction("ThuongHieu");
         }
-
         //sua thong tin thuong hieu
         [HttpGet]
         public ActionResult SuaThuonghieu(int id)
@@ -858,7 +857,6 @@ namespace WebBanGiayDep.Controllers
             return View(tHUONGHIEU);
         }
         [HttpPost, ActionName("SuaThuongHieu")]
-
         public ActionResult CapNhatThuongHieu(int id)
         {
             THUONGHIEU thuonghieu = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
@@ -866,7 +864,8 @@ namespace WebBanGiayDep.Controllers
             data.SubmitChanges();
             return RedirectToAction("ThuongHieu");
         }
-
+        #endregion
+        #region Quản lý nhà cung cấp
         // ================================================Nhà cung Cấp===========================
         public ActionResult NhaCungCap(int? page)
         {
@@ -944,7 +943,6 @@ namespace WebBanGiayDep.Controllers
             data.SubmitChanges();
             return RedirectToAction("NhaCungCap");
         }
-
         [HttpGet]
         public ActionResult SuaNhaCungCap(int id)
         {
@@ -966,7 +964,10 @@ namespace WebBanGiayDep.Controllers
             data.SubmitChanges();
             return RedirectToAction("NhaCungCap");
         }
+        #endregion
+        #region Quản lý khách hàng
         // ================================================Quản lý khách hàng===========================
+        #region hiện thông tin khách hàng
         public ActionResult KhachHang(int? page)
         {
             if (Session["Username_Admin"] == null)
@@ -974,12 +975,37 @@ namespace WebBanGiayDep.Controllers
             else
             if (bool.Parse(Session["PQ_KhachHang"].ToString()) == false)//Không đủ quyền hạn
             {
-                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực quản lý sản phẩm !');window.location='/Admin/';</script>");
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực này!');window.location='/Admin/';</script>");
             }
             int pageNumber = (page ?? 1);
             int pageSize = 9;
             return View(data.KHACHHANGs.ToList().OrderBy(n => n.MaKH).ToPagedList(pageNumber, pageSize));
         }
+        #endregion
+        #region Quản lý trạng thái khách hàng
+        //Hàm khóa hoặc mở khóa tài khoản Admin (ở đây sử dụng hàm void để Response.Write hình update lại)
+        [HttpPost]
+        public void UpdateTrangThaiKhachHang(int id)
+        {
+            var AD = (from ad in data.KHACHHANGs where ad.MaKH == id select ad).SingleOrDefault();
+            string Hinh = "";
+
+            if (AD.TrangThai == true)
+            {
+                AD.TrangThai = false;
+                Hinh = "/images/Admin/Icons/icon_An.png";
+            }
+            else
+            {
+                AD.TrangThai = true;
+                Hinh = "/images/Admin/Icons/icon_Hien.png";
+            }
+            UpdateModel(AD);
+            data.SubmitChanges();
+            Response.Write(Hinh);
+        }
+        #endregion
+        #region Chi tiết khách hàng
         //chi tiet khach hang
         public ActionResult ChiTietKhachHang(int id)
         {
@@ -993,6 +1019,9 @@ namespace WebBanGiayDep.Controllers
             }
             return View(kHACHHANG);
         }
+        #endregion
+        #endregion
+        #region Quản lý loại giày
         // ================================================Quản lý loai giay===========================
         public ActionResult LoaiGiay(int? page)
         {
@@ -1071,5 +1100,62 @@ namespace WebBanGiayDep.Controllers
             data.SubmitChanges();
             return RedirectToAction("LoaiGiay");
         }
+        #endregion
+        #region Quản lý đơn hàng
+        #region Danh sách đơn hàng
+        public ActionResult Order(int? page)
+        {
+            if (Session["Username_Admin"] == null)//Chưa đăng nhập 
+                return RedirectToAction("Login");
+            else
+                if (bool.Parse(Session["PQ_DonHang"].ToString()) == false)
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực quản trị Đơn Hàng !');window.location='/Admin/';</script>");
+
+            int PageSize = 10;//Chỉ lấy ra 10 dòng (10 đơn hàng )
+            int PageNum = (page ?? 1);
+
+            //Lấy ra Danh sách đơn hàng
+            var _DH = (from d in data.DONHANGs
+                       orderby d.NgayDat descending
+                       select d).ToPagedList(PageNum, PageSize);
+            return View(_DH);
+        }
+        #endregion
+        #region UpdateOrder
+        [HttpPost]
+        public void UpdateOrder(int id)
+        {
+            var _DH = (from d in data.DONHANGs where d.MaDonHang == id select d).SingleOrDefault();
+            string _Hinh = "";
+            if (_DH.TinhTrangGiaoHang == true)
+            {
+                _DH.TinhTrangGiaoHang = false;
+                _Hinh = "/images/Admin/Icons/icon_An.png";
+            }
+            else
+            {
+                _DH.TinhTrangGiaoHang = true;
+                _Hinh = "/images/Admin/Icons/icon_Hien.png";
+            }
+            UpdateModel(_DH);
+            data.SubmitChanges();
+            Response.Write(_Hinh);
+        }
+        #endregion
+        #region Bảng Chi tiết đơn hàng (OrderDetail)
+        public ActionResult OrderDetail(int id)
+        {
+            if (Session["Username_Admin"] == null)//Chưa đăng nhập 
+                return RedirectToAction("Login");
+            else
+                if (bool.Parse(Session["PQ_DonHang"].ToString()) == false)//Không đủ quyền hạn vào ku vực này 
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực này!');window.location='/Admin/';</script>");
+            var CT_DH = (from c in data.CT_DONHANGs
+                         where c.MaDonHang == id
+                         select c).ToList();
+            return View(CT_DH);
+        }
+        #endregion
+        #endregion
     }
 }
