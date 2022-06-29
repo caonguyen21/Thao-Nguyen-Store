@@ -127,12 +127,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CTDH.cs" />
     <Compile Include="Models\CTSP.cs" />
     <Compile Include="Models\dbShopGiay.designer.cs">
       <AutoGen>True</AutoGen>
@@ -682,6 +684,8 @@
     <Content Include="Views\Admin\ThemMoiLoaiGiay.cshtml" />
     <Content Include="Views\Admin\XoaLoaiGiay.cshtml" />
     <Content Include="Views\User\MyProfile.cshtml" />
+    <Content Include="Views\DonHang\LichSuDonHang.cshtml" />
+    <Content Include="Views\DonHang\ChiTietDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

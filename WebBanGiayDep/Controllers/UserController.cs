@@ -197,21 +197,22 @@ namespace WebBanGiayDep.Controllers
         [HttpGet]
         public ActionResult MyProfile() // chuyển đến trang hồ sơ
         {
-            if (Session["Taikhoan"] == null) RedirectToAction("Dangnhap", "User");
+            if (Session["Taikhoan"] == null)
+                return RedirectToAction("Dangnhap", "User");
             KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
             return View(kh);
         }
-        /*[HttpPost]
-        public ActionResult MyProfile(string strURL, FormCollection collection)
-        {
-            if (Session["Taikhoan"] == null || Session["Taikhoan"].ToString() == "")
-            {
-                return RedirectToAction("Dangnhap", "User");
-            }
-            KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+        //[HttpPost]
+        //public ActionResult MyProfile(string strURL, FormCollection collection)
+        //{
+        //    if (Session["Taikhoan"] == null || Session["Taikhoan"].ToString() == "")
+        //    {
+        //        return RedirectToAction("Dangnhap", "User");
+        //    }
+        //    KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
 
-            var user = data.KHACHHANGs.SingleOrDefault(p => p.MaKH == kh.MaKH);
+        //    var user = data.KHACHHANGs.SingleOrDefault(p => p.MaKH == kh.MaKH);
 
-        }*/
+        //}
     }
 }
