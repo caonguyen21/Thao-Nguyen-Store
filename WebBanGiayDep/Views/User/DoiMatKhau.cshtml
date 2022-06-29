@@ -11,7 +11,7 @@
     {
         Html.AntiForgeryToken();
         <form>
-            <h3 style="text-align:center; margin-top: 100px; font-size: 25px; font-weight: bold ">THAY ĐỔI MẬT KHẨU</h3>
+            <h2>Thay đổi mật khẩu</h2>
             <div class="profile" style="margin-left: 40%; margin-bottom:10%; margin-top:2%">
                 <div class="form-group">
                     <label for="oldPassword" style="font-weight:bold">Mật khẩu cũ: </label>
@@ -27,8 +27,8 @@
                 </div>
                 <br />
                 <div>
-                    <button type="submit" id="save-btn">
-                        <i class="fa fa-save" style="font-size:20px">
+                    <button type="submit" id="save-btn" class="button">
+                        <i style="font-size:20px">
                         </i>Lưu
                     </button>
                 </div>
@@ -58,5 +58,23 @@
 
     input {
         height: 10%
+    }
+    h2 {
+        font-weight: bold;
+        font-size: 30px;
+        margin: 20px 0 20px 0;
+        text-align:center
+    }
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 7px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
     }
 </style>

@@ -987,20 +987,20 @@ namespace WebBanGiayDep.Controllers
         [HttpPost]
         public void UpdateTrangThaiKhachHang(int id)
         {
-            var AD = (from ad in data.KHACHHANGs where ad.MaKH == id select ad).SingleOrDefault();
+            var _KH = (from kh in data.KHACHHANGs where kh.MaKH == id select kh).SingleOrDefault();
             string Hinh = "";
 
-            if (AD.TrangThai == true)
+            if (_KH.TrangThai == true)
             {
-                AD.TrangThai = false;
+                _KH.TrangThai = false;
                 Hinh = "/images/Admin/Icons/icon_An.png";
             }
             else
             {
-                AD.TrangThai = true;
+                _KH.TrangThai = true;
                 Hinh = "/images/Admin/Icons/icon_Hien.png";
             }
-            UpdateModel(AD);
+            UpdateModel(_KH);
             data.SubmitChanges();
             Response.Write(Hinh);
         }

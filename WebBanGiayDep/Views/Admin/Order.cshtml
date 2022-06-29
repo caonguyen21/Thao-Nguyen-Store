@@ -5,6 +5,7 @@
     ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 <style>
     table.center {
         width: 780px;
@@ -25,9 +26,10 @@
 </script>
 <div class="wrap" style="padding-top: 2%; padding-left: 10%; padding-right: 10%; padding-bottom: 5%">
     <h2 style="text-align: center; ">QUẢN LÝ ĐƠN HÀNG</h2>
+    <br />
     @using (Html.BeginForm())
     {
-        <table border="1" style="width: 984px; border: 1px solid #d0d0d0; border-collapse: collapse;"class="center">
+        <table border="1" style="width: 984px; border: 1px solid #d0d0d0; border-collapse: collapse;" class="center">
             <tr>
                 <th>Mã ĐH</th>
                 <th>Người mua</th>
@@ -72,6 +74,7 @@
             }
         </table>
     }
+    <br />
     <div class="MenuTrang" style="text-align:center">
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
         @Html.PagedListPager(Model, page => Url.Action("Order", new { page }))

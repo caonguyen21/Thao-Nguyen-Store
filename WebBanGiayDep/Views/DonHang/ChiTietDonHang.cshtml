@@ -36,7 +36,7 @@
     }
 </style>
 <h2 style=" text-align:center"> Chi tiết đơn đặt hàng </h2>
-<table text-align="center" border="1" style="margin: auto; margin-bottom:200px">
+<table text-align="center" border="1" style="margin: auto">
 
     <tr style="text-align:center; font-weight:bold">
         <td> Mã Giày </td>
@@ -64,12 +64,13 @@
             <td>@String.Format("{0:##,#}", item.iThanhTien) VNĐ</td>
             <td> <a href="@Url.Action("ChiTietSanPham", "Home", new {id = item.iMaGiay})">Chi tiết</a></td>
         </tr>
+
     }
     <tr>
         <td colspan="8"> Tổng tiền: @String.Format("{0:0,0}", @ViewBag.TongTien) VND </td>
     </tr>
-
 </table>
-<div style=" text-align:center">
+<br />
+<div style=" text-align:center; margin-bottom: 150px" >
     <a href="@Url.Action("LichSuDonHang", "DonHang")" class="button">Trở về</a>
 </div>
