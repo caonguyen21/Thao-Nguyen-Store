@@ -683,9 +683,9 @@
     <Content Include="Views\Admin\SuaLoaiGiay.cshtml" />
     <Content Include="Views\Admin\ThemMoiLoaiGiay.cshtml" />
     <Content Include="Views\Admin\XoaLoaiGiay.cshtml" />
-    <Content Include="Views\User\MyProfile.cshtml" />
     <Content Include="Views\DonHang\LichSuDonHang.cshtml" />
     <Content Include="Views\DonHang\ChiTietDonHang.cshtml" />
+    <Content Include="Views\User\MyProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

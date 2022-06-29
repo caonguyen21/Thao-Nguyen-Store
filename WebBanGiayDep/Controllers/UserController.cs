@@ -195,24 +195,28 @@ namespace WebBanGiayDep.Controllers
         }
         //chinh sua thong tin khách hàng
         [HttpGet]
-        public ActionResult MyProfile() // chuyển đến trang hồ sơ
+        public ActionResult MyProfile(int id) // chuyển đến trang hồ sơ
         {
             if (Session["Taikhoan"] == null)
+            {
                 return RedirectToAction("Dangnhap", "User");
-            KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
-            return View(kh);
+            }
+            else
+            {
+                KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+                ViewBag.MaKH = kh.MaKH;
+                return View(kh);
+            }
+           
         }
-        //[HttpPost]
-        //public ActionResult MyProfile(string strURL, FormCollection collection)
-        //{
-        //    if (Session["Taikhoan"] == null || Session["Taikhoan"].ToString() == "")
-        //    {
-        //        return RedirectToAction("Dangnhap", "User");
-        //    }
-        //    KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
-
-        //    var user = data.KHACHHANGs.SingleOrDefault(p => p.MaKH == kh.MaKH);
-
-        //}
+        [HttpPost, ActionName("MyProfile")]
+        public ActionResult UpdateProfile(int id)
+        {
+            KHACHHANG kh = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
+            UpdateModel(kh);
+            data.SubmitChanges();
+            return Content("<script>alert('Thay đổi thông tin thành công');window.location='/User/MyProfile/" +kh.MaKH +"';</script>");
+            //return RedirectToAction("MyProfile");
+        }
     }
 }

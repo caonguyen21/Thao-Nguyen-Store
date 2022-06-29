@@ -4,63 +4,72 @@
     ViewBag.Title = "MyProfile";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+
+<h2>MyProfile</h2>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>KHACHHANG</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaKH)
 
-    <form>
-        <h3 style=" text-align: center;margin-top: 100px; font-size: 25px; font-weight: bold ">HỒ SƠ CỦA TÔI</h3>
-        <div class="profile" style="margin-left: 40%; margin-bottom:10%; margin-top:2%">
-            <br />
-            <div class="form-group">
-                <label for="name" style="font-weight:bold">Tên tài khoản: </label>
-                <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Tên tài khoản" value="@Model.TaiKhoanKH">
-            </div>
-
-            <div class="form-group">
-                <label for="name" style="font-weight:bold">Họ tên: </label>
-                <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Họ tên" value="@Model.HoTen">
-            </div>
-
-            <div class="form-group">
-                <label for="email" style="font-weight:bold">Email: </label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="@Model.EmailKH ">
-            </div>
-
-            <div class="form-group">
-                <label for="address" style="font-weight:bold">Địa chỉ: </label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" value="@Model.DiaChiKH">
-            </div>
-
-            <div class="form-group">
-                <label for="phoneNumber" style="font-weight:bold">Điện thoại: </label>
-                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Điện thoại" value="@Model.DienThoaiKH">
-            </div>
-
-            <div class="form-group">
-                <label for="date" style="font-weight:bold">Ngày sinh: </label>
-                <input type="text" class="form-control" id="date" name="date" placeholder="Địa chỉ" value="@Model.NgaySinh">
-            </div>
-            <br />
-            <button type="submit" id="save-btn"><i class="fa fa-save" style="font-size:20px "></i>Lưu</button>
-            <h3 id="Error">@ViewData["Error"]</h3>
-            <h3 id="Success">@ViewData["Success"]</h3>
-            <br />
-            <div style="margin-left:100px">
-                @Html.ActionLink("Trở về trang chủ", "Index", "Home")
+        <div class="form-group">
+            @Html.LabelFor(model => model.TaiKhoanKH, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div>@Model.TaiKhoanKH</div>
             </div>
         </div>
-    </form>
+        <div class="form-group">
+            @Html.LabelFor(model => model.HoTen, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailKH, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div>@Model.EmailKH</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DiaChiKH, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DiaChiKH, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DiaChiKH, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DienThoaiKH, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DienThoaiKH, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DienThoaiKH, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NgaySinh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+            <h3 id="Success">@ViewData["Success"]</h3>
+        </div>
+    </div>
 }
-<style>
-    .form-group {
-        padding: 5px;
-        font-size: 20px;
-    }
 
-    input {
-        height: 10%
-    }
-</style>
-
-
+<div>
+    <a href="@Url.Action("Index","Home")">Trở về trang chủ</a>
+</div>
