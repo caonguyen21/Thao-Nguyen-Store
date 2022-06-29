@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ShopGiay" Class="dbShopGiayDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=CAONGUYEN-K19\LOCAL;Initial Catalog=ShopGiay;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ShopGiayConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=HALCYONPC;Initial Catalog=ShopGiay;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ShopGiayConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CT_DONHANG" Member="CT_DONHANGs">
     <Type Name="CT_DONHANG">
       <Column Name="MaDonHang" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -11,13 +11,11 @@
       <Association Name="SANPHAM_CT_DONHANG" Member="SANPHAM" ThisKey="MaGiay" OtherKey="MaGiay" Type="SANPHAM" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.YKIENKHACHHANG" Member="YKIENKHACHHANGs">
-    <Type Name="YKIENKHACHHANG">
-      <Column Name="MAYKIEN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="HoTen" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NgayGui" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.THUONGHIEU" Member="THUONGHIEUs">
+    <Type Name="THUONGHIEU">
+      <Column Name="MaThuongHieu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenThuongHieu" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="THUONGHIEU_SANPHAM" Member="SANPHAMs" ThisKey="MaThuongHieu" OtherKey="MaThuongHieu" Type="SANPHAM" />
     </Type>
   </Table>
   <Table Name="dbo.DONHANG" Member="DONHANGs">
@@ -67,7 +65,7 @@
   </Table>
   <Table Name="dbo.PHANQUYEN" Member="PHANQUYENs">
     <Type Name="PHANQUYEN">
-      <Column Name="MaPQ" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaPQ" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="MaQL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="QL_Admin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="QL_NhaCungCap" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
@@ -82,7 +80,7 @@
   </Table>
   <Table Name="dbo.QUANLY" Member="QUANLies">
     <Type Name="QUANLY">
-      <Column Name="MaQL" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaQL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TaiKhoanQL" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="MatKhau" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="HoTen" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -113,11 +111,13 @@
       <Association Name="THUONGHIEU_SANPHAM" Member="THUONGHIEU" ThisKey="MaThuongHieu" OtherKey="MaThuongHieu" Type="THUONGHIEU" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.THUONGHIEU" Member="THUONGHIEUs">
-    <Type Name="THUONGHIEU">
-      <Column Name="MaThuongHieu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TenThuongHieu" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="THUONGHIEU_SANPHAM" Member="SANPHAMs" ThisKey="MaThuongHieu" OtherKey="MaThuongHieu" Type="SANPHAM" />
+  <Table Name="dbo.YKIENKHACHHANG" Member="YKIENKHACHHANGs">
+    <Type Name="YKIENKHACHHANG">
+      <Column Name="MAYKIEN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="HoTen" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayGui" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

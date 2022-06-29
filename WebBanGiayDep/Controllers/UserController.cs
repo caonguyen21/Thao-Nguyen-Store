@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using WebBanGiayDep.Models;
 
 namespace WebBanGiayDep.Controllers
@@ -33,19 +30,22 @@ namespace WebBanGiayDep.Controllers
             var dienthoai = collection["DienThoai"];
             var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["NgaySinh"]);
             string matkhau_mahoa;
-         
+
 
             if (String.IsNullOrEmpty(hoten))
             {
                 ViewData["Loi1"] = "Họ Tên khách hàng không được để trống";
-            }else if(String.IsNullOrEmpty(tendn)){
+            }
+            else if (String.IsNullOrEmpty(tendn))
+            {
                 ViewData["Loi2"] = "Tên đăng nhập không được để trống";
             }
             else if (String.IsNullOrEmpty(matkhau))
             {
                 ViewData["Loi3"] = "Mật khẩu không được để trống!";
             }
-            else if(!matkhaunhaplai.Equals(matkhau)){               
+            else if (!matkhaunhaplai.Equals(matkhau))
+            {
                 ViewData["Loi4"] = "Mật khẩu nhập lại không trùng khớp!";
             }
             else if (String.IsNullOrEmpty(email))
@@ -60,7 +60,7 @@ namespace WebBanGiayDep.Controllers
             {
                 ViewData["Loi7"] = "Số điện thoại không được để trống";
             }
-            else if(String.IsNullOrEmpty(ngaysinh))
+            else if (String.IsNullOrEmpty(ngaysinh))
             {
                 ViewData["Loi8"] = "Vui lòng nhập ngày sinh!!!";
             }
@@ -78,7 +78,7 @@ namespace WebBanGiayDep.Controllers
 
                 data.KHACHHANGs.InsertOnSubmit(kh);
                 data.SubmitChanges();
-                return RedirectToAction("Dangnhap","User");
+                return RedirectToAction("Dangnhap", "User");
             }
 
             return this.Dangky();
@@ -98,10 +98,11 @@ namespace WebBanGiayDep.Controllers
             if (String.IsNullOrEmpty(tendn))
             {
                 ViewData["Loi1"] = "Tên đăng nhập không được để trống";
-            }else if (String.IsNullOrEmpty(matkhau))
-                    {
-                        ViewData["Loi2"] = "Mật khẩu không được để trống";
-                   }
+            }
+            else if (String.IsNullOrEmpty(matkhau))
+            {
+                ViewData["Loi2"] = "Mật khẩu không được để trống";
+            }
             else
             {
                 KHACHHANG kh = data.KHACHHANGs.SingleOrDefault(n => n.TaiKhoanKH == tendn && n.MatKhau == matkhau_mahoa);
@@ -207,7 +208,7 @@ namespace WebBanGiayDep.Controllers
                 ViewBag.MaKH = kh.MaKH;
                 return View(kh);
             }
-           
+
         }
         [HttpPost, ActionName("MyProfile")]
         public ActionResult UpdateProfile(int id)
@@ -215,7 +216,7 @@ namespace WebBanGiayDep.Controllers
             KHACHHANG kh = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
             UpdateModel(kh);
             data.SubmitChanges();
-            return Content("<script>alert('Thay đổi thông tin thành công');window.location='/User/MyProfile/" +kh.MaKH +"';</script>");
+            return Content("<script>alert('Thay đổi thông tin thành công');window.location='/User/MyProfile/" + kh.MaKH + "';</script>");
             //return RedirectToAction("MyProfile");
         }
     }

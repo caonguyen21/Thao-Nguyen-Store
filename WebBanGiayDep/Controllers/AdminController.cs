@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PagedList;
+using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanGiayDep.Models;
-using PagedList;
-using System.IO;
-using PagedList.Mvc;
 
 namespace WebBanGiayDep.Controllers
 {
-    
+
     public class AdminController : Controller
     {
         dbShopGiayDataContext data = new dbShopGiayDataContext();
         // GET: Admin
         //======================================Login===============================================
+        #region Trang chủ
         public ActionResult Index()
         {
             if (Session["Username_Admin"] == null)
@@ -24,6 +23,8 @@ namespace WebBanGiayDep.Controllers
             }
             return View();
         }
+        #endregion
+        #region Đăng nhập
         [HttpGet]
         public ActionResult Login()
         {
@@ -72,12 +73,16 @@ namespace WebBanGiayDep.Controllers
                 return Content("<script>alert('Đăng nhập thất bại!');window.location='/Admin/Login';</script>");
             }
         }
+        #endregion
+        #region Đăng xuất
         public ActionResult Logout()
         {
             Session.RemoveAll();
             Session.Abandon();
             return RedirectToAction("Login");
         }
+        #endregion
+        #region Thông tin tài khoản
         public ActionResult Account()
         {
             //Chưa đăng nhập => Login
@@ -133,6 +138,54 @@ namespace WebBanGiayDep.Controllers
                 return Content("<script>alert('Lỗi hệ thống.Vui lòng thử lại!');window.location='/Admin/Account';</script>");
             }
         }
+        #endregion
+        #region Đổi mật khẩu (ChangePassword)
+        public ActionResult ChangePassword()
+        {
+            if (Session["Username_Admin"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(FormCollection collection)
+        {
+            try
+            {
+                //Lấy giá trị ở Form ChangePassword
+                string _PassOld = collection["txt_Password"];
+                string _PassNew = collection["txt_PasswordNew"];
+                string _RePassNew = collection["txt_NhapLaiPass"];
+                int _MaAdmin = int.Parse(Session["MaAdmin"].ToString());
+                var ad = data.QUANLies.SingleOrDefault(a => a.MaQL == _MaAdmin);
+                if (ad.MatKhau == _PassOld)
+                {
+                    if (_RePassNew == _PassNew)
+                    {
+                        if (_PassNew.Length >= 6)
+                        {
+                            ad.MatKhau = _PassNew;
+                            UpdateModel(ad);
+                            data.SubmitChanges();
+                            return Content("<script>alert('Đổi mật khẩu thành công!');window.location='/Admin/ChangePassword';</script>");
+                        }
+                        else
+                            return Content("<script>alert('Mật khẩu mới phải có ít nhất 6 ký tự!');window.location='/Admin/ChangePassword';</script>");
+                    }
+                    else
+                        return Content("<script>alert('Mật khẩu nhập lại không đúng!');window.location='/Admin/ChangePassword';</script>");
+                }
+                else
+                    return Content("<script>alert('Mật Khẩu cũ không đúng!');window.location='/Admin/ChangePassword';</script>");
+            }
+            catch
+            {
+                return Content("<script>alert('Thao tác đổi mật khẩu thất bại!');window.location='/Admin/ChangePassword';</script>");
+            }
+        }
+        #endregion
+        #region Danh sách admin
         public ActionResult ListAdmin(int? page)
         {
             if (Session["Username_Admin"] == null)
@@ -148,33 +201,57 @@ namespace WebBanGiayDep.Controllers
 
             //Lấy ra Danh sách Admin
             var PQ = (from pq in data.PHANQUYENs
-                      orderby pq.MaQL descending
+                      orderby pq.MaQL ascending
                       select pq).ToPagedList(PageNum, PageSize);
             return View(PQ);
         }
-        #region Quản lý admin
+        #endregion
+        #region Quản lý trạng thái
         //Hàm khóa hoặc mở khóa tài khoản Admin (ở đây sử dụng hàm void để Response.Write hình update lại)
         [HttpPost]
         public void UpdateTrangThai(int id)
         {
-            var AD = (from ad in data.QUANLies where ad.MaQL == id select ad).SingleOrDefault();
-            string Hinh = "";
-            if (AD.MaQL != 1)
+            var _AD = (from ad in data.QUANLies where ad.MaQL == id select ad).SingleOrDefault();
+            string _Hinh = "";
+
+            if (_AD.TrangThai == true)
             {
-                if (AD.TrangThai == true)
-                {
-                    AD.TrangThai = false;
-                    Hinh = "/images/Admin/Icons/icon_An.png";
-                }
-                else
-                {
-                    AD.TrangThai = true;
-                    Hinh = "/images/Admin/Icons/icon_Hien.png";
-                }
-                UpdateModel(AD);
-                data.SubmitChanges();
-                Response.Write(Hinh);
+                _AD.TrangThai = false;
+                _Hinh = "/images/Admin/Icons/icon_An.png";
             }
+            else
+            {
+                _AD.TrangThai = true;
+                _Hinh = "/images/Admin/Icons/icon_Hien.png";
+            }
+            UpdateModel(_AD);
+            data.SubmitChanges();
+            Response.Write(_Hinh);
+        }
+        #endregion
+        #region Quản trị Admin
+        [HttpPost]
+        public void UpdatePQ_QuanTriAdmin(int id)
+        {
+            //Lấy ra tài khoản Admin trong bảng phân quyền cần Update quyền quản trị
+            var _PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
+            //Tạo chuỗi _Hinh để chứa đường dẫn hình Ẩn Hiện khi Update lại
+            string _Hinh = "";
+
+            //Không có quyền thì cập nhật lại thành có và ngược lại
+            if (_PQ.QL_Admin == true)
+            {
+                _PQ.QL_Admin = false;
+                _Hinh = "/images/Admin/Icons/block.png";
+            }
+            else
+            {
+                _PQ.QL_Admin = true;
+                _Hinh = "/images/Admin/Icons/accept.png";
+            }
+            UpdateModel(_PQ);
+            data.SubmitChanges();
+            Response.Write(_Hinh);
 
         }
         #endregion
@@ -182,21 +259,21 @@ namespace WebBanGiayDep.Controllers
         [HttpPost]
         public void UpdatePQ_NhaSanXuat(int id)
         {
-            var PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
-            string Hinh = "";
-            if (PQ.QL_NhaCungCap == true)
+            var _PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
+            string _Hinh = "";
+            if (_PQ.QL_NhaCungCap == true)
             {
-                PQ.QL_NhaCungCap = false;
-                Hinh = "/images/Admin/Icons/block.png";
+                _PQ.QL_NhaCungCap = false;
+                _Hinh = "/images/Admin/Icons/block.png";
             }
             else
             {
-                PQ.QL_NhaCungCap = true;
-                Hinh = "/images/Admin/Icons/accept.png";
+                _PQ.QL_NhaCungCap = true;
+                _Hinh = "/images/Admin/Icons/accept.png";
             }
-            UpdateModel(PQ);
+            UpdateModel(_PQ);
             data.SubmitChanges();
-            Response.Write(Hinh);
+            Response.Write(_Hinh);
         }
         #endregion
         #region quản lý sản phẩm
@@ -242,7 +319,6 @@ namespace WebBanGiayDep.Controllers
         }
         #endregion
         #region Quản lý đơn hàng
-        //Hàm Update Phân quyền cho quản trị:(ở đây sử dụng hàm void để Response.Write hình update lại)
         [HttpPost]
         public void UpdatePQ_DonHang(int id)
         {
@@ -256,6 +332,71 @@ namespace WebBanGiayDep.Controllers
             else
             {
                 PQ.QL_DonHang = true;
+                Hinh = "/images/Admin/Icons/accept.png";
+            }
+            UpdateModel(PQ);
+            data.SubmitChanges();
+            Response.Write(Hinh);
+        }
+        #endregion
+        #region Quản lý thương hiệu
+        [HttpPost]
+        public void UpdatePQ_ThuongHieu(int id)
+        {
+            var PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
+            string Hinh = "";
+            if (PQ.QL_ThuongHieu == true)
+            {
+                PQ.QL_ThuongHieu = false;
+                Hinh = "/images/Admin/Icons/block.png";
+            }
+            else
+            {
+                PQ.QL_ThuongHieu = true;
+                Hinh = "/images/Admin/Icons/accept.png";
+            }
+            UpdateModel(PQ);
+            data.SubmitChanges();
+            Response.Write(Hinh);
+        }
+        #endregion
+        #region Quản lý loại giày
+        //Hàm Update Phân quyền cho quản trị:(ở đây sử dụng hàm void để Response.Write hình update lại)
+        [HttpPost]
+        public void UpdatePQ_LoaiGiay(int id)
+        {
+            var PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
+            string Hinh = "";
+            if (PQ.QL_LoaiGiay == true)
+            {
+                PQ.QL_LoaiGiay = false;
+                Hinh = "/images/Admin/Icons/block.png";
+            }
+            else
+            {
+                PQ.QL_LoaiGiay = true;
+                Hinh = "/images/Admin/Icons/accept.png";
+            }
+            UpdateModel(PQ);
+            data.SubmitChanges();
+            Response.Write(Hinh);
+        }
+        #endregion
+        #region Quản lý ý kiến khách hàng
+        //Hàm Update Phân quyền cho quản trị:(ở đây sử dụng hàm void để Response.Write hình update lại)
+        [HttpPost]
+        public void UpdatePQ_YKienKhachHang(int id)
+        {
+            var PQ = (from ad in data.PHANQUYENs where ad.MaQL == id select ad).SingleOrDefault();
+            string Hinh = "";
+            if (PQ.QL_YKienKhachHang == true)
+            {
+                PQ.QL_YKienKhachHang = false;
+                Hinh = "/images/Admin/Icons/block.png";
+            }
+            else
+            {
+                PQ.QL_YKienKhachHang = true;
                 Hinh = "/images/Admin/Icons/accept.png";
             }
             UpdateModel(PQ);
@@ -301,13 +442,12 @@ namespace WebBanGiayDep.Controllers
                 {
                     ad.TaiKhoanQL = Username;
                 }
-                //Kiểm tra Mật khẩu nhập lại có giống Mật khẩu đăng ký không?
                 if (RePassword != Password)
                     return Content("<script>alert('Mật khẩu nhập lại không đúng!');window.location='/Admin/CreateAdmin';</script>");
                 else
+                {
                     ad.MatKhau = Password;
-
-                //Kiểm tra xem Email đã có người sử dụng chưa?
+                }
                 var CheckEmail = data.QUANLies.FirstOrDefault(a => a.EmailQL == Email);
                 if (CheckEmail != null)
                 {
@@ -319,11 +459,12 @@ namespace WebBanGiayDep.Controllers
                 }
                 ad.HoTen = HoTen;
                 ad.DienThoaiQL = DienThoai;
+
                 HttpPostedFileBase FileUpload = Request.Files["FileUpload"];
                 if (FileUpload != null && FileUpload.ContentLength > 0)
                 {
                     string _FileName = Path.GetFileName(FileUpload.FileName);
-                    string _Path = Path.Combine(Server.MapPath("~/Content/Images/Upload/"), _FileName);
+                    string _Path = Path.Combine(Server.MapPath("/images/Upload/"), _FileName);
                     if (FileUpload.ContentLength > 1 * 1024 * 1024)
                     {
                         return Content("<script>alert('Kích thước của tập tin không được vượt quá 1 MB!');window.location='/Admin/CreateAdmin';</script>");
@@ -339,7 +480,7 @@ namespace WebBanGiayDep.Controllers
                 }
                 else
                 {
-                    ad.Avatar = "/images/Upload/avatars";
+                    ad.Avatar = "/images/Upload/avatars.jpg";
                 }
                 ad.TrangThai = true;
                 data.QUANLies.InsertOnSubmit(ad);
@@ -421,14 +562,21 @@ namespace WebBanGiayDep.Controllers
             }
             catch
             {
-                return Content("<script>alert('Đăng ký thất bại.Vui lòng kiểm tra Ngày/Tháng/Năm sinh đã hợp lệ chưa?!');window.location='/Admin/CreateAdmin';</script>");
+                return Content("<script>alert('Đăng ký thất bại.Hệ thống gặp vấn đề');window.location='/Admin/CreateAdmin';</script>");
             }
         }
         #endregion
 
         // =================================================Sản Phẩm===================================================
-        public ActionResult SanPham(int ? page)
+        public ActionResult SanPham(int? page)
         {
+            if (Session["Username_Admin"] == null)
+                return RedirectToAction("Login");
+            else
+            if (bool.Parse(Session["PQ_SanPham"].ToString()) == false)//Không đủ quyền hạn
+            {
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực quản lý sản phẩm !');window.location='/Admin/';</script>");
+            }
             int pageNumber = (page ?? 1);
             int pageSize = 7;
             return View(data.SANPHAMs.ToList().OrderBy(n => n.MaGiay).ToPagedList(pageNumber, pageSize));
@@ -453,7 +601,7 @@ namespace WebBanGiayDep.Controllers
         public ActionResult ThemMoiSanPham(SANPHAM sanpham, HttpPostedFileBase fileUpload)
         {
             ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
-            ViewBag.MaLoai = new SelectList(data.LOAIGIAYs.ToList().Where(n=>n.TrangThai == true).OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+            ViewBag.MaLoai = new SelectList(data.LOAIGIAYs.ToList().Where(n => n.TrangThai == true).OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
             ViewBag.MaNCC = new SelectList(data.NHACUNGCAPs.ToList().Where(n => n.TrangThai == true).OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
 
             if (fileUpload == null)
@@ -515,7 +663,7 @@ namespace WebBanGiayDep.Controllers
             }
             return View(sanPham);
         }
-        [HttpPost,ActionName("XoaSanPham")]
+        [HttpPost, ActionName("XoaSanPham")]
         public ActionResult XacNhanXoa(int id)
         {
             SANPHAM sanPham = data.SANPHAMs.SingleOrDefault(n => n.MaGiay == id);
@@ -549,7 +697,7 @@ namespace WebBanGiayDep.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult SuaSanPham( int id, HttpPostedFileBase fileUpload)
+        public ActionResult SuaSanPham(int id, HttpPostedFileBase fileUpload)
         {
             SANPHAM sp = data.SANPHAMs.SingleOrDefault(n => n.MaGiay == id);
 
@@ -585,13 +733,20 @@ namespace WebBanGiayDep.Controllers
                     data.SubmitChanges();
                 }
                 return RedirectToAction("SanPham");
-            }       
+            }
         }
-        
+
         //y kien khach hang
         //======================================Ý kiến Khách Hàng========================================
         public ActionResult ykienkhachhang(int? page)
         {
+            if (Session["Username_Admin"] == null)
+                return RedirectToAction("Login");
+            else
+            if (bool.Parse(Session["PQ_YKienKhachHang"].ToString()) == false)//Không đủ quyền hạn
+            {
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực này !');window.location='/Admin/';</script>");
+            }
             int pageNumber = (page ?? 1);
             int pageSize = 5;
             return View(data.YKIENKHACHHANGs.ToList().OrderBy(n => n.MAYKIEN).ToPagedList(pageNumber, pageSize));
@@ -625,10 +780,17 @@ namespace WebBanGiayDep.Controllers
             return RedirectToAction("Ykienkhachhang");
         }
 
-       // ==========================================Thương hiệu===========================================
+        // ==========================================Thương hiệu===========================================
         //quan ly thuong hieu
         public ActionResult ThuongHieu(int? page)
         {
+            if (Session["Username_Admin"] == null)
+                return RedirectToAction("Login");
+            else
+            if (bool.Parse(Session["PQ_ThuongHieu"].ToString()) == false)//Không đủ quyền hạn
+            {
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực này!');window.location='/Admin/';</script>");
+            }
             int pageNumber = (page ?? 1);
             int pageSize = 9;
             return View(data.THUONGHIEUs.ToList().OrderBy(n => n.MaThuongHieu).ToPagedList(pageNumber, pageSize));
@@ -695,8 +857,8 @@ namespace WebBanGiayDep.Controllers
             ViewBag.MaThuongHieu = new SelectList(data.THUONGHIEUs.ToList().OrderBy(n => n.TenThuongHieu), "MaThuongHieu", "TenThuongHieu");
             return View(tHUONGHIEU);
         }
-        [HttpPost,ActionName("SuaThuongHieu")]
-    
+        [HttpPost, ActionName("SuaThuongHieu")]
+
         public ActionResult CapNhatThuongHieu(int id)
         {
             THUONGHIEU thuonghieu = data.THUONGHIEUs.SingleOrDefault(n => n.MaThuongHieu == id);
@@ -705,13 +867,20 @@ namespace WebBanGiayDep.Controllers
             return RedirectToAction("ThuongHieu");
         }
 
-       // ================================================Nhà cung Cấp===========================
-       public ActionResult NhaCungCap(int ? page)
+        // ================================================Nhà cung Cấp===========================
+        public ActionResult NhaCungCap(int? page)
         {
+            if (Session["Username_Admin"] == null)
+                return RedirectToAction("Login");
+            else
+            if (bool.Parse(Session["PQ_NhaCungCap"].ToString()) == false)//Không đủ quyền hạn
+            {
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực này!');window.location='/Admin/';</script>");
+            }
             int pageNumber = (page ?? 1);
             int pageSize = 9;
 
-            return View(data.NHACUNGCAPs.ToList().OrderBy(n => n.MaNCC).ToPagedList(pageNumber,pageSize));
+            return View(data.NHACUNGCAPs.ToList().OrderBy(n => n.MaNCC).ToPagedList(pageNumber, pageSize));
         }
         [HttpGet]
         public ActionResult ThemMoiNhaCungCap()
@@ -727,12 +896,12 @@ namespace WebBanGiayDep.Controllers
                 ViewData["Error1"] = "Vui lòng điền đầy đủ thông tin";
                 return ThemMoiNhaCungCap();
             }
-            if ( String.IsNullOrEmpty(ncc.DiaChi))
+            if (String.IsNullOrEmpty(ncc.DiaChi))
             {
                 ViewData["Error2"] = "Vui lòng điền đầy đủ thông tin";
                 return ThemMoiNhaCungCap();
             }
-           
+
             if (ncc.DienThoai.Length != 10)
             {
                 ViewData["Error3"] = "Số điện thoại không đúng định dạng";
@@ -761,7 +930,7 @@ namespace WebBanGiayDep.Controllers
             }
             return View(ncc);
         }
-        [HttpPost,ActionName("XoaNhaCungCap")]
+        [HttpPost, ActionName("XoaNhaCungCap")]
         public ActionResult XacNhanXoaNCC(int id)
         {
             NHACUNGCAP ncc = data.NHACUNGCAPs.SingleOrDefault(n => n.MaNCC == id);
@@ -775,7 +944,7 @@ namespace WebBanGiayDep.Controllers
             data.SubmitChanges();
             return RedirectToAction("NhaCungCap");
         }
-        
+
         [HttpGet]
         public ActionResult SuaNhaCungCap(int id)
         {
@@ -786,10 +955,10 @@ namespace WebBanGiayDep.Controllers
                 Response.StatusCode = 404;
                 return null;
             }
-          
+
             return View(ncc);
         }
-        [HttpPost,ActionName("SuaNhaCungCap")]
+        [HttpPost, ActionName("SuaNhaCungCap")]
         public ActionResult CapNhatNCC(int id)
         {
             NHACUNGCAP ncc = data.NHACUNGCAPs.SingleOrDefault(n => n.MaNCC == id);
@@ -800,6 +969,13 @@ namespace WebBanGiayDep.Controllers
         // ================================================Quản lý khách hàng===========================
         public ActionResult KhachHang(int? page)
         {
+            if (Session["Username_Admin"] == null)
+                return RedirectToAction("Login");
+            else
+            if (bool.Parse(Session["PQ_KhachHang"].ToString()) == false)//Không đủ quyền hạn
+            {
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực quản lý sản phẩm !');window.location='/Admin/';</script>");
+            }
             int pageNumber = (page ?? 1);
             int pageSize = 9;
             return View(data.KHACHHANGs.ToList().OrderBy(n => n.MaKH).ToPagedList(pageNumber, pageSize));
@@ -820,6 +996,13 @@ namespace WebBanGiayDep.Controllers
         // ================================================Quản lý loai giay===========================
         public ActionResult LoaiGiay(int? page)
         {
+            if (Session["Username_Admin"] == null)
+                return RedirectToAction("Login");
+            else
+            if (bool.Parse(Session["PQ_LoaiGiay"].ToString()) == false)//Không đủ quyền hạn
+            {
+                return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực quản lý sản phẩm !');window.location='/Admin/';</script>");
+            }
             int pageNumber = (page ?? 1);
             int pageSize = 9;
             return View(data.LOAIGIAYs.ToList().OrderBy(n => n.MaLoai).ToPagedList(pageNumber, pageSize));

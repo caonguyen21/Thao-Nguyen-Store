@@ -33,9 +33,9 @@ namespace WebBanGiayDep.Models
     partial void InsertCT_DONHANG(CT_DONHANG instance);
     partial void UpdateCT_DONHANG(CT_DONHANG instance);
     partial void DeleteCT_DONHANG(CT_DONHANG instance);
-    partial void InsertYKIENKHACHHANG(YKIENKHACHHANG instance);
-    partial void UpdateYKIENKHACHHANG(YKIENKHACHHANG instance);
-    partial void DeleteYKIENKHACHHANG(YKIENKHACHHANG instance);
+    partial void InsertTHUONGHIEU(THUONGHIEU instance);
+    partial void UpdateTHUONGHIEU(THUONGHIEU instance);
+    partial void DeleteTHUONGHIEU(THUONGHIEU instance);
     partial void InsertDONHANG(DONHANG instance);
     partial void UpdateDONHANG(DONHANG instance);
     partial void DeleteDONHANG(DONHANG instance);
@@ -57,9 +57,9 @@ namespace WebBanGiayDep.Models
     partial void InsertSANPHAM(SANPHAM instance);
     partial void UpdateSANPHAM(SANPHAM instance);
     partial void DeleteSANPHAM(SANPHAM instance);
-    partial void InsertTHUONGHIEU(THUONGHIEU instance);
-    partial void UpdateTHUONGHIEU(THUONGHIEU instance);
-    partial void DeleteTHUONGHIEU(THUONGHIEU instance);
+    partial void InsertYKIENKHACHHANG(YKIENKHACHHANG instance);
+    partial void UpdateYKIENKHACHHANG(YKIENKHACHHANG instance);
+    partial void DeleteYKIENKHACHHANG(YKIENKHACHHANG instance);
     #endregion
 		
 		public dbShopGiayDataContext() : 
@@ -100,11 +100,11 @@ namespace WebBanGiayDep.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<YKIENKHACHHANG> YKIENKHACHHANGs
+		public System.Data.Linq.Table<THUONGHIEU> THUONGHIEUs
 		{
 			get
 			{
-				return this.GetTable<YKIENKHACHHANG>();
+				return this.GetTable<THUONGHIEU>();
 			}
 		}
 		
@@ -164,11 +164,11 @@ namespace WebBanGiayDep.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<THUONGHIEU> THUONGHIEUs
+		public System.Data.Linq.Table<YKIENKHACHHANG> YKIENKHACHHANGs
 		{
 			get
 			{
-				return this.GetTable<THUONGHIEU>();
+				return this.GetTable<YKIENKHACHHANG>();
 			}
 		}
 	}
@@ -413,140 +413,84 @@ namespace WebBanGiayDep.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.YKIENKHACHHANG")]
-	public partial class YKIENKHACHHANG : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.THUONGHIEU")]
+	public partial class THUONGHIEU : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MAYKIEN;
+		private int _MaThuongHieu;
 		
-		private string _Email;
+		private string _TenThuongHieu;
 		
-		private string _HoTen;
-		
-		private System.Nullable<System.DateTime> _NgayGui;
-		
-		private string _NoiDung;
+		private EntitySet<SANPHAM> _SANPHAMs;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMAYKIENChanging(int value);
-    partial void OnMAYKIENChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnHoTenChanging(string value);
-    partial void OnHoTenChanged();
-    partial void OnNgayGuiChanging(System.Nullable<System.DateTime> value);
-    partial void OnNgayGuiChanged();
-    partial void OnNoiDungChanging(string value);
-    partial void OnNoiDungChanged();
+    partial void OnMaThuongHieuChanging(int value);
+    partial void OnMaThuongHieuChanged();
+    partial void OnTenThuongHieuChanging(string value);
+    partial void OnTenThuongHieuChanged();
     #endregion
 		
-		public YKIENKHACHHANG()
+		public THUONGHIEU()
 		{
+			this._SANPHAMs = new EntitySet<SANPHAM>(new Action<SANPHAM>(this.attach_SANPHAMs), new Action<SANPHAM>(this.detach_SANPHAMs));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAYKIEN", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MAYKIEN
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaThuongHieu", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MaThuongHieu
 		{
 			get
 			{
-				return this._MAYKIEN;
+				return this._MaThuongHieu;
 			}
 			set
 			{
-				if ((this._MAYKIEN != value))
+				if ((this._MaThuongHieu != value))
 				{
-					this.OnMAYKIENChanging(value);
+					this.OnMaThuongHieuChanging(value);
 					this.SendPropertyChanging();
-					this._MAYKIEN = value;
-					this.SendPropertyChanged("MAYKIEN");
-					this.OnMAYKIENChanged();
+					this._MaThuongHieu = value;
+					this.SendPropertyChanged("MaThuongHieu");
+					this.OnMaThuongHieuChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
-		public string Email
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenThuongHieu", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string TenThuongHieu
 		{
 			get
 			{
-				return this._Email;
+				return this._TenThuongHieu;
 			}
 			set
 			{
-				if ((this._Email != value))
+				if ((this._TenThuongHieu != value))
 				{
-					this.OnEmailChanging(value);
+					this.OnTenThuongHieuChanging(value);
 					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
+					this._TenThuongHieu = value;
+					this.SendPropertyChanged("TenThuongHieu");
+					this.OnTenThuongHieuChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string HoTen
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="THUONGHIEU_SANPHAM", Storage="_SANPHAMs", ThisKey="MaThuongHieu", OtherKey="MaThuongHieu")]
+		public EntitySet<SANPHAM> SANPHAMs
 		{
 			get
 			{
-				return this._HoTen;
+				return this._SANPHAMs;
 			}
 			set
 			{
-				if ((this._HoTen != value))
-				{
-					this.OnHoTenChanging(value);
-					this.SendPropertyChanging();
-					this._HoTen = value;
-					this.SendPropertyChanged("HoTen");
-					this.OnHoTenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgayGui", DbType="Date")]
-		public System.Nullable<System.DateTime> NgayGui
-		{
-			get
-			{
-				return this._NgayGui;
-			}
-			set
-			{
-				if ((this._NgayGui != value))
-				{
-					this.OnNgayGuiChanging(value);
-					this.SendPropertyChanging();
-					this._NgayGui = value;
-					this.SendPropertyChanged("NgayGui");
-					this.OnNgayGuiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoiDung", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string NoiDung
-		{
-			get
-			{
-				return this._NoiDung;
-			}
-			set
-			{
-				if ((this._NoiDung != value))
-				{
-					this.OnNoiDungChanging(value);
-					this.SendPropertyChanging();
-					this._NoiDung = value;
-					this.SendPropertyChanged("NoiDung");
-					this.OnNoiDungChanged();
-				}
+				this._SANPHAMs.Assign(value);
 			}
 		}
 		
@@ -568,6 +512,18 @@ namespace WebBanGiayDep.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_SANPHAMs(SANPHAM entity)
+		{
+			this.SendPropertyChanging();
+			entity.THUONGHIEU = this;
+		}
+		
+		private void detach_SANPHAMs(SANPHAM entity)
+		{
+			this.SendPropertyChanging();
+			entity.THUONGHIEU = null;
 		}
 	}
 	
@@ -1512,7 +1468,7 @@ namespace WebBanGiayDep.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPQ", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPQ", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int MaPQ
 		{
 			get
@@ -1823,7 +1779,7 @@ namespace WebBanGiayDep.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaQL", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaQL", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int MaQL
 		{
 			get
@@ -2506,84 +2462,140 @@ namespace WebBanGiayDep.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.THUONGHIEU")]
-	public partial class THUONGHIEU : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.YKIENKHACHHANG")]
+	public partial class YKIENKHACHHANG : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaThuongHieu;
+		private int _MAYKIEN;
 		
-		private string _TenThuongHieu;
+		private string _Email;
 		
-		private EntitySet<SANPHAM> _SANPHAMs;
+		private string _HoTen;
+		
+		private System.Nullable<System.DateTime> _NgayGui;
+		
+		private string _NoiDung;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaThuongHieuChanging(int value);
-    partial void OnMaThuongHieuChanged();
-    partial void OnTenThuongHieuChanging(string value);
-    partial void OnTenThuongHieuChanged();
+    partial void OnMAYKIENChanging(int value);
+    partial void OnMAYKIENChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnHoTenChanging(string value);
+    partial void OnHoTenChanged();
+    partial void OnNgayGuiChanging(System.Nullable<System.DateTime> value);
+    partial void OnNgayGuiChanged();
+    partial void OnNoiDungChanging(string value);
+    partial void OnNoiDungChanged();
     #endregion
 		
-		public THUONGHIEU()
+		public YKIENKHACHHANG()
 		{
-			this._SANPHAMs = new EntitySet<SANPHAM>(new Action<SANPHAM>(this.attach_SANPHAMs), new Action<SANPHAM>(this.detach_SANPHAMs));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaThuongHieu", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaThuongHieu
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAYKIEN", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MAYKIEN
 		{
 			get
 			{
-				return this._MaThuongHieu;
+				return this._MAYKIEN;
 			}
 			set
 			{
-				if ((this._MaThuongHieu != value))
+				if ((this._MAYKIEN != value))
 				{
-					this.OnMaThuongHieuChanging(value);
+					this.OnMAYKIENChanging(value);
 					this.SendPropertyChanging();
-					this._MaThuongHieu = value;
-					this.SendPropertyChanged("MaThuongHieu");
-					this.OnMaThuongHieuChanged();
+					this._MAYKIEN = value;
+					this.SendPropertyChanged("MAYKIEN");
+					this.OnMAYKIENChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenThuongHieu", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string TenThuongHieu
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
+		public string Email
 		{
 			get
 			{
-				return this._TenThuongHieu;
+				return this._Email;
 			}
 			set
 			{
-				if ((this._TenThuongHieu != value))
+				if ((this._Email != value))
 				{
-					this.OnTenThuongHieuChanging(value);
+					this.OnEmailChanging(value);
 					this.SendPropertyChanging();
-					this._TenThuongHieu = value;
-					this.SendPropertyChanged("TenThuongHieu");
-					this.OnTenThuongHieuChanged();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="THUONGHIEU_SANPHAM", Storage="_SANPHAMs", ThisKey="MaThuongHieu", OtherKey="MaThuongHieu")]
-		public EntitySet<SANPHAM> SANPHAMs
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string HoTen
 		{
 			get
 			{
-				return this._SANPHAMs;
+				return this._HoTen;
 			}
 			set
 			{
-				this._SANPHAMs.Assign(value);
+				if ((this._HoTen != value))
+				{
+					this.OnHoTenChanging(value);
+					this.SendPropertyChanging();
+					this._HoTen = value;
+					this.SendPropertyChanged("HoTen");
+					this.OnHoTenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgayGui", DbType="Date")]
+		public System.Nullable<System.DateTime> NgayGui
+		{
+			get
+			{
+				return this._NgayGui;
+			}
+			set
+			{
+				if ((this._NgayGui != value))
+				{
+					this.OnNgayGuiChanging(value);
+					this.SendPropertyChanging();
+					this._NgayGui = value;
+					this.SendPropertyChanged("NgayGui");
+					this.OnNgayGuiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoiDung", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string NoiDung
+		{
+			get
+			{
+				return this._NoiDung;
+			}
+			set
+			{
+				if ((this._NoiDung != value))
+				{
+					this.OnNoiDungChanging(value);
+					this.SendPropertyChanging();
+					this._NoiDung = value;
+					this.SendPropertyChanged("NoiDung");
+					this.OnNoiDungChanged();
+				}
 			}
 		}
 		
@@ -2605,18 +2617,6 @@ namespace WebBanGiayDep.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_SANPHAMs(SANPHAM entity)
-		{
-			this.SendPropertyChanging();
-			entity.THUONGHIEU = this;
-		}
-		
-		private void detach_SANPHAMs(SANPHAM entity)
-		{
-			this.SendPropertyChanging();
-			entity.THUONGHIEU = null;
 		}
 	}
 }
