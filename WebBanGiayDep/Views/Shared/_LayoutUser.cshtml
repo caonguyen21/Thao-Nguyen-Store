@@ -181,11 +181,27 @@
 
             <div class="cssmenu " style="width: 40% ">
                 <ul class="icon2 sub-icon2 profile_img">
-
                     <li>
-                        <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                        <button class="fa fa-search" type="submit"></button>
+                        <input id="txt_Tim" runat="server" class="au-input au-input--xl" type="text" name="search" placeholder="Bạn muốn mua gì hôm nay?" />
+                      @*  //<a href="/Home/Search/xxx" class="TimClick fa fa-search">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search</a>*@
+                        <button class="fa fa-search" type="submit" onclick="/Home/Search/xxx"></button>
+                        <script>
+                            $(function () {
+                                $('.TimClick').click(function () {
+                                    var id = $("#txt_Tim").val();
+                                    if (id == "") {
+                                        alert("Vui lòng nhập một từ khóa để tìm kiếm !");
+                                        this.href = window.location;
+                                    }
+                                    else {
+                                        this.href = this.href.replace("xxx", id);
+                                    }
+                                });
+                            });
+                        </script>
                     </li>
+
+
 
                     <li>
                         <a href="@Url.Action("ListSanPham","Home")">Sản phẩm</a>
@@ -206,16 +222,17 @@
                             <ul class="sub-icon2 list">
                                 <li>
                                     <a href="@Url.Action("MyProfile","User", new { id = taikhoan.MaKH})">Hồ sơ của tôi</a>
+                                    <hr />
                                 </li>
-                                <hr />
+
                                 <li>
                                     <a href="@Url.Action("LichSuDonHang","DonHang")">Lịch sử đặt hàng</a>
+                                    <hr />
                                 </li>
-                                <hr />
                                 <li>
                                     <a href="@Url.Action("DoiMatKhau","User")">Đổi mật khẩu</a>
+                                    <hr />
                                 </li>
-                                <hr />
                                 <li>
                                     <a href="/User/Logout">Đăng xuất</a>
                                 </li>
@@ -327,7 +344,6 @@
                         <ul class="list1">
                             <li><a href="@Url.Action("TinTuc", "Home")">Tin tức mới</a></li>
                             <li><a href="@Url.Action("GioiThieu", "Home")">Về chúng tôi</a></li>
-
                         </ul>
                         <br />
                         <h3 class="m_9">LIÊN HỆ</h3>

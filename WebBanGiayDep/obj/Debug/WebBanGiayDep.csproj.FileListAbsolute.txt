@@ -669,7 +669,6 @@ D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\System.Web.WebPages.Razor.xml
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\Newtonsoft.Json.xml
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\Antlr3.Runtime.pdb
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\GitHub\LapTrinhWeb\WebBanGiayDep\obj\Debug\WebBanGiayDep.csproj.AssemblyReference.cache
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\obj\Debug\WebBanGiayDep.csproj.CoreCompileInputs.cache
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\obj\Debug\WebBanGiayDep.csproj.CopyComplete
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\obj\Debug\WebBanGiayDep.dll
@@ -836,3 +835,8 @@ D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Numerics.Vectors.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\EntityFramework.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\EntityFramework.xml
+D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\System.Net.Http.dll
+D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\System.Web.dll
+D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\System.Web.Routing.dll
+D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\System.dll
+D:\GitHub\LapTrinhWeb\WebBanGiayDep\obj\Debug\WebBanGiayDep.csproj.AssemblyReference.cache

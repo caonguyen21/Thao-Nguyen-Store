@@ -108,13 +108,13 @@ namespace WebBanGiayDep.Controllers
         {
             //Lấy ra danh sách sản phẩm từ chuỗi tìm kiếm truyền vào
             var search = (from sp in data.SANPHAMs
-                          where (sp.TrangThai == true) && (sp.TenGiay.Contains(id)) && (sp.NHACUNGCAP.TrangThai == true)
+                          where (sp.TrangThai == true) && (sp.TenGiay.Contains(id)) && (sp.THUONGHIEU.TenThuongHieu.Contains(id))
                           orderby sp.GiaBan descending
                           select sp).ToList();
 
             //Lấy ra các sản phẩm khác (Không có sản phẩm của nhà sản xuất đang xem)
             ViewBag.SP_Khac = (from sp in data.SANPHAMs
-                               where (sp.TrangThai == true) && (!sp.TenGiay.Contains(id)) && (sp.NHACUNGCAP.TrangThai == true)
+                               where (sp.TrangThai == true) && (!sp.TenGiay.Contains(id)) && (sp.THUONGHIEU.TenThuongHieu.Contains(id))
                                orderby sp.GiaBan descending
                                select sp).ToList();
 
