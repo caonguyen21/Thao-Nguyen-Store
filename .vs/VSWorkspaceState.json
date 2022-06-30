@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\WebBanGiayDep",
-    "\\WebBanGiayDep\\Views",
-    "\\WebBanGiayDep\\Views\\Admin"
+    ""
   ],
-  "SelectedNode": "\\WebBanGiayDep\\Views\\Admin\\SanPham.cshtml",
+  "SelectedNode": "\\WebBanGiayDep.sln",
   "PreviewInSolutionExplorer": false
 }

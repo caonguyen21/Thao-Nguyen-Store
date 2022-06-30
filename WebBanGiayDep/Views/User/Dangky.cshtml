@@ -4,81 +4,88 @@
     Layout = "~/Views/Shared/_LayoutTaiKhoan.cshtml";
 }
 
-<table align="center" style="margin-left: 40%; margin-bottom:10%; margin-top:2%">
-    <h1 style="text-align:center; margin-top: 100px; font-size: 25px; font-weight: bold ">ĐĂNG KÝ THÀNH VIÊN</h1>
-    @using (Html.BeginForm())
-    {
-        @Html.ValidationSummary(true)
-        <tr style="height:40px">
-            <td>Họ tên khách hàng:</td>
-            <td>
-                @Html.TextBox("HotenKH")
-                @ViewData["Loi1"]
-            </td>
-        </tr>
+<div class="login">
+    <div class="wrap">
+        <div class="col_1_of_login span_1_of_login">
+            <h4 class="title">BẠN ĐÃ CÓ TÀI KHOẢN</h4>
+            <h5 class="sub_title">ĐĂNG NHẬP TÀI KHOẢN</h5>
+            <div class="button1">
+                <a href="@Url.Action("Dangnhap", "User")"><input type="submit" name="Submit" value="Đăng NHẬP ngay"></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <div class="col_1_of_login span_1_of_login">
+                <div class="login-title">
+                    <h4 class="title">ĐĂNG KÝ TÀI KHOẢN</h4>
+                    <div class="comments-area">
+                        <form>
+                            <p>
+                                <label>Họ tên khách hàng</label>
+                                <span>*</span>
+                                <input type="text" value="" @Html.TextBox("HotenKH")
+                                       @ViewData["Loi1"]
+                            </p>
 
-        <tr style="height:40px">
-            <td>Tên đăng nhập:</td>
-            <td>
-                @Html.TextBox("TenDN")
-                @ViewData["Loi2"]
-            </td>
-        </tr>
+                            <p>
+                                <label>Tên đăng nhập</label>
+                                <span>*</span>
+                                <input type="text" value="" @Html.TextBox("TenDN")
+                                       @ViewData["Loi2"]
+                            </p>
 
-        <tr style="height:40px">
-            <td>Mật khẩu:</td>
-            <td>
-                @Html.Password("MatKhau")
-                @ViewData["Loi3"]
-            </td>
-        </tr>
+                            <p>
+                                <label>Mật khẩu</label>
+                                <span>*</span>
+                                <input type="password" value="" @Html.Password("MatKhau")
+                                       @ViewData["Loi3"]
+                            </p>
 
-        <tr style="height:40px">
-            <td>Nhập lại mật khẩu:</td>
-            <td>
-                @Html.Password("MatKhauNhapLai")
-                @ViewData["Loi4"]
-            </td>
-        </tr>
+                            <p>
+                                <label>Nhập lại mật khẩu</label>
+                                <span>*</span>
+                                <input type="password" value="" @Html.Password("MatKhauNhapLai")
+                                       @ViewData["Loi4"]
+                            </p>
 
-        <tr style="height:40px">
-            <td>Email:</td>
-            <td>
-                <input type="email" name="email" />
-                @ViewData["Loi5"]
-            </td>
-        </tr>
+                            <p>
+                                <label>Email</label>
+                                <span>*</span>
+                                <input type="email" name="email" style=" padding: 10px 15px; width: 97%; color: #000; font-size: 0.8125em; border: 1px solid #f0f0f0; background: #fff; outline: none; display: block; font-family: 'Open Sans', sans-serif;" />
+                                @ViewData["Loi5"]
+                            </p>
 
-        <tr style="height:40px">
-            <td>Địa chỉ:</td>
-            <td>
-                @Html.TextBox("DiaChi")
-                @ViewData["Loi6"]
-            </td>
-        </tr>
+                            <p>
+                                <label>Địa chỉ</label>
+                                <span>*</span>
+                                <input type="text" value="" @Html.TextBox("DiaChi")
+                                       @ViewData["Loi6"]
+                            </p>
 
-        <tr style="height:40px">
-            <td>Điện thoại:</td>
-            <td>
-                @Html.TextBox("DienThoai")
-                @ViewData["Loi7"]
-            </td>
-        </tr>
+                            <p>
+                                <label>Số điện thoại</label>
+                                <span>*</span>
+                                <input type="text" value="" @Html.TextBox("DienThoai")
+                                       @ViewData["Loi7"]
+                            </p>
 
-        <tr style="height:40px">
-            <td>Ngày sinh:</td>
-            <td>
-                <input type="date" name="NgaySinh" />
-                @ViewData["Loi8"]
-            </td>
-        </tr>
+                            <p>
+                                <label>Ngày sinh</label>
+                                <span>*</span>
+                                <input type="date" name="NgaySinh" style=" padding: 10px 15px; width: 97%; color: #000; font-size: 0.8125em; border: 1px solid #f0f0f0; background: #fff; outline: none; display: block; font-family: 'Open Sans', sans-serif;" />
+                                @ViewData["Loi8"]
+                            </p>
 
-        <tr style="height:40px">
-            <td></td>
-            <td>
-                <input type="submit" value="Đăng ký" />
-            </td>
-        </tr>
-    }
-</table>
-
+                            <p>
+                                <input type="submit" value="Đăng ký">
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="clear"></div>
+    </div>
+</div>
