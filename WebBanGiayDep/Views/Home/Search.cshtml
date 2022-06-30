@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebBanGiayDep.Models.SANPHAM>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<ul style="margin: 0">
+    <li><a>Tìm kiếm sản phẩm (Có @Model.Count() sản phẩm mang tên @ViewBag.TuKhoa) </a></li>
+</ul>
+<div>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <div>
+                    <a href="@Url.Action("Details", "Home", new { id = item.MaGiay })">
+                        <img src="@item.AnhBia" style="width:200px" />
+                        <br />
+                        <div style="text-align: left; padding-left: 15px; color: #666666; font-weight: bold">
+                            <br />
+                            @item.TenGiay
+                        </div>
+                        <br />
+                        <div style="text-align: left; padding-left: 15px; color: #FF6600; font-weight: 700;">
+                            @string.Format("{0:#,##0}", item.GiaBan) <sup>đ</sup>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="more-detail">
+                    <br />
+                    <a href="@Url.Action("Details", "Home", new { id = item.MaGiay })">
+                        <label style="color: #666; font-weight: bold;">@item.TenGiay</label>
+                    </a>
+                </div>
+            </li>
+        }
+    </ul>
+    <div class="clear"></div>
+</div>

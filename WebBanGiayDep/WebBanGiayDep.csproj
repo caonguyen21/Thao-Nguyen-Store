@@ -693,6 +693,7 @@
     <Content Include="Views\Admin\ChangePassword.cshtml" />
     <Content Include="Views\Admin\Order.cshtml" />
     <Content Include="Views\Admin\OrderDetail.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

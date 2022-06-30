@@ -53,7 +53,7 @@
 
             <div class="clear"></div>
             <br />
-            <div class="MenuTrang">
+            <div class="MenuTrang" style="text-align:center">
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>

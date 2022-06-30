@@ -49,6 +49,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
     <script src="~/Scripts/jquery.easydropdown.js"></script>
+    <link href="~/Content/theme.css" rel="stylesheet" media="all">
     <script type="text/javascript">
         $(document).ready(function () {
             $(".dropdown img.flag").addClass("flagvisibility");
@@ -178,7 +179,6 @@
                     </ul>
                 </div>
             </div>
-
             <div class="cssmenu " style="width: 40% ">
                 <ul class="icon2 sub-icon2 profile_img">
                     <li>
@@ -200,16 +200,19 @@
                             <ul class="sub-icon2 list">
                                 <li>
                                     <a href="@Url.Action("MyProfile","User", new { id = taikhoan.MaKH})">Hồ sơ của tôi</a>
+                                    <hr />
                                 </li>
-                                <hr />
+
                                 <li>
                                     <a href="@Url.Action("LichSuDonHang","DonHang")">Lịch sử đặt hàng</a>
+                                    <hr />
                                 </li>
-                                <hr />
+
                                 <li>
                                     <a href="@Url.Action("DoiMatKhau","User")">Đổi mật khẩu</a>
+                                    <hr />
                                 </li>
-                                <hr />
+
                                 <li>
                                     <a href="/User/Logout">Đăng xuất</a>
                                 </li>
@@ -289,81 +292,91 @@
         </div>
     </div>
     <!--end_menu-->
-    @RenderBody()
-    <!--footer-->
-    <div class="footer">
-        <div class="footer-top">
-            <div class="wrap">
-                <div class="col_1_of_footer-top span_1_of_footer-top">
-                    <ul class="f_list">
-                        <li><img src="~/images/f_icon2.png" alt="" /><span class="delivery">© 2015 SHOP GIÀY DÉP THẢO NGUYÊN.</span></li>
-                    </ul>
-
-                </div>
-                <div class="col_1_of_footer-top span_1_of_footer-top">
-                    <ul class="f_list">
-                        <li><img src="~/images/f_icon1.png" alt="" /><span class="delivery">Hộ trợ khách hàng : <span class="orange">(+84) 899 999 999 </span></span></li>
-                    </ul>
-                </div>
-                <div class="col_1_of_footer-top span_1_of_footer-top">
-                    <ul class="f_list">
-                        <li><img src="~/images/f_icon.png" alt="" /><span class="delivery">Mua hàng hiệu chính hãng trực tuyến, Giá Tốt Nhất</span></li>
-                    </ul>
-                </div>
-                <div class="clear"></div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="wrap">
-                <div class="section group">
-                    <div class="col_1_of_5 span_1_of_5">
-                        <h3 class="m_9">TIN TỨC & GIỚI THIỆU</h3>
-                        <ul class="list1">
-                            <li><a href="@Url.Action("TinTuc", "Home")">Tin tức mới</a></li>
-                            <li><a href="@Url.Action("GioiThieu", "Home")">Về chúng tôi</a></li>
-
-                        </ul>
-                        <br />
-                        <h3 class="m_9">LIÊN HỆ</h3>
-                        <ul class="list1">
-                            <li><a href="@Url.Action("Themmoiykien", "User")">Liên hệ</a></li>
-                        </ul>
-                    </div>
-                    <div class="col_1_of_5 span_1_of_5">
-                        <h3 class="m_9">THÔNG TIN</h3>
-                        <ul class="list1">
-                            <li><a href="#">Tên doanh nghiệp: Shop Giày Dép Thảo Nguyên</a></li>
-                            <li><a href="#">Hotline: (+84) 899 999 999</a></li>
-                            <li><a href="#">Email: shopthaonguyen@gmail.com</a></li>
-                            <li><a href="#">Thời gian làm việc: Thứ 2 - Chủ nhật: 8h00 - 22h00</a></li>
-                            <li><a href="#">Địa chỉ: 23k/7, Bình Đáng, Bình Hòa, Thuận An, Bình Dương</a></li>
-                        </ul>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </div>
-        <div class="copy">
-            <div class="wrap">
-                <p>© All rights reserved | Designed by Nhóm 11 19DTHA2</p>
-            </div>
+    <div class="container-fluid">
+        <div class="header-wrap">
+            <form class="form-header" action="" method="POST">
+                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                <button class="au-btn--submit" type="submit">
+                    <i class="zmdi zmdi-search"></i>
+                </button>
+            </form>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
+            @RenderBody()
+            <!--footer-->
+            <div class="footer">
+                <div class="footer-top">
+                    <div class="wrap">
+                        <div class="col_1_of_footer-top span_1_of_footer-top">
+                            <ul class="f_list">
+                                <li><img src="~/images/f_icon2.png" alt="" /><span class="delivery">© 2015 SHOP GIÀY DÉP THẢO NGUYÊN.</span></li>
+                            </ul>
 
-            var defaults = {
-                containerID: 'toTop', // fading element id
-                containerHoverID: 'toTopHover', // fading element hover id
-                scrollSpeed: 1200,
-                easingType: 'linear'
-            };
+                        </div>
+                        <div class="col_1_of_footer-top span_1_of_footer-top">
+                            <ul class="f_list">
+                                <li><img src="~/images/f_icon1.png" alt="" /><span class="delivery">Hộ trợ khách hàng : <span class="orange">(+84) 899 999 999 </span></span></li>
+                            </ul>
+                        </div>
+                        <div class="col_1_of_footer-top span_1_of_footer-top">
+                            <ul class="f_list">
+                                <li><img src="~/images/f_icon.png" alt="" /><span class="delivery">Mua hàng hiệu chính hãng trực tuyến, Giá Tốt Nhất</span></li>
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="wrap">
+                        <div class="section group">
+                            <div class="col_1_of_5 span_1_of_5">
+                                <h3 class="m_9">TIN TỨC & GIỚI THIỆU</h3>
+                                <ul class="list1">
+                                    <li><a href="@Url.Action("TinTuc", "Home")">Tin tức mới</a></li>
+                                    <li><a href="@Url.Action("GioiThieu", "Home")">Về chúng tôi</a></li>
 
-            $().UItoTop({ easingType: 'easeOutQuart' });
+                                </ul>
+                                <br />
+                                <h3 class="m_9">LIÊN HỆ</h3>
+                                <ul class="list1">
+                                    <li><a href="@Url.Action("Themmoiykien", "User")">Liên hệ</a></li>
+                                </ul>
+                            </div>
+                            <div class="col_1_of_5 span_1_of_5">
+                                <h3 class="m_9">THÔNG TIN</h3>
+                                <ul class="list1">
+                                    <li><a href="#">Tên doanh nghiệp: Shop Giày Dép Thảo Nguyên</a></li>
+                                    <li><a href="#">Hotline: (+84) 899 999 999</a></li>
+                                    <li><a href="#">Email: shopthaonguyen@gmail.com</a></li>
+                                    <li><a href="#">Thời gian làm việc: Thứ 2 - Chủ nhật: 8h00 - 22h00</a></li>
+                                    <li><a href="#">Địa chỉ: 23k/7, Bình Đáng, Bình Hòa, Thuận An, Bình Dương</a></li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="copy">
+                    <div class="wrap">
+                        <p>© All rights reserved | Designed by Nhóm 11 19DTHA2</p>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
 
-        });
-    </script>
-    <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
-    <!--end_footer-->
+                    var defaults = {
+                        containerID: 'toTop', // fading element id
+                        containerHoverID: 'toTopHover', // fading element hover id
+                        scrollSpeed: 1200,
+                        easingType: 'linear'
+                    };
+
+                    $().UItoTop({ easingType: 'easeOutQuart' });
+
+                });
+            </script>
+            <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+            <!--end_footer-->
 </body>
 </html>

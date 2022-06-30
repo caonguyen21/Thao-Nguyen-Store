@@ -637,13 +637,9 @@ D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.DiaSymReader.Native.x86
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.Managed.Core.targets
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.VisualBasic.Core.targets
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Collections.Immutable.dll
-D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.FileSystem.dll
-D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.FileSystem.Primitives.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Reflection.Metadata.dll
-D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Security.Cryptography.Primitives.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Text.Encoding.CodePages.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Threading.Tasks.Extensions.dll
-D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.ValueTuple.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.exe
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.exe.config
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.rsp

@@ -1,11 +1,8 @@
-﻿using System;
+﻿using PagedList;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebBanGiayDep.Models;
-using PagedList;
-using PagedList.Mvc;
 
 namespace WebBanGiayDep.Controllers
 {
@@ -27,7 +24,6 @@ namespace WebBanGiayDep.Controllers
             var giayton = SoLuongTonGiay(50);
             return PartialView(giayton.ToPagedList(pageNum, pageSize));
         }
-
         private List<SANPHAM> layGiayMoi(int count)
         {
             return data.SANPHAMs.OrderByDescending(a => a.NgayCapNhat).Take(count).ToList();
@@ -37,14 +33,14 @@ namespace WebBanGiayDep.Controllers
             var giaymoi = layGiayMoi(5);
             return PartialView(giaymoi);
         }
-        private List<SANPHAM> SoLuongTonGiay (int count)
+        private List<SANPHAM> SoLuongTonGiay(int count)
         {
             return data.SANPHAMs.OrderByDescending(a => a.SoLuongTon).Take(count).ToList();
         }
         public ActionResult ChiTietSanPham(int id)
         {
             var chitietsanpham = (from s in data.SANPHAMs
-                                  where s.MaGiay == id 
+                                  where s.MaGiay == id
                                   join lg in data.LOAIGIAYs
                                   on s.MaLoai equals lg.MaLoai
                                   join th in data.THUONGHIEUs
@@ -62,7 +58,7 @@ namespace WebBanGiayDep.Controllers
                                       TenLoai = lg.TenLoai,
                                       ThoiGianBaoHanh = (int)s.ThoiGianBaoHanh,
                                   });
-             return View(chitietsanpham.Single());
+            return View(chitietsanpham.Single());
         }
         public ActionResult ThuongHieu()
         {
@@ -70,7 +66,7 @@ namespace WebBanGiayDep.Controllers
             return PartialView(thuonghieu);
         }
 
-        public ActionResult SPTheoThuongHieu(int id, int ? page)
+        public ActionResult SPTheoThuongHieu(int id, int? page)
         {
             int pageSize = 9;
             int pageNum = (page ?? 1);
@@ -87,12 +83,12 @@ namespace WebBanGiayDep.Controllers
         public ActionResult GiayNu()
         {
             var GiayNu = from s in data.LOAIGIAYs
-                          where s.GioiTinh == false
-                          select s;
+                         where s.GioiTinh == false
+                         select s;
             return PartialView(GiayNu);
         }
 
-        public ActionResult SPTheoGioiTinh(int id, int ? page)
+        public ActionResult SPTheoGioiTinh(int id, int? page)
         {
             int pageSize = 9;
             int pageNum = (page ?? 1);
@@ -107,5 +103,25 @@ namespace WebBanGiayDep.Controllers
         {
             return View();
         }
+        #region Sản phẩm tìm kiếm (Search)
+        public ActionResult Search(string id)
+        {
+            //Lấy ra danh sách sản phẩm từ chuỗi tìm kiếm truyền vào
+            var search = (from sp in data.SANPHAMs
+                          where (sp.TrangThai == true) && (sp.TenGiay.Contains(id)) && (sp.NHACUNGCAP.TrangThai == true)
+                          orderby sp.GiaBan descending
+                          select sp).ToList();
+
+            //Lấy ra các sản phẩm khác (Không có sản phẩm của nhà sản xuất đang xem)
+            ViewBag.SP_Khac = (from sp in data.SANPHAMs
+                               where (sp.TrangThai == true) && (!sp.TenGiay.Contains(id)) && (sp.NHACUNGCAP.TrangThai == true)
+                               orderby sp.GiaBan descending
+                               select sp).ToList();
+
+            //Tạo key để xuất thông báo tìm kiếm
+            ViewBag.TuKhoa = id;
+            return View(search);
+        }
+        #endregion
     }
 }
