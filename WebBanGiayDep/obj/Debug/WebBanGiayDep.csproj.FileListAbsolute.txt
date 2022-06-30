@@ -420,13 +420,9 @@ C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.DiaSy
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.Managed.Core.targets
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.FileSystem.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.FileSystem.Primitives.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Security.Cryptography.Primitives.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Text.Encoding.CodePages.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Threading.Tasks.Extensions.dll
-C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.ValueTuple.dll
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.exe
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.exe.config
 C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.rsp
@@ -840,3 +836,7 @@ D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\System.Web.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\System.Web.Routing.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\bin\System.dll
 D:\GitHub\LapTrinhWeb\WebBanGiayDep\obj\Debug\WebBanGiayDep.csproj.AssemblyReference.cache
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\System.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\System.Net.Http.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\System.Web.dll
+C:\Users\Cao Nguyen\Desktop\LapTrinhWeb\WebBanGiayDep\bin\System.Web.Routing.dll

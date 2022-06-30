@@ -179,12 +179,10 @@
                 </div>
             </div>
 
-            <div class="cssmenu " style="width: 40% ">
+            <div class="cssmenu " style="width: 45% ">
                 <ul class="icon2 sub-icon2 profile_img">
-                    <li>
-                        <input id="txt_Tim" runat="server" class="au-input au-input--xl" type="text" name="search" placeholder="Bạn muốn mua gì hôm nay?" />
-                      @*  //<a href="/Home/Search/xxx" class="TimClick fa fa-search">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search</a>*@
-                        <button class="fa fa-search" type="submit" onclick="/Home/Search/xxx"></button>
+                    <li style="display: inline-block; outline: none ">
+                        <input id="txt_Tim" runat="server" class="au-input au-input--xl" type="text" name="search" style="border: none; font-size: 16px; outline: none;" placeholder="Bạn muốn tìm gì..." />
                         <script>
                             $(function () {
                                 $('.TimClick').click(function () {
@@ -201,7 +199,9 @@
                         </script>
                     </li>
 
-
+                    <li>
+                        <a href="/Home/Search/xxx" class="TimClick fa fa-search">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    </li>
 
                     <li>
                         <a href="@Url.Action("ListSanPham","Home")">Sản phẩm</a>
