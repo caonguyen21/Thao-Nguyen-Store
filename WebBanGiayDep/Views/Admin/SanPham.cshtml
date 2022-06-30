@@ -23,6 +23,17 @@
 </style>
 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(function () {
+        $(".DaGiaoClick").click(function () {
+            var _MaDH = $(this).attr("data-id");
+            $.post("/Admin/TrangThaiSanPham", { "id": _MaDH },
+                function (data) {
+                    $('#img_AnHien-' + _MaDH).attr('src', data);
+                });
+        });
+    });
+</script>
 <div class="wrap" style="padding-top:2%; padding-left:10%; padding-right:10%; padding-bottom:5%">
     <h2 style="text-align: center; ">QUẢN LÝ THÔNG TIN SẢN PHẨM</h2>
     <a href="@Url.Action("ThemMoiSanPham", "Admin")" class="button">THÊM SẢN PHẨM</a>
@@ -44,46 +55,58 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenGiay)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Size)
-                </td>
-                <td>
-                    <img src=@Url.Content("~/images/"+ @item.AnhBia) />
-                </td>
-                <td>
-                    @String.Format("{0:0,0}", item.GiaBan) VNĐ
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.THUONGHIEU.TenThuongHieu)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TrangThai)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NHACUNGCAP.TenNCC)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LOAIGIAY.TenLoai)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ThoiGianBaoHanh)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NgayCapNhat)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SoLuongTon)
-                </td>
-                <td>
-                    @Html.ActionLink("Sửa", "SuaSanPham", new { id = item.MaGiay }) |
-                    @Html.ActionLink("Chi tiết", "ChiTietSanPham", new { id = item.MaGiay }) |
-                    @Html.ActionLink("Xóa", "XoaSanPham", new { id = item.MaGiay })
-                </td>
-            </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenGiay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Size)
+        </td>
+        <td>
+            <img src=@Url.Content("~/images/"+ @item.AnhBia) />
+        </td>
+        <td>
+            @String.Format("{0:0,0}", item.GiaBan) VNĐ
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THUONGHIEU.TenThuongHieu)
+        </td>
+        <td style="text-align: center">
+            @if (item.TrangThai == true)
+            {
+                <a href="#" class="DaGiaoClick" data-id="@item.MaGiay">
+                    <img src="/images/Admin/Icons/icon_Hien.png" id="img_AnHien-@item.MaGiay" title="Còn hàng" />
+                </a>
+            }
+            else
+            {
+                <a href="#" class="DaGiaoClick" data-id="@item.MaGiay">
+                    <img src="/images/Admin/Icons/icon_An.png" id="img_AnHien-@item.MaGiay" title="Hết hàng" />
+                </a>
+            }
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.NHACUNGCAP.TenNCC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOAIGIAY.TenLoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGianBaoHanh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayCapNhat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuongTon)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "SuaSanPham", new { id = item.MaGiay }) |
+            @Html.ActionLink("Chi tiết", "ChiTietSanPham", new { id = item.MaGiay }) |
+            @Html.ActionLink("Xóa", "XoaSanPham", new { id = item.MaGiay })
+        </td>
+    </tr>
         }
 
     </table>

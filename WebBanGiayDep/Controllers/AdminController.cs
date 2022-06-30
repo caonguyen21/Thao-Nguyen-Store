@@ -581,6 +581,27 @@ namespace WebBanGiayDep.Controllers
             int pageSize = 7;
             return View(data.SANPHAMs.ToList().OrderBy(n => n.MaGiay).ToPagedList(pageNumber, pageSize));
         }
+        #region Trạng thái sản phẩm
+        [HttpPost]
+        public void TrangThaiSanPham(int id)
+        {
+            var _DH = (from d in data.SANPHAMs where d.MaGiay == id select d).SingleOrDefault();
+            string _Hinh = "";
+            if (_DH.TrangThai == true)
+            {
+                _DH.TrangThai = false;
+                _Hinh = "/images/Admin/Icons/icon_An.png";
+            }
+            else
+            {
+                _DH.TrangThai = true;
+                _Hinh = "/images/Admin/Icons/icon_Hien.png";
+            }
+            UpdateModel(_DH);
+            data.SubmitChanges();
+            Response.Write(_Hinh);
+        }
+        #endregion
         [HttpGet]
         public ActionResult ThemMoiSanPham()
         {
@@ -881,6 +902,27 @@ namespace WebBanGiayDep.Controllers
 
             return View(data.NHACUNGCAPs.ToList().OrderBy(n => n.MaNCC).ToPagedList(pageNumber, pageSize));
         }
+        #region Trạng thái nhà cung cấp
+        [HttpPost]
+        public void TrangThaiNCC(int id)
+        {
+            var _DH = (from d in data.NHACUNGCAPs where d.MaNCC == id select d).SingleOrDefault();
+            string _Hinh = "";
+            if (_DH.TrangThai == true)
+            {
+                _DH.TrangThai = false;
+                _Hinh = "/images/Admin/Icons/icon_An.png";
+            }
+            else
+            {
+                _DH.TrangThai = true;
+                _Hinh = "/images/Admin/Icons/icon_Hien.png";
+            }
+            UpdateModel(_DH);
+            data.SubmitChanges();
+            Response.Write(_Hinh);
+        }
+        #endregion
         [HttpGet]
         public ActionResult ThemMoiNhaCungCap()
         {
@@ -1036,7 +1078,27 @@ namespace WebBanGiayDep.Controllers
             int pageSize = 9;
             return View(data.LOAIGIAYs.ToList().OrderBy(n => n.MaLoai).ToPagedList(pageNumber, pageSize));
         }
-        //chi tiet khach hang
+        #region Trạng thái loại giày
+        [HttpPost]
+        public void TrangThaiLoai(int id)
+        {
+            var _DH = (from d in data.LOAIGIAYs where d.MaLoai == id select d).SingleOrDefault();
+            string _Hinh = "";
+            if (_DH.TrangThai == true)
+            {
+                _DH.TrangThai = false;
+                _Hinh = "/images/Admin/Icons/icon_An.png";
+            }
+            else
+            {
+                _DH.TrangThai = true;
+                _Hinh = "/images/Admin/Icons/icon_Hien.png";
+            }
+            UpdateModel(_DH);
+            data.SubmitChanges();
+            Response.Write(_Hinh);
+        }
+        #endregion
         [HttpGet]
         public ActionResult SuaLoaiGiay(int id)
         {
