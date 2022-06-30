@@ -482,13 +482,9 @@ D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.DiaSymReader.N
 D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.Managed.Core.targets
 D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\Microsoft.VisualBasic.Core.targets
 D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Collections.Immutable.dll
-D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.FileSystem.dll
-D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.IO.FileSystem.Primitives.dll
 D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Reflection.Metadata.dll
-D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Security.Cryptography.Primitives.dll
 D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Text.Encoding.CodePages.dll
 D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.Threading.Tasks.Extensions.dll
-D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\System.ValueTuple.dll
 D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.exe
 D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.exe.config
 D:\LapTrinhWebsite\LapTrinhWeb\WebBanGiayDep\bin\roslyn\vbc.rsp
