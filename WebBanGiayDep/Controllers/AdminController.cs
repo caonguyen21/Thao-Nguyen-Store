@@ -195,24 +195,23 @@ namespace WebBanGiayDep.Controllers
                 return Content("<script>alert('Bạn không đủ quyền hạn vào khu vực quản trị Administrator !');window.location='/Admin/';</script>");
             }
 
-            int PageSize = 3;//Chỉ lấy ra 3 dòng (3 Admin)
+            int PageSize = 4;//Chỉ lấy ra 3 dòng (3 Admin)
             int PageNum = (page ?? 1);
 
             //Lấy ra Danh sách Admin
             var PQ = (from pq in data.PHANQUYENs
+                      where pq.MaQL > 1
                       orderby pq.MaQL ascending
                       select pq).ToPagedList(PageNum, PageSize);
             return View(PQ);
         }
         #endregion
-        #region Quản lý trạng thái
-        //Hàm khóa hoặc mở khóa tài khoản Admin (ở đây sử dụng hàm void để Response.Write hình update lại)
+        #region Quản lý trạng thái Admin
         [HttpPost]
         public void UpdateTrangThai(int id)
         {
             var _AD = (from ad in data.QUANLies where ad.MaQL == id select ad).SingleOrDefault();
             string _Hinh = "";
-
             if (_AD.TrangThai == true)
             {
                 _AD.TrangThai = false;
@@ -431,6 +430,7 @@ namespace WebBanGiayDep.Controllers
                 string Email = collection["txt_Email"];
                 string HoTen = collection["txt_HoTen"];
                 string DienThoai = collection["txt_DienThoai"];
+                string matkhau_mahoa;
                 //Kiểm tra xem tài khoản đã có người sử dụng chưa?
                 var CheckUser = data.QUANLies.FirstOrDefault(a => a.TaiKhoanQL == Username);
                 if (CheckUser != null)
@@ -445,7 +445,8 @@ namespace WebBanGiayDep.Controllers
                     return Content("<script>alert('Mật khẩu nhập lại không đúng!');window.location='/Admin/CreateAdmin';</script>");
                 else
                 {
-                    ad.MatKhau = Password;
+                    matkhau_mahoa = Md5.MaHoaMD5(Password);
+                    ad.MatKhau = matkhau_mahoa;
                 }
                 var CheckEmail = data.QUANLies.FirstOrDefault(a => a.EmailQL == Email);
                 if (CheckEmail != null)
