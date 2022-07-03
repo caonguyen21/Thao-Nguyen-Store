@@ -145,7 +145,7 @@ namespace WebBanGiayDep.Controllers
             List<GioHang> gh = LayGioHang();
             dh.MaKH = kh.MaKH;
             dh.NgayDat = DateTime.Now;
-            var ngaygiao = String.Format("{0:MM/dd/yyyy}", collection["Ngaygiao"]);
+            var ngaygiao = String.Format("{0:MM/dd/yyyy}", DateTime.Now.AddDays(7));
             dh.NgayGiao = DateTime.Parse(ngaygiao);
             dh.TinhTrangGiaoHang = false;
             dh.TongTien = (decimal)TongTien();

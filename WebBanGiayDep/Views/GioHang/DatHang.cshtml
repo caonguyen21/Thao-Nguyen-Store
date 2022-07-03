@@ -72,7 +72,7 @@
         <tr style="height:40px">
             <td>Ngày giao dự kiến: </td>
             <td style="font-weight:bold">
-                <input type="date" name="Ngaygiao" />
+                @DateTime.Now.AddDays(7).ToShortDateString() 
             </td>
         </tr>
         <tr style="height:40px">
