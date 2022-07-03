@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebBanGiayDep.Models;
 
@@ -83,12 +82,12 @@ namespace WebBanGiayDep.Controllers
             //Kiem tra giay da co trong sesstion 
             GioHang sanpham = listGioHang.SingleOrDefault(n => n.iMaGiay == iMaSp);
             //neu ton tai thi cho sua so luong
-            if(sanpham != null)
+            if (sanpham != null)
             {
                 listGioHang.RemoveAll(n => n.iMaGiay == iMaSp);
                 return RedirectToAction("GioHang");
             }
-            if(listGioHang.Count == 0)
+            if (listGioHang.Count == 0)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -104,7 +103,7 @@ namespace WebBanGiayDep.Controllers
             //neu ton tai thi cho sua so luong
             if (sanpham != null)
             {
-                sanpham.iSoLuong = int.Parse(f["txtSoluong"].ToString()); 
+                sanpham.iSoLuong = int.Parse(f["txtSoluong"].ToString());
             }
             return RedirectToAction("GioHang");
         }

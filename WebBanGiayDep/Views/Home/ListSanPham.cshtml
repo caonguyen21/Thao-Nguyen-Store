@@ -11,7 +11,7 @@
 <div class="login">
     <div class="wrap">
         <div class="List" style=" padding-left: 50px; padding-right: 50px">
-            <div class="mens-toolbar">
+            <div class="mens-toolbar"style="text-align:center">
                 <div class="sort">
                     <div class="sort-by">
                         <label>Tìm kiếm</label>
@@ -34,7 +34,7 @@
             </div>
             <div class="clear"></div>
             @*item *@
-            <div class="box1">
+            <div   class="box1" style="text-align:center" >
                 @foreach (var item in Model)
                 {
                     <div class="box1">
@@ -61,7 +61,7 @@
             </div>
             @*end item *@
             <br />
-            <div class="MenuTrang">
+            <div class="MenuTrang" style="text-align:center">
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
                 @Html.PagedListPager(Model, page => Url.Action("ListSanPham", new { page }))
             </div>

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace WebBanGiayDep.Models
 {
@@ -27,7 +25,7 @@ namespace WebBanGiayDep.Models
             iSize = GIAY.Size;
             iSoLuong = 1;
             dGiaBan = double.Parse(GIAY.GiaBan.ToString());
-           
+
         }
     }
 }

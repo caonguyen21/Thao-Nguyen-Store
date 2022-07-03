@@ -10,6 +10,8 @@ namespace WebBanGiayDep.Controllers
     {
         //Tao 1 doi tuong chua toan bo CSDL tu dbWeb ban giay
         dbShopGiayDataContext data = new dbShopGiayDataContext();
+        #region Trang chủ
+        #region index
         public ActionResult Index(int? page)
         {
             int pageSize = 9;
@@ -17,6 +19,8 @@ namespace WebBanGiayDep.Controllers
             var giayton = SoLuongTonGiay(50);
             return PartialView(giayton.ToPagedList(pageNum, pageSize));
         }
+        #endregion
+        #region danh sách sản phẩm
         public ActionResult ListSanPham(int? page)
         {
             int pageSize = 9;
@@ -24,19 +28,27 @@ namespace WebBanGiayDep.Controllers
             var giayton = SoLuongTonGiay(50);
             return PartialView(giayton.ToPagedList(pageNum, pageSize));
         }
-        private List<SANPHAM> layGiayMoi(int count)
+        #endregion
+        #region lấy giày mới
+        private List<SANPHAM> LayGiayMoi(int count)
         {
             return data.SANPHAMs.OrderByDescending(a => a.NgayCapNhat).Take(count).ToList();
         }
+        #endregion
+        #region giày mới
         public ActionResult GiayMoi()
         {
-            var giaymoi = layGiayMoi(5);
+            var giaymoi = LayGiayMoi(5);
             return PartialView(giaymoi);
         }
+        #endregion
+        #region số lượng giày tồn
         private List<SANPHAM> SoLuongTonGiay(int count)
         {
             return data.SANPHAMs.OrderByDescending(a => a.SoLuongTon).Take(count).ToList();
         }
+        #endregion
+        #region chi tiết
         public ActionResult ChiTietSanPham(int id)
         {
             var chitietsanpham = (from s in data.SANPHAMs
@@ -60,12 +72,16 @@ namespace WebBanGiayDep.Controllers
                                   });
             return View(chitietsanpham.Single());
         }
+
+        #endregion
+        #region thương hiệu
         public ActionResult ThuongHieu()
         {
             var thuonghieu = (from s in data.THUONGHIEUs select s);
             return PartialView(thuonghieu);
         }
-
+        #endregion
+        #region sản phẩm theo thương hiệu
         public ActionResult SPTheoThuongHieu(int id, int? page)
         {
             int pageSize = 9;
@@ -73,6 +89,8 @@ namespace WebBanGiayDep.Controllers
             var sanpham = from s in data.SANPHAMs where (s.MaThuongHieu == id && s.TrangThai == true) select s;
             return View(sanpham.ToPagedList(pageNum, pageSize));
         }
+        #endregion
+        #region giày nam
         public ActionResult GiayNam()
         {
             var GiayNam = from s in data.LOAIGIAYs
@@ -80,6 +98,9 @@ namespace WebBanGiayDep.Controllers
                           select s;
             return PartialView(GiayNam);
         }
+        #endregion
+        #region giày nữ
+
         public ActionResult GiayNu()
         {
             var GiayNu = from s in data.LOAIGIAYs
@@ -87,7 +108,8 @@ namespace WebBanGiayDep.Controllers
                          select s;
             return PartialView(GiayNu);
         }
-
+        #endregion
+        #region giới tính
         public ActionResult SPTheoGioiTinh(int id, int? page)
         {
             int pageSize = 9;
@@ -95,14 +117,19 @@ namespace WebBanGiayDep.Controllers
             var sanpham = from s in data.SANPHAMs where (s.MaLoai == id && s.TrangThai == true) select s;
             return View(sanpham.ToPagedList(pageNum, pageSize));
         }
+        #endregion
+        #region tin tức
         public ActionResult TinTuc()
         {
             return View();
         }
+        #endregion
+        #region giới thiệu
         public ActionResult GioiThieu()
         {
             return View();
         }
+        #endregion
         #region Sản phẩm tìm kiếm (Search)
         public ActionResult Search(string id)
         {
@@ -122,6 +149,7 @@ namespace WebBanGiayDep.Controllers
             ViewBag.TuKhoa = id;
             return View(search);
         }
+        #endregion
         #endregion
     }
 }

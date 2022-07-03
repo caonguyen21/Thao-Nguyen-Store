@@ -19,6 +19,25 @@ namespace WebBanGiayDep.Controllers
             {
                 return RedirectToAction("Login");
             }
+            var kh = data.KHACHHANGs.ToList();
+            var ct = data.CT_DONHANGs.ToList();
+            var dh = data.DONHANGs.ToList();
+            decimal sum = 0;
+            foreach (var item in dh)
+            {
+                if (item.TinhTrangGiaoHang == true)
+                {
+                    sum = (decimal)dh.Sum(n => n.TongTien);
+                }
+            }
+            var delivery = (from s in data.DONHANGs
+                            where s.TinhTrangGiaoHang == true
+                            select s).ToList();
+
+            ViewBag.TotalDeli = delivery.Count;
+            ViewBag.TotalEarnings = sum;
+            ViewBag.TotalUser = kh.Count;
+            ViewBag.Total = ct.Count;
             return View();
         }
         #endregion
@@ -760,7 +779,7 @@ namespace WebBanGiayDep.Controllers
         #endregion
         #region Quản lý ý kiến khách hàng
         //======================================Ý kiến Khách Hàng========================================
-        public ActionResult ykienkhachhang(int? page)
+        public ActionResult Ykienkhachhang(int? page)
         {
             if (Session["Username_Admin"] == null)
                 return RedirectToAction("Login");
