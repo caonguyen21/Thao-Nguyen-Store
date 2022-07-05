@@ -11,32 +11,13 @@
 <div class="login">
     <div class="wrap">
         <div class="List" style=" padding-left: 50px; padding-right: 50px">
-            <div class="mens-toolbar"style="text-align:center">
-                <div class="sort">
-                    <div class="sort-by">
-                        <label>Tìm kiếm</label>
-                        <select>
-                            <option value="">
-                                Phổ biến
-                            </option>
-                            <option value="">
-                                Giá : Cao tới thấp
-                            </option>
-                            <option value="">
-                                Giá : Thấp tới cao
-                            </option>
-                        </select>
-                        <a href=""><img src="images/arrow2.gif" alt="" class="v-middle"></a>
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-            </div>
             <div class="clear"></div>
             @*item *@
             <div   class="box1" style="text-align:center" >
                 @foreach (var item in Model)
                 {
+                if (item.TrangThai==true) 
+                    {
                     <div class="box1">
                         <div class="col_1_of_3 span_1_of_3" style="margin: 0 20px 20px 0">
                             <a href="@Url.Action("ChiTietSanPham", "Home",new {id = item.MaGiay } )">
@@ -56,6 +37,7 @@
                             </a>
                         </div>
                     </div>
+                    }
                 }
                 <div class="clear"></div>
             </div>

@@ -30,6 +30,8 @@
         <div class="content-bottom" style=" padding-left: 20px; padding-right: 20px">
             @foreach (var item in Model)
             {
+                if (item.TrangThai==true) 
+                { 
                 <div class="box1">
                     <div class="col_1_of_3 span_1_of_3" style="margin: 0 20px 20px 0">
                         <a href="@Url.Action("ChiTietSanPham", "Home",new {id = item.MaGiay } )">
@@ -49,6 +51,7 @@
                         </a>
                     </div>
                 </div>
+                }
             }
 
             <div class="clear"></div>
