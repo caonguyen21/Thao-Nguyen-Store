@@ -211,13 +211,13 @@ namespace WebBanGiayDep.Controllers
 
         }
         [HttpPost, ActionName("MyProfile")]
-        public ActionResult UpdateProfile(int id)
+        public ActionResult UpdateProfile(int id)   
         {
             KHACHHANG kh = data.KHACHHANGs.SingleOrDefault(n => n.MaKH == id);
             UpdateModel(kh);
             data.SubmitChanges();
+            Session["Taikhoan"] = kh;
             return Content("<script>alert('Thay đổi thông tin thành công');window.location='/User/MyProfile/" + kh.MaKH + "';</script>");
-            //return RedirectToAction("MyProfile");
         }
     }
 }

@@ -16,7 +16,9 @@ namespace WebBanGiayDep.Controllers
         {
             int pageSize = 9;
             int pageNum = (page ?? 1);
-            var giayton = SoLuongTonGiay(50);
+            var giayton = from s in data.SANPHAMs
+                          where s.TrangThai == true
+                          select s;
             return PartialView(giayton.ToPagedList(pageNum, pageSize));
         }
         #endregion
@@ -25,7 +27,9 @@ namespace WebBanGiayDep.Controllers
         {
             int pageSize = 9;
             int pageNum = (page ?? 1);
-            var giayton = SoLuongTonGiay(50);
+            var giayton = from s in data.SANPHAMs join lg in data.LOAIGIAYs on s.MaLoai equals lg.MaLoai 
+                          where s.TrangThai == true && lg.TrangThai == true
+                          select s;
             return PartialView(giayton.ToPagedList(pageNum, pageSize));
         }
         #endregion
@@ -93,8 +97,8 @@ namespace WebBanGiayDep.Controllers
         #region giày nam
         public ActionResult GiayNam()
         {
-            var GiayNam = from s in data.LOAIGIAYs
-                          where s.GioiTinh == true
+            var GiayNam = from s in data.LOAIGIAYs 
+                          where s.GioiTinh == true && s.TrangThai == true
                           select s;
             return PartialView(GiayNam);
         }
@@ -104,7 +108,7 @@ namespace WebBanGiayDep.Controllers
         public ActionResult GiayNu()
         {
             var GiayNu = from s in data.LOAIGIAYs
-                         where s.GioiTinh == false
+                         where s.GioiTinh == false && s.TrangThai == true
                          select s;
             return PartialView(GiayNu);
         }
